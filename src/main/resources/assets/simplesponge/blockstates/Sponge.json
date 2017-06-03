@@ -1,0 +1,10 @@
+{
+    "forge_marker" : 1,
+    "defaults" : {
+        "model" : "cube_all",
+        "transform": "forge:default-block"
+    },
+    "variants" : {
+        "normal" : [{ "textures" : { "all" : "simplesponge:blocks/Sponge" } }]
+    }
+}

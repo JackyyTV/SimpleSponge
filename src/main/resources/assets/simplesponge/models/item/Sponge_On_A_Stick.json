@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "simplesponge:items/Sponge_On_A_Stick"
+    }
+}
