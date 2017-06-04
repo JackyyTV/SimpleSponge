@@ -2,4 +2,4 @@ language: java
 script: gradlew build
 jdk:
   - oraclejdk8
-sudo: true
+sudo: required
