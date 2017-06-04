@@ -7,9 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * Created by Admin on 04/06/2017.
- */
 public class SimpleSpongeTab {
 
     public static CreativeTabs spongeCreativeTab = new CreativeTabs("simplesponge"){
