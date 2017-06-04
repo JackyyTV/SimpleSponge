@@ -22,9 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-/**
- * Created by Admin on 04/06/2017.
- */
 public class BlockSponge extends Block {
 
     private static final int TICK_RATE = 20;
@@ -32,7 +29,7 @@ public class BlockSponge extends Block {
 
     public BlockSponge() {
         super(Material.SPONGE);
-        setSoundType(SoundType.PLANT);
+        setSoundType(SoundType.CLOTH);
         setTickRandomly(true);
         setResistance(0.5f);
         setHarvestLevel("axe", 0);

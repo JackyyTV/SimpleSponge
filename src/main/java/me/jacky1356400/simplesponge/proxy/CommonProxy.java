@@ -10,9 +10,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
 
-/**
- * Created by Admin on 04/06/2017.
- */
 public class CommonProxy {
 
     public static Configuration config;

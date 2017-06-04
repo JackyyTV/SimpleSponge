@@ -9,9 +9,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- * Created by Admin on 04/06/2017.
- */
 @Mod(modid = SimpleSponge.MODID, version = SimpleSponge.VERSION, name = "SimpleSponge", useMetadata = true)
 public class SimpleSponge {
 

@@ -6,9 +6,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-/**
- * Created by Admin on 04/06/2017.
- */
 public class ClientProxy extends CommonProxy {
 
     public void preInit(FMLPreInitializationEvent e){

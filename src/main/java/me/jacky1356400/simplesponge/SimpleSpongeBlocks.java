@@ -4,9 +4,6 @@ import me.jacky1356400.simplesponge.block.BlockSponge;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-/**
- * Created by Admin on 04/06/2017.
- */
 public class SimpleSpongeBlocks {
 
     public static BlockSponge sponge;

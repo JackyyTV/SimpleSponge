@@ -5,11 +5,11 @@
   "description": "OpenBlocks Sponge port.",
   "version": "${version}",
   "mcversion": "1.10.2",
-  "url": "",
+  "url": "https://github.com/Jacky1356400/SimpleSponge",
   "updateUrl": "",
   "authorList": ["Jacky1356400", "ThatGamerBlue"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "assets/simplesponge/logo.png",
   "screenshots": [],
   "dependencies": []
 }
