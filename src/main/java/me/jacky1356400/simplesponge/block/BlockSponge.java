@@ -2,6 +2,7 @@ package me.jacky1356400.simplesponge.block;
 
 import me.jacky1356400.simplesponge.Config;
 import me.jacky1356400.simplesponge.SimpleSponge;
+import me.jacky1356400.simplesponge.creative.SimpleSpongeTab;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -35,7 +36,7 @@ public class BlockSponge extends Block {
         setHarvestLevel("axe", 0);
         setRegistryName(SimpleSponge.MODID + ":sponge");
         this.setUnlocalizedName(SimpleSponge.MODID + ".sponge");
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        this.setCreativeTab(SimpleSpongeTab.spongeCreativeTab);
 
     }
 
