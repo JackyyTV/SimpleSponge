@@ -3,7 +3,7 @@
   "modid": "simplesponge",
   "name": "Simple Sponge",
   "description": "OpenBlocks Sponge port.",
-  "version": "1.0",
+  "version": "${version}",
   "mcversion": "1.10.2",
   "url": "",
   "updateUrl": "",
