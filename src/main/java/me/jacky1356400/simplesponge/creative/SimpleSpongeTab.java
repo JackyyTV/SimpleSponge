@@ -1,6 +1,5 @@
 package me.jacky1356400.simplesponge.creative;
 
-import me.jacky1356400.simplesponge.SimpleSponge;
 import me.jacky1356400.simplesponge.SimpleSpongeItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

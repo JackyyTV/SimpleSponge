@@ -8,7 +8,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -32,12 +31,10 @@ public class BlockSponge extends Block {
         super(Material.SPONGE);
         setSoundType(SoundType.CLOTH);
         setTickRandomly(true);
-        setResistance(0.5f);
-        setHarvestLevel("axe", 0);
+        setHardness(0.3f);
         setRegistryName(SimpleSponge.MODID + ":sponge");
         this.setUnlocalizedName(SimpleSponge.MODID + ".sponge");
         this.setCreativeTab(SimpleSpongeTab.spongeCreativeTab);
-
     }
 
     @SideOnly(Side.CLIENT)
@@ -100,7 +97,7 @@ public class BlockSponge extends Block {
                 world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px, py, pz, 0.0D, 0.0D, 0.0D);
             }
         } else {
-            //world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+            world.setBlockState(pos, Blocks.FIRE.getDefaultState());
         }
         return true;
     }
