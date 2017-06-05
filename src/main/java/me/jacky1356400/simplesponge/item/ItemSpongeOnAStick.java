@@ -25,7 +25,6 @@ public class ItemSpongeOnAStick extends Item {
         setUnlocalizedName(SimpleSponge.MODID + ".sponge_on_a_stick");
         setMaxStackSize(1);
         setMaxDamage(Config.spongeMaxDamage);
-        setCreativeTab(SimpleSpongeTab.spongeCreativeTab);
     }
 
     public boolean showDurabilityBar(ItemStack stack){
@@ -72,13 +71,13 @@ public class ItemSpongeOnAStick extends Item {
         }
 
         if (hitLava) {
-            stack.stackSize = 0;
+            ItemStack.setCount = 0;
             player.setFire(6);
         }
 
         if (absorbedAnything) {
             if (damage >= Config.spongeMaxDamage) {
-                stack.stackSize = 0;
+                ItemStack.setCount = 0;
             } else if(!player.isCreative()) {
                 stack.setItemDamage(damage);
             }
