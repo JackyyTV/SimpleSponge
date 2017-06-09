@@ -2,7 +2,6 @@ package me.jacky1356400.simplesponge.item;
 
 import me.jacky1356400.simplesponge.Config;
 import me.jacky1356400.simplesponge.SimpleSponge;
-import me.jacky1356400.simplesponge.creative.SimpleSpongeTab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +24,7 @@ public class ItemSpongeOnAStick extends Item {
         setUnlocalizedName(SimpleSponge.MODID + ".sponge_on_a_stick");
         setMaxStackSize(1);
         setMaxDamage(Config.spongeMaxDamage);
+        setCreativeTab(SimpleSponge.spongeCreativeTab);
     }
 
     public boolean showDurabilityBar(ItemStack stack){
@@ -71,13 +71,13 @@ public class ItemSpongeOnAStick extends Item {
         }
 
         if (hitLava) {
-            ItemStack.setCount = 0;
+            ItemStack.EMPTY;
             player.setFire(6);
         }
 
         if (absorbedAnything) {
             if (damage >= Config.spongeMaxDamage) {
-                ItemStack.setCount = 0;
+                ItemStack.EMPTY;
             } else if(!player.isCreative()) {
                 stack.setItemDamage(damage);
             }

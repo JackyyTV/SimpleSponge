@@ -34,6 +34,7 @@ public class BlockSponge extends Block {
         setHardness(0.3f);
         setRegistryName(SimpleSponge.MODID + ":sponge");
         this.setUnlocalizedName(SimpleSponge.MODID + ".sponge");
+        setCreativeTab(SimpleSponge.spongeCreativeTab);
     }
 
     @SideOnly(Side.CLIENT)

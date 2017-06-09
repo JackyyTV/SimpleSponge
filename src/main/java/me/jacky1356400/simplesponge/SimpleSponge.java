@@ -1,5 +1,6 @@
 package me.jacky1356400.simplesponge;
 
+import me.jacky1356400.simplesponge.creative.SimpleSpongeTab;
 import me.jacky1356400.simplesponge.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -14,6 +15,7 @@ public class SimpleSponge {
 
     public static final String VERSION = "2.0";
     public static final String MODID = "simplesponge";
+    public static final SimpleSpongeTab spongeCreativeTab = new SimpleSpongeTab();
 
     public static Logger logger = LogManager.getLogger("SimpleSponge");
 
