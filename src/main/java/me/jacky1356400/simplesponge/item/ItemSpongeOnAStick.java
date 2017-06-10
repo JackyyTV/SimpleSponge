@@ -37,15 +37,15 @@ public class ItemSpongeOnAStick extends Item {
     }
 
     @Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        return soakUp(world, pos, player, stack)? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return soakUp(world, pos, player, player.getHeldItem(hand))? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-        boolean result = soakUp(world, player.getPosition(), player, stack);
-        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, stack);
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        boolean result = soakUp(world, player.getPosition(), player, player.getHeldItem(hand));
+        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItem(hand));
     }
 
     private static boolean soakUp(World world, BlockPos pos, EntityPlayer player, ItemStack stack) {
@@ -71,13 +71,13 @@ public class ItemSpongeOnAStick extends Item {
         }
 
         if (hitLava) {
-            ItemStack.EMPTY;
+            stack.setCount(0);
             player.setFire(6);
         }
 
         if (absorbedAnything) {
             if (damage >= Config.spongeMaxDamage) {
-                ItemStack.EMPTY;
+                stack.setCount(0);
             } else if(!player.isCreative()) {
                 stack.setItemDamage(damage);
             }

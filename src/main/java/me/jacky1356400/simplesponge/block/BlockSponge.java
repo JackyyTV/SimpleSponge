@@ -2,7 +2,6 @@ package me.jacky1356400.simplesponge.block;
 
 import me.jacky1356400.simplesponge.Config;
 import me.jacky1356400.simplesponge.SimpleSponge;
-import me.jacky1356400.simplesponge.creative.SimpleSpongeTab;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
