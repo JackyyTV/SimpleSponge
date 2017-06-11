@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = SimpleSponge.MODID, version = SimpleSponge.VERSION, name = "SimpleSponge", useMetadata = true)
 public class SimpleSponge {
 
-    public static final String VERSION = "3.0";
+    public static final String VERSION = "2.0";
     public static final String MODID = "simplesponge";
     public static final SimpleSpongeTab spongeCreativeTab = new SimpleSpongeTab();
 
