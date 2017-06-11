@@ -17,13 +17,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSpongeOnAStick extends Item {
+public class ItemMagmaticSpongeOnAStick extends Item {
 
-    public ItemSpongeOnAStick(){
-        setRegistryName(SimpleSponge.MODID + ":sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".sponge_on_a_stick");
+    public ItemMagmaticSpongeOnAStick(){
+        setRegistryName(SimpleSponge.MODID + ":magmatic_sponge_on_a_stick");
+        setUnlocalizedName(SimpleSponge.MODID + ".magmatic_sponge_on_a_stick");
         setMaxStackSize(1);
-        setMaxDamage(Config.spongeMaxDamage);
+        setMaxDamage(Config.magmaticSpongeMaxDamage);
         setCreativeTab(SimpleSponge.spongeCreativeTab);
     }
 
@@ -50,33 +50,26 @@ public class ItemSpongeOnAStick extends Item {
 
     private static boolean soakUp(World world, BlockPos pos, EntityPlayer player, ItemStack stack) {
         boolean absorbedAnything = false;
-        boolean hitLava = false;
         int damage = stack.getItemDamage();
 
-        for (int x = -Config.spongeOnAStickRange; x <= Config.spongeOnAStickRange; x++) {
-            for (int y = -Config.spongeOnAStickRange; y <= Config.spongeOnAStickRange; y++) {
-                for (int z = -Config.spongeOnAStickRange; z <= Config.spongeOnAStickRange; z++) {
+        for (int x = -Config.magmaticSpongeOnAStickRange; x <= Config.magmaticSpongeOnAStickRange; x++) {
+            for (int y = -Config.magmaticSpongeOnAStickRange; y <= Config.magmaticSpongeOnAStickRange; y++) {
+                for (int z = -Config.magmaticSpongeOnAStickRange; z <= Config.magmaticSpongeOnAStickRange; z++) {
                     final BlockPos targetPos = pos.add(x, y, z);
 
                     Material material = world.getBlockState(targetPos).getMaterial();
                     if (material.isLiquid()) {
                         absorbedAnything = true;
-                        hitLava |= material == Material.LAVA;
                         world.setBlockToAir(targetPos);
-                        if (++damage >= Config.spongeMaxDamage) break;
+                        if (++damage >= Config.magmaticSpongeMaxDamage) break;
                     }
 
                 }
             }
         }
 
-        if (hitLava) {
-            stack.stackSize = 0;
-            player.setFire(6);
-        }
-
         if (absorbedAnything) {
-            if (damage >= Config.spongeMaxDamage) {
+            if (damage >= Config.magmaticSpongeMaxDamage) {
                 stack.stackSize = 0;
             } else if(!player.isCreative()) {
                 stack.setItemDamage(damage);

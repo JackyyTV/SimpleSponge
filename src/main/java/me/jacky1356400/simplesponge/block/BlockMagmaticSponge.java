@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
@@ -21,19 +20,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockSponge extends Block {
+public class BlockMagmaticSponge extends Block {
 
     private static final int TICK_RATE = 20;
     private static final Random RANDOM = new Random();
 
-    public BlockSponge() {
+    public BlockMagmaticSponge() {
         super(Material.SPONGE);
         setSoundType(SoundType.CLOTH);
         setTickRandomly(true);
         setHardness(0.3f);
-        setRegistryName(SimpleSponge.MODID + ":sponge");
-        this.setUnlocalizedName(SimpleSponge.MODID + ".sponge");
-        this.setCreativeTab(SimpleSponge.spongeCreativeTab);
+        setRegistryName(SimpleSponge.MODID + ":magmatic_sponge");
+        this.setUnlocalizedName(SimpleSponge.MODID + ".magmatic_sponge");
+        setCreativeTab(SimpleSponge.spongeCreativeTab);
     }
 
     @SideOnly(Side.CLIENT)
@@ -69,21 +68,18 @@ public class BlockSponge extends Block {
 
     private void clearupLiquid(World world, BlockPos pos) {
         if (world.isRemote) return;
-        boolean hitLava = false;
-        for (int dx = -Config.spongeRange; dx <= Config.spongeRange; dx++) {
-            for (int dy = -Config.spongeRange; dy <= Config.spongeRange; dy++) {
-                for (int dz = -Config.spongeRange; dz <= Config.spongeRange; dz++) {
+        for (int dx = -Config.magmaticSpongeRange; dx <= Config.magmaticSpongeRange; dx++) {
+            for (int dy = -Config.magmaticSpongeRange; dy <= Config.magmaticSpongeRange; dy++) {
+                for (int dz = -Config.magmaticSpongeRange; dz <= Config.magmaticSpongeRange; dz++) {
                     final BlockPos workPos = pos.add(dx, dy, dz);
                     final IBlockState state = world.getBlockState(workPos);
                     Material material = state.getMaterial();
                     if (material.isLiquid()) {
-                        hitLava |= material == Material.LAVA;
                         world.setBlockToAir(workPos);
                     }
                 }
             }
         }
-        if (hitLava) world.addBlockEvent(pos, this, 0, 0);
     }
 
     @Override
@@ -95,8 +91,6 @@ public class BlockSponge extends Block {
                 double pz = pos.getZ() + RANDOM.nextDouble();
                 world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px, py, pz, 0.0D, 0.0D, 0.0D);
             }
-        } else {
-            world.setBlockState(pos, Blocks.FIRE.getDefaultState());
         }
         return true;
     }

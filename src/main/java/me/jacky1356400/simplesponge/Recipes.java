@@ -11,21 +11,14 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class Recipes {
 
     public static void init(){
-        ShapelessOreRecipe spongeRecipe = new ShapelessOreRecipe(new ItemStack(SimpleSpongeBlocks.sponge),
-                new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE), "slimeball");
+        ShapelessOreRecipe spongeRecipe = new ShapelessOreRecipe(new ItemStack(SimpleSpongeBlocks.sponge), new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE), "slimeball");
         GameRegistry.addRecipe(spongeRecipe);
-
-        ShapedOreRecipe spongeOnAStickRecipe = new ShapedOreRecipe(new ItemStack(SimpleSpongeItems.spongeOnAStick),
-                " s ", " w ", " w ", 's', SimpleSpongeBlocks.sponge, 'w', "stickWood");
-        GameRegistry.addRecipe(spongeOnAStickRecipe);
-
-        ShapelessOreRecipe magmaticSpongeRecipe = new ShapelessOreRecipe(new ItemStack(SimpleSpongeBlocks.magmaticSponge),
-                new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE), Items.MAGMA_CREAM);
+        ShapedOreRecipe spongeonastickRecipe = new ShapedOreRecipe(new ItemStack(SimpleSpongeItems.spongeOnAStick), " s ", " w ", " w ", 's', SimpleSpongeBlocks.sponge, 'w', "stickWood");
+        GameRegistry.addRecipe(spongeonastickRecipe);
+        ShapelessOreRecipe magmaticSpongeRecipe = new ShapelessOreRecipe(new ItemStack(SimpleSpongeBlocks.magmaticSponge), SimpleSpongeBlocks.sponge, Items.MAGMA_CREAM);
         GameRegistry.addRecipe(magmaticSpongeRecipe);
-
-        ShapedOreRecipe magmaticSpongeOnAStickRecipe = new ShapedOreRecipe(new ItemStack(SimpleSpongeItems.magmaticSpongeOnAStick),
-                " s ", " w ", " w ", 's', SimpleSpongeBlocks.magmaticSponge, 'w', "stickWood");
-        GameRegistry.addRecipe(magmaticSpongeOnAStickRecipe);
+        ShapedOreRecipe magmaticSpongeonastickRecipe = new ShapedOreRecipe(new ItemStack(SimpleSpongeItems.magmaticSpongeOnAStick), " s ", " w ", " w ", 's', SimpleSpongeBlocks.magmaticSponge, 'w', "stickWood");
+        GameRegistry.addRecipe(magmaticSpongeonastickRecipe);
     }
 
 }
