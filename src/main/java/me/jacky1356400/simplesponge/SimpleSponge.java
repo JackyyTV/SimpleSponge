@@ -34,6 +34,8 @@ public class SimpleSponge {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e){
+        logger.error("thatgamerblue made most of this mod because jacky is a copypasta noob #spreadtheword");
+        logger.error("also jacky doesn't really understand versioning but dont tell him");
         proxy.postInit(e);
     }
 
