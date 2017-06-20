@@ -1,0 +1,5 @@
+item.simplesponge.sponge_on_a_stick.name=海绵棍
+item.simplesponge.magmatic_sponge_on_a_stick.name=岩浆海绵棍
+tile.simplesponge.sponge.name=海绵
+tile.simplesponge.magmatic_sponge.name=岩浆海绵
+itemGroup.simplesponge=简易海绵
