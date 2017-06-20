@@ -1,7 +1,6 @@
 package me.jacky1356400.simplesponge.proxy;
 
 import me.jacky1356400.simplesponge.Config;
-import me.jacky1356400.simplesponge.Recipes;
 import me.jacky1356400.simplesponge.SimpleSponge;
 import me.jacky1356400.simplesponge.SimpleSpongeBlocks;
 import me.jacky1356400.simplesponge.SimpleSpongeItems;
@@ -26,7 +25,6 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent e){
         SimpleSponge.logger.info("proxy");
-        Recipes.init();
     }
 
     public void postInit(FMLPostInitializationEvent e){
