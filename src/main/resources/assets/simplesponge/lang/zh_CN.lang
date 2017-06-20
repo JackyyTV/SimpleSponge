@@ -1,0 +1,5 @@
+item.simplesponge.sponge_on_a_stick.name=Sponge on a Stick
+item.simplesponge.magmatic_sponge_on_a_stick.name=Magmatic Sponge on a Stick
+tile.simplesponge.sponge.name=Sponge
+tile.simplesponge.magmatic_sponge.name=Magmatic Sponge
+itemGroup.simplesponge=Simple Sponge
