@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "simplesponge:magmatic_sponge"
+  },
+  "ingredients": [
+    {
+      "item": "simplesponge:sponge"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

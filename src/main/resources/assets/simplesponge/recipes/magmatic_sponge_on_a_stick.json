@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "simplesponge:magmatic_sponge_on_a_stick"
+  },
+  "pattern": [
+    " M ",
+    " S ",
+    " S "
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "M": {
+      "item": "simplesponge:magmatic_sponge"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "simplesponge:sponge"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:wool",
+      "data": 32767
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "slimeball"
+    }
+  ],
+  "type": "forge:ore_shapeless"
+}

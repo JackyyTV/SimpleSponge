@@ -22,16 +22,7 @@ public class Recipes {
         Item MS = Item.getItemFromBlock(SimpleSpongeBlocks.magmaticSponge);
         String T = "stickWood";
         String B = "slimeball";
-        CraftingManager.REGISTRY.register(id++, new ResourceLocation(SimpleSponge.MODID + ":recipe" + id),
-                RecipeHelper.getShapeless(SimpleSpongeBlocks.sponge, new Object[] {W, B}));
-        CraftingManager.REGISTRY.register(id++, new ResourceLocation(SimpleSponge.MODID + ":recipe" + id),
-                RecipeHelper.getShapeless(SimpleSpongeBlocks.magmaticSponge, new Object[] {S, M}));
-        CraftingManager.REGISTRY.register(id++, new ResourceLocation(SimpleSponge.MODID + ":recipe" + id),
-                RecipeHelper.getShaped(new ItemStack(SimpleSpongeItems.spongeOnAStick, 1, 0),
-                        3, 3, new Object[] {null, S, null, null, T, null, null, T, null}));
-        CraftingManager.REGISTRY.register(id++, new ResourceLocation(SimpleSponge.MODID + ":recipe" + id),
-                RecipeHelper.getShaped(new ItemStack(SimpleSpongeItems.magmaticSpongeOnAStick,1, 0),
-                        3, 3, new Object[] {null, MS, null, null, T, null, null, T, null}));
+        // THESE RECIPES ARE NOW JSONIFIED
     }
 
 }
