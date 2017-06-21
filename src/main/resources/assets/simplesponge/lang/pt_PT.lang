@@ -1,0 +1,5 @@
+item.simplesponge.sponge_on_a_stick.name=Pau com Esponja
+item.simplesponge.magmatic_sponge_on_a_stick.name=Pau com Esponja Magmatica
+tile.simplesponge.sponge.name=Esponja
+tile.simplesponge.magmatic_sponge.name=Esponja Magmatica
+itemGroup.simplesponge=Esponja Simples
