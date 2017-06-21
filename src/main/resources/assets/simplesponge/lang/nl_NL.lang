@@ -1,0 +1,5 @@
+item.simplesponge.sponge_on_a_stick.name=Spons op een Stok
+item.simplesponge.magmatic_sponge_on_a_stick.name=Magmatische Spons op een Stok
+tile.simplesponge.sponge.name=Spons
+tile.simplesponge.magmatic_sponge.name=Magmatische Spons
+itemGroup.simplesponge=Simpele Spons
