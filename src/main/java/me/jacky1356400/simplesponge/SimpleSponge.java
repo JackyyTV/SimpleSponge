@@ -1,7 +1,7 @@
 package me.jacky1356400.simplesponge;
 
-import me.jacky1356400.simplesponge.creative.SimpleSpongeTab;
 import me.jacky1356400.simplesponge.proxy.CommonProxy;
+import me.jacky1356400.simplesponge.util.Data;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -10,12 +10,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = SimpleSponge.MODID, version = SimpleSponge.VERSION, name = "SimpleSponge", useMetadata = true, dependencies = "required-after:forge@14.21.0.2338;")
+@Mod(modid = Data.MODID, version = Data.VERSION, name = Data.MODNAME, useMetadata = true, dependencies = Data.DEPENDS)
 public class SimpleSponge {
-
-    public static final String VERSION = "3.2";
-    public static final String MODID = "simplesponge";
-    public static final SimpleSpongeTab spongeCreativeTab = new SimpleSpongeTab();
 
     public static Logger logger = LogManager.getLogger("SimpleSponge");
 

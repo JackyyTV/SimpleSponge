@@ -1,26 +1,22 @@
 package me.jacky1356400.simplesponge.block;
 
 import me.jacky1356400.simplesponge.Config;
-import me.jacky1356400.simplesponge.SimpleSponge;
+import me.jacky1356400.simplesponge.util.Data;
+import me.jacky1356400.simplesponge.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockMagmaticSponge extends Block {
+public class BlockMagmaticSponge extends Block implements IHasModel {
 
     private static final int TICK_RATE = 20;
     private static final Random RANDOM = new Random();
@@ -30,14 +26,10 @@ public class BlockMagmaticSponge extends Block {
         setSoundType(SoundType.CLOTH);
         setTickRandomly(true);
         setHardness(0.3f);
-        setRegistryName(SimpleSponge.MODID + ":magmatic_sponge");
-        this.setUnlocalizedName(SimpleSponge.MODID + ".magmatic_sponge");
-        setCreativeTab(SimpleSponge.spongeCreativeTab);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void initModel(){
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        setRegistryName(Data.MODID + ":magmatic_sponge");
+        this.setUnlocalizedName(Data.MODID + ".magmatic_sponge");
+        setCreativeTab(Data.TAB);
+        Data.BLOCKS.add(this);
     }
 
     @Override

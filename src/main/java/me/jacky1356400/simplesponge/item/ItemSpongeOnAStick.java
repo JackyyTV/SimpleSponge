@@ -1,9 +1,9 @@
 package me.jacky1356400.simplesponge.item;
 
 import me.jacky1356400.simplesponge.Config;
-import me.jacky1356400.simplesponge.SimpleSponge;
+import me.jacky1356400.simplesponge.util.Data;
+import me.jacky1356400.simplesponge.util.IHasModel;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,27 +13,20 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSpongeOnAStick extends Item {
+public class ItemSpongeOnAStick extends Item implements IHasModel {
 
     public ItemSpongeOnAStick(){
-        setRegistryName(SimpleSponge.MODID + ":sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".sponge_on_a_stick");
+        setRegistryName(Data.MODID + ":sponge_on_a_stick");
+        setUnlocalizedName(Data.MODID + ".sponge_on_a_stick");
         setMaxStackSize(1);
         setMaxDamage(Config.spongeMaxDamage);
-        setCreativeTab(SimpleSponge.spongeCreativeTab);
+        setCreativeTab(Data.TAB);
+        Data.ITEMS.add(this);
     }
 
     public boolean showDurabilityBar(ItemStack stack){
         return stack.isItemDamaged();
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
     @Override
