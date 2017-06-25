@@ -7,11 +7,15 @@ import me.jacky1356400.simplesponge.item.ItemSpongeOnAStick;
 import me.jacky1356400.simplesponge.util.Data;
 import me.jacky1356400.simplesponge.util.RecipeHelper;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModRegistry {
 
@@ -22,7 +26,7 @@ public class ModRegistry {
 
     @SuppressWarnings("deprecation")
     private static void initRecipes() {
-        String W = "blockWool";
+        ItemStack W = new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE);
         String S = "slimeball";
         String T = "stickWood";
         Item M = Items.MAGMA_CREAM;
@@ -42,6 +46,8 @@ public class ModRegistry {
     @SubscribeEvent
     public void onItemRegistry(RegistryEvent.Register<Item> e) {
         e.getRegistry().registerAll(Data.ITEMS.toArray(new Item[0]));
+        for (Block block : Data.BLOCKS)
+            e.getRegistry().register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
     }
 
     @SubscribeEvent
