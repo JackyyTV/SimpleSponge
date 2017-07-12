@@ -1,4 +1,4 @@
-package me.jacky1356400.simplesponge.creative;
+package me.jacky1356400.simplesponge;
 
 import me.jacky1356400.simplesponge.SimpleSpongeItems;
 import me.jacky1356400.simplesponge.SimpleSponge;

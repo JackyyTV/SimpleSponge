@@ -1,5 +1,10 @@
+#Creative Tab
+itemGroup.simplesponge=Einfacher Schwamm
+
+#Items
 item.simplesponge.sponge_on_a_stick.name=Schwamm am Stiel
 item.simplesponge.magmatic_sponge_on_a_stick.name=Magmatischer Schwamm am Stiel
+
+#Blocks
 tile.simplesponge.sponge.name=Schwamm
 tile.simplesponge.magmatic_sponge.name=Magmatischer Schwamm
-itemGroup.simplesponge=Einfacher Schwamm
