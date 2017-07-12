@@ -74,6 +74,7 @@ public class BlockMagmaticSponge extends Block implements IHasModel {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
         if (world.isRemote) {

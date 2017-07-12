@@ -78,6 +78,7 @@ public class BlockSponge extends Block implements IHasModel {
         if (hitLava) world.addBlockEvent(pos, this, 0, 0);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
         if (world.isRemote) {
