@@ -1,7 +1,6 @@
 package me.jacky1356400.simplesponge;
 
-import me.jacky1356400.simplesponge.block.BlockMagmaticSponge;
-import me.jacky1356400.simplesponge.block.BlockSponge;
+import me.jacky1356400.simplesponge.block.*;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

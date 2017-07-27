@@ -7,12 +7,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
+public class ItemCompressedMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
-    public ItemMagmaticSpongeOnAStick(){
-        setRegistryName(SimpleSponge.MODID + ":magmatic_sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".magmatic_sponge_on_a_stick");
-        setMaxDamage(Config.magmaticSpongeOnAStickMaxDamage);
+    public ItemCompressedMagmaticSpongeOnAStick(){
+        setRegistryName(SimpleSponge.MODID + ":compressed_magmatic_sponge_on_a_stick");
+        setUnlocalizedName(SimpleSponge.MODID + ".compressed_magmatic_sponge_on_a_stick");
+        setMaxDamage(getDmg());
         setCreativeTab(SimpleSponge.spongeCreativeTab);
     }
 
@@ -22,18 +22,18 @@ public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
     }
 
     @Override
-    public boolean isMagmatic() {
-        return true;
-    }
-
-    @Override
     public int getDmg() {
-        return Config.magmaticSpongeOnAStickMaxDamage;
+        return Config.compressedMagmaticSpongeOnAStickMaxDamage * 9;
     }
 
     @Override
     public int getRange() {
-        return Config.magmaticSpongeOnAStickRange;
+        return Config.compressedMagmaticSpongeOnAStickRange * 2;
+    }
+
+    @Override
+    public boolean isMagmatic() {
+        return true;
     }
 
 }
