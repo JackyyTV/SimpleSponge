@@ -25,7 +25,6 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e){
-        SimpleSponge.logger.info("proxy");
         Recipes.init();
     }
 
