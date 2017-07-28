@@ -1,7 +1,6 @@
 package me.jacky1356400.simplesponge.proxy;
 
 import me.jacky1356400.simplesponge.Config;
-import me.jacky1356400.simplesponge.SimpleSponge;
 import me.jacky1356400.simplesponge.init.ModRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -23,7 +22,6 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-        SimpleSponge.logger.info("proxy");
     }
 
     public void postInit(FMLPostInitializationEvent e) {

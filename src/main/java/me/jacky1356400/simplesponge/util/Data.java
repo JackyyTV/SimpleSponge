@@ -15,7 +15,7 @@ public class Data {
     public static final List<Item> ITEMS = new ArrayList<Item>();
     public static final List<Block> BLOCKS = new ArrayList<Block>();
     public static final List<IRecipe> RECIPES = new ArrayList<IRecipe>();
-    public static final String VERSION = "3.4";
+    public static final String VERSION = "3.5";
     public static final String MODID = "simplesponge";
     public static final String MODNAME = "SimpleSponge";
     public static final String DEPENDS = "required-after:forge@[14.21.0.2355,];";
