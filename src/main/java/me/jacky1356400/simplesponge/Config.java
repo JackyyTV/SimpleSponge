@@ -10,6 +10,7 @@ public class Config {
     private static final String CATEGORY_MAGSPONGE = "magmatic sponge";
     private static final String CATEGORY_ENSPONGE = "energized sponge";
     private static final String CATEGORY_COMPRESSED = "compressed sponge";
+    private static final String CATEGORY_MISC = "misc";
 
     public static int spongeMaxDamage;
     public static int spongeRange;
@@ -24,6 +25,7 @@ public class Config {
     public static int compressedSpongeOnAStickRange;
     public static int compressedMagmaticSpongeOnAStickMaxDamage;
     public static int compressedMagmaticSpongeOnAStickRange;
+    public static boolean openBlocksIntegration;
 
     public static void readConfig(){
         Configuration cfg = CommonProxy.config;
@@ -56,6 +58,8 @@ public class Config {
         compressedSpongeOnAStickRange = cfg.getInt("compressedSpongeOnAStickRange", CATEGORY_COMPRESSED, 3, 1, 64, "Set the range (multiplied by 2) for a Compressed Sponge On A Stick");
         compressedMagmaticSpongeOnAStickMaxDamage = cfg.getInt("compressedMagmaticSpongeOnAStickMaxDamage", CATEGORY_COMPRESSED, 256, 1, Integer.MAX_VALUE, "Set the durability (multiplied by 9) for a Compressed Magmatic Sponge On A Stick");
         compressedMagmaticSpongeOnAStickRange = cfg.getInt("compressedMagmaticSpongeOnAStickRange", CATEGORY_COMPRESSED, 3, 1, 64, "Set the range (multiplied by 2) for a Compressed Magmatic Sponge On A Stick");
+
+        openBlocksIntegration = cfg.getBoolean("openBlocksIntegration", CATEGORY_MISC, true, "When OpenBlocks is detected, certain crafting recipes will be changed / disabled. Set this to false if you wish to use the sponges from this mod (you'll have to use CraftTweaker to prevent recipe conflicts).");
     }
 
 }

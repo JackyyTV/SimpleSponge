@@ -31,7 +31,7 @@ public class BlockSponge extends BlockSpongeBase {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        if (Loader.isModLoaded("openblocks")){
+        if (Loader.isModLoaded("openblocks") && Config.openBlocksIntegration){
             tooltip.add(TextFormatting.RED + I18n.format("tooltip." + SimpleSponge.MODID + ".warning.openblocks"));
         }
     }

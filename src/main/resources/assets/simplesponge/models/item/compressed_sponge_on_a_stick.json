@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:item/generated",
-    "textures": {
-        "layer0": "simplesponge:items/compressed_sponge_on_a_stick"
-    }
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "simplesponge:items/compressed_sponge_on_a_stick"
+  }
 }

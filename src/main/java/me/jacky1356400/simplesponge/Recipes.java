@@ -14,7 +14,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class Recipes {
 
     public static void init(){
-        if (!Loader.isModLoaded("openblocks")) {
+        if (!Loader.isModLoaded("openblocks") && Config.openBlocksIntegration) {
             GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(SimpleSpongeBlocks.sponge), new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE), "slimeball"));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SimpleSpongeItems.spongeOnAStick), " s ", " w ", " w ", 's', SimpleSpongeBlocks.sponge, 'w', "stickWood"));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SimpleSpongeItems.compressedSpongeOnAStick), "sss", "sss", "sss", 's', SimpleSpongeItems.spongeOnAStick));
