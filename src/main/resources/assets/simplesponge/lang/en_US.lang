@@ -13,5 +13,4 @@ tile.simplesponge.sponge.name=Sponge
 tile.simplesponge.magmatic_sponge.name=Magmatic Sponge
 
 #Tooltips
-tooltip.simplesponge.warning.openblocks=OpenBlocks detected, crafting recipe disabled!
 tooltip.simplesponge.durability=Durability

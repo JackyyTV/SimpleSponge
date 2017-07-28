@@ -4,6 +4,7 @@ import me.jacky1356400.simplesponge.Config;
 import me.jacky1356400.simplesponge.SimpleSponge;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class BlockSponge extends BlockSpongeBase {
@@ -29,10 +31,12 @@ public class BlockSponge extends BlockSpongeBase {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        if (Loader.isModLoaded("openblocks") && Config.openBlocksIntegration){
-            tooltip.add(TextFormatting.RED + I18n.format("tooltip." + SimpleSponge.MODID + ".warning.openblocks"));
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
+        if (!Loader.isModLoaded("openblocks")) {
+            list.add(new ItemStack(item));
+        } else if (Loader.isModLoaded("openblocks") && !Config.openBlocksIntegration) {
+            list.add(new ItemStack(item));
         }
     }
 
