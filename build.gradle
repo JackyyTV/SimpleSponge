@@ -8,10 +8,9 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 version = "${mc_version}-${mod_version}"
-group= "me.jacky1356400.simplesponge"
+group= "jackyy.simplesponge"
 archivesBaseName = "SimpleSponge"
 
 sourceCompatibility = targetCompatibility = "1.8"
@@ -20,36 +19,36 @@ compileJava {
 }
 
 minecraft {
-    version = "${mc_version}-${forge_version}"
+    version = "${forge_version}"
     runDir = "run"
     mappings = "${mappings_version}"
+	
+	replace '@FINGERPRINT@', project.findProperty('signSHA1')
+    replaceIn "SimpleSponge.java"
 }
 
 repositories {
-    maven {
-        url "http://dvs1.progwml6.com/files/maven"
-    }
-    maven {
-        url "http://maven.epoxide.xyz"
-    }
-    maven {
-        url "http://maven.amadornes.com/"
-    }
 	maven {
-		url  "http://tehnut.info/maven"
+		name = "JEI Maven"
+		url = "http://dvs1.progwml6.com/files/maven"
+	}
+	maven {
+		name = "Hwyla Maven"
+		url = "https://tehnut.info/maven"
+	}
+	maven {
+		name = "CoFH Maven"
+		url = "http://maven.covers1624.net"
 	}
 }
 
 dependencies {
-    compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.12:4.7.1.69:api"
-    runtime "mezz.jei:jei_1.12:4.7.1.69"
-	deobfCompile "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12:api"
-	runtime "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12"
+	deobfCompile "mezz.jei:jei_1.12.2:+"
+	deobfCompile "mcp.mobius.waila:Hwyla:+"
+	compile "cofh:RedstoneFlux:1.12-2.+:deobf"
 }
 
-processResources
-{
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
     from(sourceSets.main.resources.srcDirs) {
@@ -59,5 +58,28 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    onlyIf {
+		project.hasProperty('keyStore')
+	}
+	keyStore = project.findProperty('keyStore')
+	alias = project.findProperty('keyStoreAlias')
+	storePass = project.findProperty('keyStorePass')
+	keyPass = project.findProperty('keyStoreKeyPass')
+	inputFile = jar.archivePath
+	outputFile = jar.archivePath
+}
+
+build.dependsOn signJar
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+artifacts {
+    archives deobfJar
 }
 
