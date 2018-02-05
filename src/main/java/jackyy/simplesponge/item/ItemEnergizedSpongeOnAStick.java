@@ -1,9 +1,9 @@
 package jackyy.simplesponge.item;
 
 import cofh.redstoneflux.api.IEnergyContainerItem;
+import cofh.redstoneflux.util.EnergyContainerItemWrapper;
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModConfig;
-import jackyy.simplesponge.util.EnergyContainerItemWrapper;
 import jackyy.simplesponge.util.ModUtils;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
