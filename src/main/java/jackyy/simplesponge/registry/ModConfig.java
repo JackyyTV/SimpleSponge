@@ -19,6 +19,12 @@ import java.util.Optional;
 @Config(modid = SimpleSponge.MODID, name = "SimpleSponge")
 public class ModConfig {
 
+    public static Sponge sponge = new Sponge();
+    public static MagneticSponge magneticSponge = new MagneticSponge();
+    public static EnergizedSponge energizedSponge = new EnergizedSponge();
+    public static CompressedSponge compressedSponge = new CompressedSponge();
+    public static Misc misc = new Misc();
+
     public static class Sponge {
         @Config.RangeInt(min = 1)
         @Config.Comment("Set the durability for a Sponge On A Stick")
