@@ -24,7 +24,7 @@ public class ModRecipes {
                                     Items.MAGMA_CREAM
                             )
                     );
-                } else {
+                } else if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")) == null) {
                     GameRegistry.addRecipe(
                             new ShapelessOreRecipe(
                                     new ItemStack(ModBlocks.magmaticSponge),
@@ -32,8 +32,7 @@ public class ModRecipes {
                                     Items.MAGMA_CREAM
                             )
                     );
-                }
-                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) != null) {
+                } else if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) != null) {
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(
                                     new ItemStack(ModItems.compressedSpongeOnAStick),
@@ -41,7 +40,7 @@ public class ModRecipes {
                                     's', Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick"))
                             )
                     );
-                } else {
+                } else if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(
                                     new ItemStack(ModItems.compressedSpongeOnAStick),
