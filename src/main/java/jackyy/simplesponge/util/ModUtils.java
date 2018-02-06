@@ -2,6 +2,8 @@ package jackyy.simplesponge.util;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.text.NumberFormat;
 
@@ -59,6 +61,13 @@ public class ModUtils {
         }
         container.getTagCompound().setInteger("Energy", energy);
         return container;
+    }
+
+    public static ItemStack[] getStacksFromOreDict(String oredict) {
+        NonNullList<ItemStack> stacks = OreDictionary.getOres(oredict);
+        ItemStack[] oredictlist = new ItemStack[stacks.size()];
+        oredictlist = stacks.toArray(oredictlist);
+        return oredictlist;
     }
 
 }
