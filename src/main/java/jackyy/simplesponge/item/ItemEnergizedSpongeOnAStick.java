@@ -65,8 +65,8 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     }
 
     @Override
-    public int getPerBlockUse() {
-        return ModConfig.energizedSponge.energizedSpongeOnAStickPerBlockUse;
+    public int getPerRightClickUse() {
+        return ModConfig.energizedSponge.energizedSpongeOnAStickPerRightClickUse;
     }
 
     @Override

@@ -3,7 +3,7 @@
   "modid": "simplesponge",
   "name": "Simple Sponge",
   "description": "OpenBlocks Sponge port for 1.10+, with some extra sprinkles!",
-  "version": "2.4",
+  "version": "2.4.1",
   "mcversion": "1.11.2",
   "url": "https://github.com/JackyyTV/SimpleSponge",
   "updateUrl": "",

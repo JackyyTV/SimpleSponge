@@ -45,8 +45,8 @@ public class ModConfig {
         @Config.Comment("Set the max energy for an Energized Sponge On A Stick")
         public int energizedSpongeOnAStickMaxEnergy = 500000;
         @Config.RangeInt(min = 1, max = 10000)
-        @Config.Comment("Set the per block energy use for an Energized Sponge On A Stick")
-        public int energizedSpongeOnAStickPerBlockUse = 100;
+        @Config.Comment("Set the per right click energy use for an Energized Sponge On A Stick")
+        public int energizedSpongeOnAStickPerRightClickUse = 100;
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range for an Energized Sponge On A Stick")
         public int energizedSpongeOnAStickRange = 7;

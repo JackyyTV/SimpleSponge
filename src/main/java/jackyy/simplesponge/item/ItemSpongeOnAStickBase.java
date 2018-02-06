@@ -1,6 +1,7 @@
 package jackyy.simplesponge.item;
 
 import jackyy.simplesponge.SimpleSponge;
+import jackyy.simplesponge.util.ModUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.text.NumberFormat;
 import java.util.List;
 
 public class ItemSpongeOnAStickBase extends Item {
@@ -42,8 +42,8 @@ public class ItemSpongeOnAStickBase extends Item {
         return this.getEnergy();
     }
 
-    public int getPerBlockUse() {
-        return this.getPerBlockUse();
+    public int getPerRightClickUse() {
+        return this.getPerRightClickUse();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ItemSpongeOnAStickBase extends Item {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         if (!isPowered()){
-            tooltip.add(NumberFormat.getInstance().format(stack.getMaxDamage() - stack.getItemDamage()) + " / " + NumberFormat.getInstance().format(stack.getMaxDamage()) + " " + I18n.format("tooltip." + SimpleSponge.MODID + ".durability"));
+            tooltip.add(ModUtils.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + ModUtils.formatNumber(stack.getMaxDamage()) + " " + I18n.format("tooltip." + SimpleSponge.MODID + ".durability"));
         }
     }
 
@@ -86,7 +86,7 @@ public class ItemSpongeOnAStickBase extends Item {
                         hitLava |= material == Material.LAVA;
                         world.setBlockToAir(targetPos);
                         if (!isPowered() && ++damage >= getDmg()) break;
-                        else if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockUse()) break;
+                        else if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerRightClickUse()) break;
                     }
 
                 }
@@ -102,8 +102,8 @@ public class ItemSpongeOnAStickBase extends Item {
 
         if (absorbedAnything) {
             if (isPowered()) {
-                if (stack.getTagCompound().getInteger("Energy") >= getPerBlockUse()) {
-                    stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerBlockUse());
+                if (stack.getTagCompound().getInteger("Energy") >= getPerRightClickUse()) {
+                    stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerRightClickUse());
                 }
             } else {
                 if (damage >= getDmg()) {

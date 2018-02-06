@@ -16,20 +16,55 @@ public class ModRecipes {
     public static void init() {
         if (Loader.isModLoaded("openblocks")) {
             if (ModConfig.misc.openBlocksIntegration) {
-                GameRegistry.addRecipe(
-                        new ShapelessOreRecipe(
-                                new ItemStack(ModBlocks.magmaticSponge),
-                                Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")),
-                                Items.MAGMA_CREAM
-                        )
-                );
-                GameRegistry.addRecipe(
-                        new ShapedOreRecipe(
-                                new ItemStack(ModItems.compressedSpongeOnAStick),
-                                "sss", "sss", "sss",
-                                's', Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick"))
-                        )
-                );
+                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")) != null) {
+                    GameRegistry.addRecipe(
+                            new ShapelessOreRecipe(
+                                    new ItemStack(ModBlocks.magmaticSponge),
+                                    Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")),
+                                    Items.MAGMA_CREAM
+                            )
+                    );
+                }
+                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")) == null) {
+                    GameRegistry.addRecipe(
+                            new ShapelessOreRecipe(
+                                    new ItemStack(ModBlocks.magmaticSponge),
+                                    ModBlocks.sponge,
+                                    Items.MAGMA_CREAM
+                            )
+                    );
+                    GameRegistry.addRecipe(
+                            new ShapelessOreRecipe(
+                                    new ItemStack(ModBlocks.sponge),
+                                    new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE),
+                                    "slimeball"
+                            )
+                    );
+                }
+                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) != null) {
+                    GameRegistry.addRecipe(
+                            new ShapedOreRecipe(
+                                    new ItemStack(ModItems.compressedSpongeOnAStick),
+                                    "sss", "sss", "sss",
+                                    's', Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick"))
+                            )
+                    );
+                }
+                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
+                    GameRegistry.addRecipe(
+                            new ShapedOreRecipe(
+                                    new ItemStack(ModItems.compressedSpongeOnAStick),
+                                    "sss", "sss", "sss", 's', ModItems.spongeOnAStick
+                            )
+                    );
+                    GameRegistry.addRecipe(
+                            new ShapedOreRecipe(
+                                    new ItemStack(ModItems.spongeOnAStick),
+                                    " s ", " w ", " w ",
+                                    's', ModBlocks.sponge, 'w', "stickWood"
+                            )
+                    );
+                }
             } else {
                 GameRegistry.addRecipe(
                         new ShapelessOreRecipe(
