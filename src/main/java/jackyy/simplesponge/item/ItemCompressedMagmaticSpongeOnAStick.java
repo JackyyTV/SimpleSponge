@@ -23,12 +23,12 @@ public class ItemCompressedMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase
 
     @Override
     public int getDmg() {
-        return ModConfig.CompressedSponge.compressedMagmaticSpongeOnAStickMaxDamage * 9;
+        return ModConfig.compressedSponge.compressedMagmaticSpongeOnAStickMaxDamage * 9;
     }
 
     @Override
     public int getRange() {
-        return ModConfig.CompressedSponge.compressedMagmaticSpongeOnAStickRange * 2;
+        return ModConfig.compressedSponge.compressedMagmaticSpongeOnAStickRange * 2;
     }
 
     @Override

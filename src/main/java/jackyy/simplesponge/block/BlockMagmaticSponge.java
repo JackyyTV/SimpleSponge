@@ -28,7 +28,7 @@ public class BlockMagmaticSponge extends BlockSpongeBase {
 
     @Override
     public int getRange() {
-        return ModConfig.MagneticSponge.magmaticSpongeRange;
+        return ModConfig.magneticSponge.magmaticSpongeRange;
     }
 
 }

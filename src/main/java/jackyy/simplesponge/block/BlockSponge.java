@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,9 +31,15 @@ public class BlockSponge extends BlockSpongeBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
-        if (!Loader.isModLoaded("openblocks")) {
-            list.add(new ItemStack(item));
-        } else if (Loader.isModLoaded("openblocks") && !ModConfig.Misc.openBlocksIntegration) {
+        if (Loader.isModLoaded("openblocks")) {
+            if (ModConfig.misc.openBlocksIntegration) {
+                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")) == null) {
+                    list.add(new ItemStack(item));
+                }
+            } else {
+                list.add(new ItemStack(item));
+            }
+        } else {
             list.add(new ItemStack(item));
         }
     }
@@ -44,7 +51,7 @@ public class BlockSponge extends BlockSpongeBase {
 
     @Override
     public int getRange() {
-        return ModConfig.Sponge.spongeRange;
+        return ModConfig.sponge.spongeRange;
     }
 
 }

@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,7 +20,7 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
     public ItemSpongeOnAStick() {
         setRegistryName(SimpleSponge.MODID + ":sponge_on_a_stick");
         setUnlocalizedName(SimpleSponge.MODID + ".sponge_on_a_stick");
-        setMaxDamage(ModConfig.Sponge.spongeOnAStickMaxDamage);
+        setMaxDamage(ModConfig.sponge.spongeOnAStickMaxDamage);
         setCreativeTab(SimpleSponge.TAB);
     }
 
@@ -30,12 +31,12 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     @Override
     public int getDmg() {
-        return ModConfig.Sponge.spongeOnAStickMaxDamage;
+        return ModConfig.sponge.spongeOnAStickMaxDamage;
     }
 
     @Override
     public int getRange() {
-        return ModConfig.Sponge.spongeOnAStickRange;
+        return ModConfig.sponge.spongeOnAStickRange;
     }
 
     @Override
@@ -46,9 +47,15 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
-        if (!Loader.isModLoaded("openblocks")) {
-            list.add(new ItemStack(item));
-        } else if (Loader.isModLoaded("openblocks") && !ModConfig.Misc.openBlocksIntegration) {
+        if (Loader.isModLoaded("openblocks")) {
+            if (ModConfig.misc.openBlocksIntegration) {
+                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
+                    list.add(new ItemStack(item));
+                }
+            } else {
+                list.add(new ItemStack(item));
+            }
+        } else {
             list.add(new ItemStack(item));
         }
     }

@@ -28,12 +28,12 @@ public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     @Override
     public int getDmg() {
-        return ModConfig.MagneticSponge.magmaticSpongeOnAStickMaxDamage;
+        return ModConfig.magneticSponge.magmaticSpongeOnAStickMaxDamage;
     }
 
     @Override
     public int getRange() {
-        return ModConfig.MagneticSponge.magmaticSpongeOnAStickRange;
+        return ModConfig.magneticSponge.magmaticSpongeOnAStickRange;
     }
 
 }

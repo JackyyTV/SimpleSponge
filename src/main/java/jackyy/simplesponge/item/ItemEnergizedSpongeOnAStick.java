@@ -55,17 +55,17 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     @Override
     public int getRange() {
-        return ModConfig.EnergizedSponge.energizedSpongeOnAStickRange;
+        return ModConfig.energizedSponge.energizedSpongeOnAStickRange;
     }
 
     @Override
     public int getEnergy() {
-        return ModConfig.EnergizedSponge.energizedSpongeOnAStickMaxEnergy;
+        return ModConfig.energizedSponge.energizedSpongeOnAStickMaxEnergy;
     }
 
     @Override
-    public int getPerBlockUse() {
-        return ModConfig.EnergizedSponge.energizedSpongeOnAStickPerBlockUse;
+    public int getPerRightClickUse() {
+        return ModConfig.energizedSponge.energizedSpongeOnAStickPerRightClickUse;
     }
 
     @Override

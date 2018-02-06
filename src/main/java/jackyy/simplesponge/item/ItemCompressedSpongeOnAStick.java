@@ -23,12 +23,12 @@ public class ItemCompressedSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     @Override
     public int getDmg() {
-        return ModConfig.CompressedSponge.compressedSpongeOnAStickMaxDamage * 9;
+        return ModConfig.compressedSponge.compressedSpongeOnAStickMaxDamage * 9;
     }
 
     @Override
     public int getRange() {
-        return ModConfig.CompressedSponge.compressedSpongeOnAStickRange * 2;
+        return ModConfig.compressedSponge.compressedSpongeOnAStickRange * 2;
     }
 
     @Override
