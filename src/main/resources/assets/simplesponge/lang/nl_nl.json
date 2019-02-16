@@ -1,0 +1,12 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "Simpele Spons",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "Spons op een Stok",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "Magmatische Spons op een Stok",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "Spons",
+    "block.simplesponge.magmatic_sponge": "Magmatische Spons"
+}

@@ -1,0 +1,12 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "Einfacher Schwamm",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "Schwamm am Stiel",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "Magmatischer Schwamm am Stiel",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "Schwamm",
+    "block.simplesponge.magmatic_sponge": "Magmatischer Schwamm"
+}

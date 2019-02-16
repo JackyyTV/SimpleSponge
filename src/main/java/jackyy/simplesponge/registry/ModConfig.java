@@ -1,15 +1,9 @@
 package jackyy.simplesponge.registry;
 
-import jackyy.simplesponge.SimpleSponge;
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-@Config(modid = SimpleSponge.MODID, name = "SimpleSponge", category = SimpleSponge.MODID)
+//@Config(modid = SimpleSponge.MODID, name = "SimpleSponge", category = SimpleSponge.MODID)
 public class ModConfig {
 
+    /*
     public static Sponge sponge = new Sponge();
     public static MagneticSponge magneticSponge = new MagneticSponge();
     public static EnergizedSponge energizedSponge = new EnergizedSponge();
@@ -85,5 +79,6 @@ public class ModConfig {
             }
         }
     }
+    */
 
 }

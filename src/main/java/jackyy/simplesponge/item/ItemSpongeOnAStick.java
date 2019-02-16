@@ -1,40 +1,24 @@
 package jackyy.simplesponge.item;
 
-import jackyy.simplesponge.SimpleSponge;
-import jackyy.simplesponge.registry.ModConfig;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemSpongeOnAStick() {
-        setRegistryName(SimpleSponge.MODID + ":sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".sponge_on_a_stick");
-        setMaxDamage(ModConfig.sponge.spongeOnAStickMaxDamage);
-        setCreativeTab(SimpleSponge.TAB);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        setRegistryName("sponge_on_a_stick");
+        setDamage(new ItemStack(this), getDmg());
     }
 
     @Override
     public int getDmg() {
-        return ModConfig.sponge.spongeOnAStickMaxDamage;
+        //return ModConfig.sponge.spongeOnAStickMaxDamage;
+        return 1;
     }
 
     @Override
     public int getRange() {
-        return ModConfig.sponge.spongeOnAStickRange;
+        //return ModConfig.sponge.spongeOnAStickRange;
+        return 1;
     }
 
     @Override
@@ -42,6 +26,7 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
         return false;
     }
 
+    /*
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
@@ -59,5 +44,6 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
             }
         }
     }
+    */
 
 }

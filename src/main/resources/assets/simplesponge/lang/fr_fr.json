@@ -1,0 +1,12 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "Éponge simple",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "Éponge sur un bâton",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "Éponge magmatique sur un bâton",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "Éponge",
+    "block.simplesponge.magmatic_sponge": "Éponge magmatique"
+}

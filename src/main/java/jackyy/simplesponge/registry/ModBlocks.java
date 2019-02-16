@@ -10,16 +10,11 @@ public class ModBlocks {
     public static BlockSponge sponge = new BlockSponge();
     public static BlockMagmaticSponge magmaticSponge = new BlockMagmaticSponge();
 
-    public static void init(RegistryEvent.Register<Block> e) {
-        e.getRegistry().registerAll(
+    public static void init(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(
                 sponge,
                 magmaticSponge
         );
-    }
-
-    public static void initModels() {
-        sponge.initModel();
-        magmaticSponge.initModel();
     }
 
 }

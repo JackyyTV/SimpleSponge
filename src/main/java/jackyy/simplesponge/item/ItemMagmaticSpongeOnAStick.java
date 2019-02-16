@@ -1,24 +1,12 @@
 package jackyy.simplesponge.item;
 
-import jackyy.simplesponge.SimpleSponge;
-import jackyy.simplesponge.registry.ModConfig;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.ItemStack;
 
 public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemMagmaticSpongeOnAStick() {
-        setRegistryName(SimpleSponge.MODID + ":magmatic_sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".magmatic_sponge_on_a_stick");
-        setMaxDamage(getDmg());
-        setCreativeTab(SimpleSponge.TAB);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        setRegistryName("magmatic_sponge_on_a_stick");
+        setDamage(new ItemStack(this), getDmg());
     }
 
     @Override
@@ -28,12 +16,14 @@ public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     @Override
     public int getDmg() {
-        return ModConfig.magneticSponge.magmaticSpongeOnAStickMaxDamage;
+        //return ModConfig.magneticSponge.magmaticSpongeOnAStickMaxDamage;
+        return 1;
     }
 
     @Override
     public int getRange() {
-        return ModConfig.magneticSponge.magmaticSpongeOnAStickRange;
+        //return ModConfig.magneticSponge.magmaticSpongeOnAStickRange;
+        return 1;
     }
 
 }

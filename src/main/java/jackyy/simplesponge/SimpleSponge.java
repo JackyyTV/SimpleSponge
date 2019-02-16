@@ -1,56 +1,50 @@
 package jackyy.simplesponge;
 
-import jackyy.simplesponge.proxy.CommonProxy;
+import jackyy.simplesponge.registry.ModBlocks;
 import jackyy.simplesponge.registry.ModItems;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLFingerprintViolationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = SimpleSponge.MODID, version = SimpleSponge.VERSION, name = SimpleSponge.MODNAME, dependencies = SimpleSponge.DEPENDS, acceptedMinecraftVersions = SimpleSponge.MCVERSION, certificateFingerprint = "@FINGERPRINT@", useMetadata = true)
+@Mod(SimpleSponge.MODID)
+@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class SimpleSponge {
 
-    public static final String VERSION = "3.6.1";
-    public static final String MCVERSION = "[1.12,1.13)";
     public static final String MODID = "simplesponge";
     public static final String MODNAME = "Simple Sponge";
-    public static final String DEPENDS = "after:openblocks;after:redstoneflux;";
-    public static final CreativeTabs TAB = new CreativeTabs(MODID) {
+    public static final ItemGroup TAB = new ItemGroup(MODID) {
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(ModItems.spongeOnAStick);
         }
     };
+    public static final Logger LOGGER = LogManager.getLogger(MODNAME);
 
-    public static Logger logger = LogManager.getLogger(MODNAME);
-
-    @SidedProxy(serverSide = "jackyy.simplesponge.proxy.CommonProxy", clientSide = "jackyy.simplesponge.proxy.ClientProxy")
-    public static CommonProxy proxy;
-
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent e) {
-        proxy.preInit(e);
+    public SimpleSponge() {
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent e) {
-        proxy.init(e);
+    @SubscribeEvent
+    public void onItemRegistry(RegistryEvent.Register<Item> event) {
+        ModItems.init(event);
     }
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent e) {
-        proxy.postInit(e);
+    @SubscribeEvent
+    public void onBlockRegistry(RegistryEvent.Register<Block> event) {
+        ModBlocks.init(event);
     }
 
-    @Mod.EventHandler
+    @SubscribeEvent
     public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-        logger.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified. This will NOT be supported by the mod author!");
+        LOGGER.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified. This will NOT be supported by the mod author!");
     }
 
 }

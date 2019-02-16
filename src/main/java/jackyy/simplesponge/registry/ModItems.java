@@ -1,5 +1,6 @@
 package jackyy.simplesponge.registry;
 
+import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.item.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -13,24 +14,16 @@ public class ModItems {
     public static ItemCompressedSpongeOnAStick compressedSpongeOnAStick = new ItemCompressedSpongeOnAStick();
     public static ItemCompressedMagmaticSpongeOnAStick compressedMagmaticSpongeOnAStick = new ItemCompressedMagmaticSpongeOnAStick();
 
-    public static void init(RegistryEvent.Register<Item> e) {
-        e.getRegistry().registerAll(
+    public static void init(RegistryEvent.Register<Item> event) {
+        event.getRegistry().registerAll(
                 spongeOnAStick,
                 magmaticSpongeOnAStick,
                 energizedSpongeOnAStick,
                 compressedSpongeOnAStick,
                 compressedMagmaticSpongeOnAStick,
-                new ItemBlock(ModBlocks.sponge).setRegistryName(ModBlocks.sponge.getRegistryName()),
-                new ItemBlock(ModBlocks.magmaticSponge).setRegistryName(ModBlocks.magmaticSponge.getRegistryName())
+                new ItemBlock(ModBlocks.sponge, new Item.Properties().group(SimpleSponge.TAB)).setRegistryName(ModBlocks.sponge.getRegistryName()),
+                new ItemBlock(ModBlocks.magmaticSponge, new Item.Properties().group(SimpleSponge.TAB)).setRegistryName(ModBlocks.magmaticSponge.getRegistryName())
         );
-    }
-
-    public static void initModels() {
-        spongeOnAStick.initModel();
-        magmaticSpongeOnAStick.initModel();
-        energizedSpongeOnAStick.initModel();
-        compressedSpongeOnAStick.initModel();
-        compressedMagmaticSpongeOnAStick.initModel();
     }
 
 }

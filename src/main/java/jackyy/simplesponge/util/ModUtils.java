@@ -1,14 +1,10 @@
 package jackyy.simplesponge.util;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.oredict.OreDictionary;
-
 import java.text.NumberFormat;
 
 public class ModUtils {
 
+    /*
     public static int receive(ItemStack container, int energy, int maxEnergy, boolean simulate) {
         int stored = getEnergyStored(container);
         int accepted = Math.min(energy, maxEnergy-stored);
@@ -50,11 +46,13 @@ public class ModUtils {
     public static boolean hasTag(ItemStack stack) {
         return stack.hasTagCompound();
     }
+    */
 
     public static String formatNumber(long number) {
         return NumberFormat.getInstance().format(number);
     }
 
+    /*
     public static ItemStack setDefaultEnergyTag(ItemStack container, int energy) {
         if (!container.hasTagCompound()) {
             container.setTagCompound(new NBTTagCompound());
@@ -69,5 +67,6 @@ public class ModUtils {
         oredictlist = stacks.toArray(oredictlist);
         return oredictlist;
     }
+    */
 
 }

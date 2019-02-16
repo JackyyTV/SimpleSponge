@@ -1,21 +1,10 @@
 package jackyy.simplesponge.registry;
 
-import jackyy.simplesponge.SimpleSponge;
-import jackyy.simplesponge.util.ModUtils;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-
 public class ModRecipes {
 
     public static void init() {
-        if (Loader.isModLoaded("openblocks")) {
+        /*
+        if (ModList.get().isLoaded("openblocks")) {
             if (ModConfig.misc.openBlocksIntegration) {
                 if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")) != null) {
                     GameRegistry.addShapelessRecipe(
@@ -136,7 +125,7 @@ public class ModRecipes {
                 "sss", "sss", "sss",
                 's', ModItems.magmaticSpongeOnAStick
         );
-        if (Loader.isModLoaded("redstoneflux")) {
+        if (ModList.get().isLoaded("redstoneflux")) {
             GameRegistry.addShapedRecipe(
                     new ResourceLocation(SimpleSponge.MODID, "energized_sponge_on_a_stick"),
                     null,
@@ -145,6 +134,7 @@ public class ModRecipes {
                     's', ModItems.magmaticSpongeOnAStick, 'b', Items.BLAZE_ROD, 'r', "blockRedstone"
             );
         }
+        */
     }
 
 }

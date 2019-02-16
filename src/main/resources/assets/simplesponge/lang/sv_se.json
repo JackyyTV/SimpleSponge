@@ -1,0 +1,12 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "Enkel Svamp",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "Svamp på en pinne",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "Magmatisk Svamp på en Pinne",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "Svamp",
+    "block.simplesponge.magmatic_sponge": "Magmatisk Svamp"
+}

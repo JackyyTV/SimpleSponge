@@ -1,41 +1,15 @@
 package jackyy.simplesponge.item;
 
-import cofh.redstoneflux.api.IEnergyContainerItem;
-import cofh.redstoneflux.util.EnergyContainerItemWrapper;
-import jackyy.simplesponge.SimpleSponge;
-import jackyy.simplesponge.registry.ModConfig;
-import jackyy.simplesponge.util.ModUtils;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
-@Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux")
-public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implements IEnergyContainerItem {
+//@Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux")
+public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implements IEnergyContainerItem*/ {
 
     public ItemEnergizedSpongeOnAStick() {
-        setRegistryName(SimpleSponge.MODID + ":energized_sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".energized_sponge_on_a_stick");
-        setCreativeTab(SimpleSponge.TAB);
-        setNoRepair();
+        setRegistryName("energized_sponge_on_a_stick");
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-    }
-
+    /*
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
@@ -49,6 +23,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
             }
         }
     }
+    */
 
     @Override
     public boolean isPowered() {
@@ -62,17 +37,20 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     @Override
     public int getRange() {
-        return ModConfig.energizedSponge.energizedSpongeOnAStickRange;
+        //return ModConfig.energizedSponge.energizedSpongeOnAStickRange;
+        return 1;
     }
 
     @Override
     public int getEnergy() {
-        return ModConfig.energizedSponge.energizedSpongeOnAStickMaxEnergy;
+        //return ModConfig.energizedSponge.energizedSpongeOnAStickMaxEnergy;
+        return 1;
     }
 
     @Override
     public int getPerRightClickUse() {
-        return ModConfig.energizedSponge.energizedSpongeOnAStickPerRightClickUse;
+        //return ModConfig.energizedSponge.energizedSpongeOnAStickPerRightClickUse;
+        return 1;
     }
 
     @Override
@@ -80,9 +58,10 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
         return true;
     }
 
+    /*
     @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag bool) {
         tooltip.add(ModUtils.formatNumber(getEnergyStored(stack)) + " / " + ModUtils.formatNumber(getMaxEnergyStored(stack)) + " RF");
     }
 
@@ -118,5 +97,6 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
         return new EnergyContainerItemWrapper(stack, this);
     }
+    */
 
 }

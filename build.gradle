@@ -1,65 +1,87 @@
 buildscript {
     repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
 
-version = "${mc_version}-${mod_version}"
-group= "jackyy.simplesponge"
-archivesBaseName = "SimpleSponge"
+version = '${mc_version}-${mod_version}'
+group = 'jackyy.simplesponge'
+archivesBaseName = 'SimpleSponge'
 
-sourceCompatibility = targetCompatibility = "1.8"
-compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
-}
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    version = "${forge_version}"
-    runDir = "run"
-    mappings = "${mappings_version}"
-	
-	replace '@FINGERPRINT@', project.findProperty('signSHA1')
+    mappings channel: 'snapshot', version: '20190215-1.13.1'
+    runs {
+        client = {
+            properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
+            properties 'forge.logging.console.level': 'debug'
+            workingDirectory project.file('run').canonicalPath
+            source sourceSets.main
+        }
+        server = {
+            properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
+            properties 'forge.logging.console.level': 'debug'
+            workingDirectory project.file('run').canonicalPath
+            source sourceSets.main
+        }
+    }
+    /*
+    TODO Fix this
+    replace '@FINGERPRINT@', project.findProperty('signSHA1')
     replaceIn "SimpleSponge.java"
+    */
 }
 
+/*
 repositories {
 	maven {
-		name = "JEI Maven"
-		url = "http://dvs1.progwml6.com/files/maven"
+		name = 'JEI Maven'
+		url = 'http://dvs1.progwml6.com/files/maven'
 	}
 	maven {
-		name = "Hwyla Maven"
-		url = "https://tehnut.info/maven"
+		name = 'Hwyla Maven'
+		url = 'https://tehnut.info/maven'
 	}
 	maven {
-		name = "CoFH Maven"
-		url = "http://maven.covers1624.net"
+		name = 'CoFH Maven'
+		url = 'http://maven.covers1624.net'
 	}
 }
+*/
 
 dependencies {
-	deobfCompile "mezz.jei:jei_1.12.2:+"
-	deobfCompile "mcp.mobius.waila:Hwyla:+"
-	compile "cofh:RedstoneFlux:1.12-2.+:deobf"
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.13'
+    /*
+	deobfCompile 'mezz.jei:jei_1.12.2:+'
+	deobfCompile 'mcp.mobius.waila:Hwyla:+'
+	compile 'cofh:RedstoneFlux:1.12-2.+:deobf'
+    */
 }
 
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "simplesponge",
+            "Specification-Vendor": "jackyy",
+            "Specification-Version": "${mc_version}-${mod_version}",
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${mc_version}-${mod_version}",
+            "Implementation-Vendor" :"jackyy",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ],)
     }
 }
 
+/*
+TODO Fix this
 task signJar(type: SignJar, dependsOn: reobfJar) {
     onlyIf {
 		project.hasProperty('keyStore')
@@ -82,4 +104,4 @@ task deobfJar(type: Jar) {
 artifacts {
     archives deobfJar
 }
-
+*/

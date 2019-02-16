@@ -1,0 +1,18 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "Prosta Gąbka",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "Gąbka na Patyku",
+    "item.simplesponge.compressed_sponge_on_a_stick": "Skompresowana Gąbka na Patyku",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "Magmowa Gąbka na Patyku",
+    "item.simplesponge.compressed_magmatic_sponge_on_a_stick": "Skompresowana Magmowa Gąbka na Patyku",
+    "item.simplesponge.energized_sponge_on_a_stick": "Ładowana Gąbka na Patyku",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "Gąbka",
+    "block.simplesponge.magmatic_sponge": "Magmowa Gąbka",
+
+    "_comment": "Tooltips",
+    "tooltip.simplesponge.durability": "Wytrzymałość"
+}

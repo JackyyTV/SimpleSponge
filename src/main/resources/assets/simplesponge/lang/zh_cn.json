@@ -1,0 +1,12 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "简易海绵",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "海绵棍",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "岩浆海绵棍",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "海绵",
+    "block.simplesponge.magmatic_sponge": "岩浆海绵"
+}

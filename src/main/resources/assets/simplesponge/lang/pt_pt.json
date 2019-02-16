@@ -1,0 +1,12 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "Esponja Simples",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "Pau com Esponja",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "Pau com Esponja Magmatica",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "Esponja",
+    "block.simplesponge.magmatic_sponge": "Esponja Magmatica"
+}

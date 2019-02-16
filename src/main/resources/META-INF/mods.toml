@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[24,)"
+issueTrackerURL="https://github.com/JackyyTV/SimpleSponge/issues"
+displayURL="https://github.com/JackyyTV/SimpleSponge"
+logoFile="logo.png"
+
+[[mods]]
+modId="simplesponge"
+version="4.0"
+displayName="Simple Sponge"
+credits="OpenBlocks source code and Turkey2349"
+authors="Jackyy, ThatGamerBlue"
+description='''
+OpenBlocks Sponge port for 1.10+, with some extra sprinkles!
+'''
+
+[[dependencies.simplesponge]]
+    modId="forge"
+    mandatory=true
+    versionRange="[25.0.0.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.simplesponge]]
+    modId="redstoneflux"
+    mandatory=false
+    versionRange="[2.0.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
