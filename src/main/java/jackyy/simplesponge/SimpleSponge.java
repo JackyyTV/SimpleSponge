@@ -10,12 +10,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLFingerprintViolationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(SimpleSponge.MODID)
-@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class SimpleSponge {
 
     public static final String MODID = "simplesponge";
@@ -32,19 +30,23 @@ public class SimpleSponge {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @SubscribeEvent
-    public void onItemRegistry(RegistryEvent.Register<Item> event) {
-        ModItems.init(event);
+    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onItemRegistry(RegistryEvent.Register<Item> event) {
+            ModItems.init(event);
+        }
+        @SubscribeEvent
+        public static void onBlockRegistry(RegistryEvent.Register<Block> event) {
+            ModBlocks.init(event);
+        }
     }
 
-    @SubscribeEvent
-    public void onBlockRegistry(RegistryEvent.Register<Block> event) {
-        ModBlocks.init(event);
-    }
-
+    /*
     @SubscribeEvent
     public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
         LOGGER.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified. This will NOT be supported by the mod author!");
     }
+    */
 
 }

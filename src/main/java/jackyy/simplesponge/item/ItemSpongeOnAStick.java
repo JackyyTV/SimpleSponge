@@ -1,12 +1,10 @@
 package jackyy.simplesponge.item;
 
-import net.minecraft.item.ItemStack;
-
 public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemSpongeOnAStick() {
+        super(new Properties().defaultMaxDamage(1));
         setRegistryName("sponge_on_a_stick");
-        setDamage(new ItemStack(this), getDmg());
     }
 
     @Override

@@ -1,12 +1,10 @@
 package jackyy.simplesponge.item;
 
-import net.minecraft.item.ItemStack;
-
 public class ItemCompressedMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemCompressedMagmaticSpongeOnAStick() {
+        super(new Properties().defaultMaxDamage(1));
         setRegistryName("compressed_magmatic_sponge_on_a_stick");
-        setDamage(new ItemStack(this), getDmg());
     }
 
     @Override

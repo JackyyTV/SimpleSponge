@@ -24,8 +24,8 @@ import java.util.List;
 
 public class ItemSpongeOnAStickBase extends Item {
 
-    public ItemSpongeOnAStickBase() {
-        super(new Properties().maxStackSize(1).group(SimpleSponge.TAB));
+    public ItemSpongeOnAStickBase(Properties props) {
+        super(props.group(SimpleSponge.TAB));
     }
 
     public boolean isPowered() {
@@ -93,7 +93,7 @@ public class ItemSpongeOnAStickBase extends Item {
                         world.removeBlock(targetPos);
                         if (!isPowered() && ++damage >= getDmg()) break;
                         else if (isPowered() && stack.getTag().getInt("Energy") < getPerRightClickUse()) break;
-                    } else if (state.get(BlockStateProperties.WATERLOGGED)) {
+                    } else if (state.has(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
                         absorbedAnything = true;
                         hitLava = false;
                         world.setBlockState(targetPos, state.with(BlockStateProperties.WATERLOGGED, false));

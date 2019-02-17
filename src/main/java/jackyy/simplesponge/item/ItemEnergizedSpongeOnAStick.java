@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implements IEnergyContainerItem*/ {
 
     public ItemEnergizedSpongeOnAStick() {
+        super(new Properties().maxStackSize(1).setNoRepair());
         setRegistryName("energized_sponge_on_a_stick");
     }
 

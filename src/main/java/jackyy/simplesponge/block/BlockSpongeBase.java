@@ -81,7 +81,7 @@ public class BlockSpongeBase extends Block {
                     if (material.isLiquid()) {
                         hitLava |= material == Material.LAVA;
                         world.removeBlock(workPos);
-                    } else if (state.get(BlockStateProperties.WATERLOGGED)) {
+                    } else if (state.has(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
                         world.setBlockState(workPos, state.with(BlockStateProperties.WATERLOGGED, false));
                     }
                 }
