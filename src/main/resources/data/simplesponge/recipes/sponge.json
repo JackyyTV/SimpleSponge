@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shapeless",
+  "conditions": [
+    {"type": "simplesponge:sponge", "enabled": true}
+  ],
+  "ingredients": [
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    }
+  ],
+  "result": {
+    "item": "simplesponge:sponge"
+  }
+}

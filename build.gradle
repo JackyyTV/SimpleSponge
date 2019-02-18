@@ -58,7 +58,7 @@ repositories {
 */
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.22'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.26'
     /*
 	deobfCompile 'mezz.jei:jei_1.12.2:+'
 	deobfCompile 'mcp.mobius.waila:Hwyla:+'

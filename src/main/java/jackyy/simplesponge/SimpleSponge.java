@@ -2,6 +2,7 @@ package jackyy.simplesponge;
 
 import jackyy.simplesponge.registry.ModBlocks;
 import jackyy.simplesponge.registry.ModItems;
+import jackyy.simplesponge.registry.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -10,6 +11,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +30,12 @@ public class SimpleSponge {
     public static final Logger LOGGER = LogManager.getLogger(MODNAME);
 
     public SimpleSponge() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void setup(FMLCommonSetupEvent event) {
+        ModRecipes.registerConditions();
     }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)

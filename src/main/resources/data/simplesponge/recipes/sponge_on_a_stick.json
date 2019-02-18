@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {"type": "simplesponge:sponge_on_a_stick", "enabled": true}
+  ],
+  "pattern": [
+    "#",
+    "S",
+    "S"
+  ],
+  "key": {
+    "#": {
+      "item": "simplesponge:sponge"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "simplesponge:sponge_on_a_stick"
+  }
+}

@@ -1,6 +1,42 @@
 package jackyy.simplesponge.registry;
 
+import jackyy.simplesponge.SimpleSponge;
+import net.minecraft.util.JsonUtils;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.CraftingHelper;
+
 public class ModRecipes {
+
+    public static void registerConditions() {
+        CraftingHelper.register(
+                new ResourceLocation(SimpleSponge.MODID, "sponge"),
+                json -> () -> JsonUtils.getBoolean(json, "enabled", true)
+        );
+        CraftingHelper.register(
+                new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge"),
+                json -> () -> JsonUtils.getBoolean(json, "enabled", true)
+        );
+        CraftingHelper.register(
+                new ResourceLocation(SimpleSponge.MODID, "sponge_on_a_stick"),
+                json -> () -> JsonUtils.getBoolean(json, "enabled", true)
+        );
+        CraftingHelper.register(
+                new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_on_a_stick"),
+                json -> () -> JsonUtils.getBoolean(json, "enabled", true)
+        );
+        CraftingHelper.register(
+                new ResourceLocation(SimpleSponge.MODID, "compressed_sponge_on_a_stick"),
+                json -> () -> JsonUtils.getBoolean(json, "enabled", true)
+        );
+        CraftingHelper.register(
+                new ResourceLocation(SimpleSponge.MODID, "compressed_magmatic_sponge_on_a_stick"),
+                json -> () -> JsonUtils.getBoolean(json, "enabled", true)
+        );
+        CraftingHelper.register(
+                new ResourceLocation(SimpleSponge.MODID, "energized_sponge_on_a_stick"),
+                json -> () -> JsonUtils.getBoolean(json, "enabled", true)
+        );
+    }
 
     public static void init() {
         /*

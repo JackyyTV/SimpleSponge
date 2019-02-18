@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {"type": "simplesponge:compressed_magmatic_sponge_on_a_stick", "enabled": true}
+  ],
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "simplesponge:magmatic_sponge_on_a_stick"
+    }
+  },
+  "result": {
+    "item": "simplesponge:compressed_magmatic_sponge_on_a_stick"
+  }
+}

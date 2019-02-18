@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shapeless",
+  "conditions": [
+    {"type": "simplesponge:magmatic_sponge", "enabled": true}
+  ],
+  "ingredients": [
+    {
+      "item": "simplesponge:sponge"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "result": {
+    "item": "simplesponge:magmatic_sponge"
+  }
+}
