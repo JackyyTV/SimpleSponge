@@ -1,8 +1,12 @@
 {
   "type": "crafting_shaped",
   "conditions": [
-    {"type": "simplesponge:energized_sponge_on_a_stick", "enabled": true},
-    {"type": "forge:mod_loaded", "modid": "redstoneflux"}
+    {
+      "type": "simplesponge:energized_sponge_on_a_stick", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "redstoneflux"
+    }
   ],
   "pattern": [
     "#",

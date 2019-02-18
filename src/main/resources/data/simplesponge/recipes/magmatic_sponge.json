@@ -1,7 +1,9 @@
 {
   "type": "crafting_shapeless",
   "conditions": [
-    {"type": "simplesponge:magmatic_sponge", "enabled": true}
+    {
+      "type": "simplesponge:magmatic_sponge", "enabled": true
+    }
   ],
   "ingredients": [
     {

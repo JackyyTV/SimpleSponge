@@ -1,7 +1,9 @@
 {
   "type": "crafting_shaped",
   "conditions": [
-    {"type": "simplesponge:sponge_on_a_stick", "enabled": true}
+    {
+      "type": "simplesponge:sponge_on_a_stick", "enabled": true
+    }
   ],
   "pattern": [
     "#",
