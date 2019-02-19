@@ -21,7 +21,7 @@ public class BlockSpongeBase extends Block {
     private static final Random RANDOM = new Random();
 
     public BlockSpongeBase() {
-        super(Properties.create(Material.SPONGE).sound(SoundType.CLOTH).needsRandomTick().hardnessAndResistance(0.3f));
+        super(Properties.create(Material.SPONGE).sound(SoundType.CLOTH).tickRandomly().hardnessAndResistance(0.3f));
     }
 
     @Override
@@ -80,7 +80,7 @@ public class BlockSpongeBase extends Block {
                     Material material = state.getMaterial();
                     if (material.isLiquid()) {
                         hitLava |= material == Material.LAVA;
-                        world.removeBlock(workPos);
+                        world.setBlockState(workPos, Blocks.AIR.getDefaultState());
                     } else if (state.has(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
                         world.setBlockState(workPos, state.with(BlockStateProperties.WATERLOGGED, false));
                     }

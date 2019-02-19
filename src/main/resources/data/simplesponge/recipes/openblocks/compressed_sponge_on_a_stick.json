@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "simplesponge:openblocks_integration", "enabled": true
+    },
+    {
+      "type": "forge:item_exists", "item": "openblocks:sponge_on_a_stick"
+    }
+  ],
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "openblocks:sponge_on_a_stick"
+    }
+  },
+  "result": {
+    "item": "simplesponge:compressed_sponge_on_a_stick"
+  }
+}

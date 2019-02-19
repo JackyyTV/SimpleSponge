@@ -1,22 +1,40 @@
 package jackyy.simplesponge.item;
 
+import jackyy.simplesponge.registry.ModConfigs;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
+
 public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
+    private static int dmg;
+    private static int range;
+    static {
+        try {
+            dmg = ModConfigs.CONFIG.spongeOnAStickMaxDamage.get();
+            range = ModConfigs.CONFIG.spongeOnAStickRange.get();
+        } catch (NullPointerException e) {
+            dmg = 256;
+            range = 3;
+        }
+    }
+
     public ItemSpongeOnAStick() {
-        super(new Properties().defaultMaxDamage(1));
+        super(new Properties().defaultMaxDamage(dmg));
         setRegistryName("sponge_on_a_stick");
     }
 
     @Override
     public int getDmg() {
-        //return ModConfig.sponge.spongeOnAStickMaxDamage;
-        return 1;
+        return dmg;
     }
 
     @Override
     public int getRange() {
-        //return ModConfig.sponge.spongeOnAStickRange;
-        return 1;
+        return range;
     }
 
     @Override
@@ -24,24 +42,21 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
         return false;
     }
 
-    /*
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (isInCreativeTab(tab)) {
-            if (Loader.isModLoaded("openblocks")) {
-                if (ModConfig.misc.openBlocksIntegration) {
-                    if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
-                        list.add(new ItemStack(this));
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (isInGroup(group)) {
+            if (ModList.get().isLoaded("openblocks")) {
+                if (ModConfigs.CONFIG.openBlocksIntegration.get()) {
+                    if (ForgeRegistries.ITEMS.getValue(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
+                        items.add(new ItemStack(this));
                     }
                 } else {
-                    list.add(new ItemStack(this));
+                    items.add(new ItemStack(this));
                 }
             } else {
-                list.add(new ItemStack(this));
+                items.add(new ItemStack(this));
             }
         }
     }
-    */
 
 }

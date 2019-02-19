@@ -1,22 +1,34 @@
 package jackyy.simplesponge.item;
 
+import jackyy.simplesponge.registry.ModConfigs;
+
 public class ItemCompressedMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
+    private static int dmg;
+    private static int range;
+    static {
+        try {
+            dmg = ModConfigs.CONFIG.compressedMagmaticSpongeOnAStickMaxDamage.get();
+            range = ModConfigs.CONFIG.compressedMagmaticSpongeOnAStickRange.get();
+        } catch (NullPointerException e) {
+            dmg = 256;
+            range = 3;
+        }
+    }
+
     public ItemCompressedMagmaticSpongeOnAStick() {
-        super(new Properties().defaultMaxDamage(1));
+        super(new Properties().defaultMaxDamage(dmg * 9));
         setRegistryName("compressed_magmatic_sponge_on_a_stick");
     }
 
     @Override
     public int getDmg() {
-        //return ModConfig.compressedSponge.compressedMagmaticSpongeOnAStickMaxDamage * 9;
-        return 1;
+        return dmg * 9;
     }
 
     @Override
     public int getRange() {
-        //return ModConfig.compressedSponge.compressedMagmaticSpongeOnAStickRange * 2;
-        return 1;
+        return range * 2;
     }
 
     @Override

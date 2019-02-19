@@ -7,6 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -73,7 +74,7 @@ public class ItemSpongeOnAStickBase extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         boolean result = soakUp(world, player.getPosition(), player, player.getHeldItemMainhand());
-        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItemMainhand());
+        return ActionResult.newResult(result ? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItemMainhand());
     }
 
     private boolean soakUp(World world, BlockPos pos, EntityPlayer player, ItemStack stack) {
@@ -90,7 +91,7 @@ public class ItemSpongeOnAStickBase extends Item {
                     if (material.isLiquid()) {
                         absorbedAnything = true;
                         hitLava |= material == Material.LAVA;
-                        world.removeBlock(targetPos);
+                        world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
                         if (!isPowered() && ++damage >= getDmg()) break;
                         else if (isPowered() && stack.getTag().getInt("Energy") < getPerRightClickUse()) break;
                     } else if (state.has(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {

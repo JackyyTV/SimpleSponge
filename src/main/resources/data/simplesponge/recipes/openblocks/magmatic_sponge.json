@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shapeless",
+  "conditions": [
+    {
+      "type": "simplesponge:openblocks_integration", "enabled": true
+    },
+    {
+      "type": "forge:item_exists", "item": "openblocks:sponge"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "openblocks:sponge"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "result": {
+    "item": "simplesponge:magmatic_sponge"
+  }
+}

@@ -2,7 +2,26 @@
   "type": "crafting_shapeless",
   "conditions": [
     {
-      "type": "simplesponge:magmatic_sponge", "enabled": true
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "simplesponge:openblocks_integration", "enabled": false
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "simplesponge:openblocks_integration", "enabled": true
+            },
+            {
+              "type": "forge:not",
+              "value": {
+                "type": "forge:item_exists", "item": "openblocks:sponge"
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "ingredients": [

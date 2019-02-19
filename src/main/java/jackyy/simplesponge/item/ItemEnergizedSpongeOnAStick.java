@@ -1,30 +1,48 @@
 package jackyy.simplesponge.item;
 
+import jackyy.simplesponge.registry.ModConfigs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.ModList;
 
 //@Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux")
 public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implements IEnergyContainerItem*/ {
+
+    private static int range;
+    private static int energy;
+    private static int use;
+    static {
+        try {
+            range = ModConfigs.CONFIG.energizedSpongeOnAStickRange.get();
+            energy = ModConfigs.CONFIG.energizedSpongeOnAStickMaxEnergy.get();
+            use = ModConfigs.CONFIG.energizedSpongeOnAStickPerRightClickUse.get();
+        } catch (NullPointerException e) {
+            range = 7;
+            energy = 500000;
+            use = 100;
+        }
+    }
 
     public ItemEnergizedSpongeOnAStick() {
         super(new Properties().maxStackSize(1).setNoRepair());
         setRegistryName("energized_sponge_on_a_stick");
     }
 
-    /*
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (isInCreativeTab(tab)) {
-            if (Loader.isModLoaded("redstoneflux")) {
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (isInGroup(group)) {
+            if (ModList.get().isLoaded("redstoneflux")) {
                 ItemStack empty = new ItemStack(this);
-                list.add(empty);
+                items.add(empty);
+                /*
                 ItemStack full = new ItemStack(this);
                 ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                list.add(full);
+                items.add(full);
+                */
             }
         }
     }
-    */
 
     @Override
     public boolean isPowered() {
@@ -38,20 +56,17 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implem
 
     @Override
     public int getRange() {
-        //return ModConfig.energizedSponge.energizedSpongeOnAStickRange;
-        return 1;
+        return range;
     }
 
     @Override
     public int getEnergy() {
-        //return ModConfig.energizedSponge.energizedSpongeOnAStickMaxEnergy;
-        return 1;
+        return energy;
     }
 
     @Override
     public int getPerRightClickUse() {
-        //return ModConfig.energizedSponge.energizedSpongeOnAStickPerRightClickUse;
-        return 1;
+        return use;
     }
 
     @Override
@@ -63,7 +78,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implem
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag bool) {
-        tooltip.add(ModUtils.formatNumber(getEnergyStored(stack)) + " / " + ModUtils.formatNumber(getMaxEnergyStored(stack)) + " RF");
+        tooltip.add(new TextComponentString(ModUtils.formatNumber(getEnergyStored(stack)) + " / " + ModUtils.formatNumber(getMaxEnergyStored(stack)) + " RF"));
     }
 
     @Override

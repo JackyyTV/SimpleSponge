@@ -1,6 +1,17 @@
 package jackyy.simplesponge.block;
 
+import jackyy.simplesponge.registry.ModConfigs;
+
 public class BlockMagmaticSponge extends BlockSpongeBase {
+
+    private static int range;
+    static {
+        try {
+            range = ModConfigs.CONFIG.magmaticSpongeRange.get();
+        } catch (NullPointerException e) {
+            range = 3;
+        }
+    }
 
     public BlockMagmaticSponge() {
         setRegistryName("magmatic_sponge");
@@ -13,8 +24,7 @@ public class BlockMagmaticSponge extends BlockSpongeBase {
 
     @Override
     public int getRange() {
-        //return ModConfig.magneticSponge.magmaticSpongeRange;
-        return 1;
+        return range;
     }
 
 }

@@ -18,7 +18,7 @@ archivesBaseName = 'SimpleSponge'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190217-1.13.1'
+    mappings channel: 'snapshot', version: '20190219-1.13.1'
     runs {
         client = {
             properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -58,7 +58,7 @@ repositories {
 */
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.26'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.37'
     /*
 	deobfCompile 'mezz.jei:jei_1.12.2:+'
 	deobfCompile 'mcp.mobius.waila:Hwyla:+'
