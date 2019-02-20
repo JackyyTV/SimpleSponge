@@ -50,6 +50,8 @@ public class ModConfig {
     }
 
     public static class EnergizedSponge {
+        @Config.Comment("Set to true to enable the Energized Sponge On A Stick (Requires RF to use)")
+        public boolean enableEnergizedSpongeOnAStick = true;
         @Config.RangeInt(min = 1)
         @Config.Comment("Set the max energy for an Energized Sponge On A Stick")
         public int energizedSpongeOnAStickMaxEnergy = 500000;
