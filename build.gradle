@@ -18,7 +18,7 @@ archivesBaseName = 'SimpleSponge'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190219-1.13.1'
+    mappings channel: 'snapshot', version: '20190220-1.13.1'
     runs {
         client = {
             properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -58,7 +58,7 @@ repositories {
 */
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.37'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.44'
     /*
 	deobfCompile 'mezz.jei:jei_1.12.2:+'
 	deobfCompile 'mcp.mobius.waila:Hwyla:+'
@@ -71,7 +71,7 @@ jar {
         attributes([
             "Specification-Title": "simplesponge",
             "Specification-Vendor": "jackyy",
-            "Specification-Version": "24.0",
+            "Specification-Version": project.version,
             "Implementation-Title": project.name,
             "Implementation-Version": project.version,
             "Implementation-Vendor" :"jackyy",

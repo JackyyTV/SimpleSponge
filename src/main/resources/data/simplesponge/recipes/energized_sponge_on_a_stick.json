@@ -9,9 +9,9 @@
     }
   ],
   "pattern": [
-    "#",
-    "B",
-    "R"
+    "R#R",
+    "GBG",
+    "RBR"
   ],
   "key": {
     "#": {
@@ -21,7 +21,10 @@
       "tag": "forge:rods/blaze"
     },
     "R": {
-      "tag": "forge:storage_blocks/redstone"
+      "tag": "forge:dusts/redstone"
+    },
+    "G": {
+      "tag": "forge:ingots/gold"
     }
   },
   "result": {

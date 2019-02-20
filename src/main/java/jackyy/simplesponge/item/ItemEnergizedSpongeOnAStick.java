@@ -32,14 +32,16 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implem
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if (isInGroup(group)) {
-            if (ModList.get().isLoaded("redstoneflux")) {
-                ItemStack empty = new ItemStack(this);
-                items.add(empty);
-                /*
-                ItemStack full = new ItemStack(this);
-                ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                items.add(full);
-                */
+            if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
+                if (ModList.get().isLoaded("redstoneflux")) {
+                    ItemStack empty = new ItemStack(this);
+                    items.add(empty);
+                    /*
+                    ItemStack full = new ItemStack(this);
+                    ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+                    items.add(full);
+                    */
+                }
             }
         }
     }
