@@ -37,11 +37,13 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-        ItemStack empty = new ItemStack(this);
-        list.add(empty);
-        ItemStack full = new ItemStack(this);
-        ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-        list.add(full);
+        if (ModConfig.energizedSponge.enableEnergizedSpongeOnAStick) {
+            ItemStack empty = new ItemStack(this);
+            list.add(empty);
+            ItemStack full = new ItemStack(this);
+            ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+            list.add(full);
+        }
     }
 
     @Override

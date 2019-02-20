@@ -60,7 +60,7 @@ public class ModRecipes {
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(
                                     new ItemStack(ModItems.spongeOnAStick),
-                                    " s ", " w ", " w ",
+                                    "s", "w", "w",
                                     's', ModBlocks.sponge, 'w', "stickWood"
                             )
                     );
@@ -76,7 +76,7 @@ public class ModRecipes {
                 GameRegistry.addRecipe(
                         new ShapedOreRecipe(
                                 new ItemStack(ModItems.spongeOnAStick),
-                                " s ", " w ", " w ",
+                                "s", "w", "w",
                                 's', ModBlocks.sponge, 'w', "stickWood"
                         )
                 );
@@ -105,7 +105,7 @@ public class ModRecipes {
             GameRegistry.addRecipe(
                     new ShapedOreRecipe(
                             new ItemStack(ModItems.spongeOnAStick),
-                            " s ", " w ", " w ",
+                            "s", "w", "w",
                             's', ModBlocks.sponge, 'w', "stickWood"
                     )
             );
@@ -126,7 +126,7 @@ public class ModRecipes {
         GameRegistry.addRecipe(
                 new ShapedOreRecipe(
                         new ItemStack(ModItems.magmaticSpongeOnAStick),
-                        " s ", " w ", " w ", 's', ModBlocks.magmaticSponge, 'w', "stickWood"
+                        "s", "w", "w", 's', ModBlocks.magmaticSponge, 'w', "stickWood"
                 )
         );
         GameRegistry.addRecipe(
@@ -136,13 +136,15 @@ public class ModRecipes {
                         's', ModItems.magmaticSpongeOnAStick
                 )
         );
-        GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        new ItemStack(ModItems.energizedSpongeOnAStick),
-                        " s ", " b ", " r ",
-                        's', ModItems.magmaticSpongeOnAStick, 'b', Items.BLAZE_ROD, 'r', "blockRedstone"
-                )
-        );
+        if (ModConfig.energizedSponge.enableEnergizedSpongeOnAStick) {
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModItems.energizedSpongeOnAStick),
+                            "rsr", "gbg", "rbr",
+                            's', ModItems.magmaticSpongeOnAStick, 'b', Items.BLAZE_ROD, 'r', "dustRedstone", 'g', "ingotGold"
+                    )
+            );
+        }
     }
 
 }
