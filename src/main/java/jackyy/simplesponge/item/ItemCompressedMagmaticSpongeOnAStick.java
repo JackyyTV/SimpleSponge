@@ -11,7 +11,7 @@ public class ItemCompressedMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase
 
     public ItemCompressedMagmaticSpongeOnAStick() {
         setRegistryName(SimpleSponge.MODID + ":compressed_magmatic_sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".compressed_magmatic_sponge_on_a_stick");
+        setTranslationKey(SimpleSponge.MODID + ".compressed_magmatic_sponge_on_a_stick");
         setMaxDamage(getDmg());
         setCreativeTab(SimpleSponge.TAB);
     }

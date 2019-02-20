@@ -17,7 +17,7 @@ public class BlockSponge extends BlockSpongeBase {
 
     public BlockSponge() {
         setRegistryName(SimpleSponge.MODID + ":sponge");
-        setUnlocalizedName(SimpleSponge.MODID + ".sponge");
+        setTranslationKey(SimpleSponge.MODID + ".sponge");
         setCreativeTab(SimpleSponge.TAB);
     }
 

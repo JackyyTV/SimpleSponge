@@ -17,7 +17,7 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemSpongeOnAStick() {
         setRegistryName(SimpleSponge.MODID + ":sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".sponge_on_a_stick");
+        setTranslationKey(SimpleSponge.MODID + ".sponge_on_a_stick");
         setMaxDamage(ModConfig.sponge.spongeOnAStickMaxDamage);
         setCreativeTab(SimpleSponge.TAB);
     }

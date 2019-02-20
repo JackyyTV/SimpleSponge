@@ -61,7 +61,7 @@ public class ModRecipes {
                             new ResourceLocation(SimpleSponge.MODID, "sponge_on_a_stick"),
                             null,
                             new ItemStack(ModItems.spongeOnAStick),
-                            " s ", " w ", " w ",
+                            "s", "w", "w",
                             's', ModBlocks.sponge, 'w', "stickWood"
                     );
                 }
@@ -77,7 +77,7 @@ public class ModRecipes {
                         new ResourceLocation(SimpleSponge.MODID, "sponge_on_a_stick"),
                         null,
                         new ItemStack(ModItems.spongeOnAStick),
-                        " s ", " w ", " w ",
+                        "s", "w", "w",
                         's', ModBlocks.sponge, 'w', "stickWood"
                 );
                 GameRegistry.addShapedRecipe(
@@ -106,7 +106,7 @@ public class ModRecipes {
                     new ResourceLocation(SimpleSponge.MODID, "sponge_on_a_stick"),
                     null,
                     new ItemStack(ModItems.spongeOnAStick),
-                    " s ", " w ", " w ",
+                    "s", "w", "w",
                     's', ModBlocks.sponge, 'w', "stickWood"
             );
             GameRegistry.addShapedRecipe(
@@ -127,7 +127,7 @@ public class ModRecipes {
                 new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_on_a_stick"),
                 null,
                 new ItemStack(ModItems.magmaticSpongeOnAStick),
-                " s ", " w ", " w ", 's', ModBlocks.magmaticSponge, 'w', "stickWood"
+                "s", "w", "w", 's', ModBlocks.magmaticSponge, 'w', "stickWood"
         );
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(SimpleSponge.MODID, "compressed_magmatic_sponge_on_a_stick"),
@@ -136,14 +136,16 @@ public class ModRecipes {
                 "sss", "sss", "sss",
                 's', ModItems.magmaticSpongeOnAStick
         );
-        if (Loader.isModLoaded("redstoneflux")) {
-            GameRegistry.addShapedRecipe(
-                    new ResourceLocation(SimpleSponge.MODID, "energized_sponge_on_a_stick"),
-                    null,
-                    new ItemStack(ModItems.energizedSpongeOnAStick),
-                    " s ", " b ", " r ",
-                    's', ModItems.magmaticSpongeOnAStick, 'b', Items.BLAZE_ROD, 'r', "blockRedstone"
-            );
+        if (ModConfig.energizedSponge.enableEnergizedSpongeOnAStick) {
+            if (Loader.isModLoaded("redstoneflux")) {
+                GameRegistry.addShapedRecipe(
+                        new ResourceLocation(SimpleSponge.MODID, "energized_sponge_on_a_stick"),
+                        null,
+                        new ItemStack(ModItems.energizedSpongeOnAStick),
+                        "rsr", "gbg", "rbr",
+                        's', ModItems.magmaticSpongeOnAStick, 'b', Items.BLAZE_ROD, 'r', "dustRedstone", 'g', "ingotGold"
+                );
+            }
         }
     }
 

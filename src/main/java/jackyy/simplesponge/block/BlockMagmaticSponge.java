@@ -12,7 +12,7 @@ public class BlockMagmaticSponge extends BlockSpongeBase {
 
     public BlockMagmaticSponge() {
         setRegistryName(SimpleSponge.MODID + ":magmatic_sponge");
-        setUnlocalizedName(SimpleSponge.MODID + ".magmatic_sponge");
+        setTranslationKey(SimpleSponge.MODID + ".magmatic_sponge");
         setCreativeTab(SimpleSponge.TAB);
     }
 

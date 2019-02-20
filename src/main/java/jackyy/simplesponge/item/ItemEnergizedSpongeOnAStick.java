@@ -26,7 +26,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     public ItemEnergizedSpongeOnAStick() {
         setRegistryName(SimpleSponge.MODID + ":energized_sponge_on_a_stick");
-        setUnlocalizedName(SimpleSponge.MODID + ".energized_sponge_on_a_stick");
+        setTranslationKey(SimpleSponge.MODID + ".energized_sponge_on_a_stick");
         setCreativeTab(SimpleSponge.TAB);
         setNoRepair();
     }
@@ -40,12 +40,14 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (isInCreativeTab(tab)) {
-            if (Loader.isModLoaded("redstoneflux")) {
-                ItemStack empty = new ItemStack(this);
-                list.add(empty);
-                ItemStack full = new ItemStack(this);
-                ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                list.add(full);
+            if (ModConfig.energizedSponge.enableEnergizedSpongeOnAStick) {
+                if (Loader.isModLoaded("redstoneflux")) {
+                    ItemStack empty = new ItemStack(this);
+                    list.add(empty);
+                    ItemStack full = new ItemStack(this);
+                    ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+                    list.add(full);
+                }
             }
         }
     }
