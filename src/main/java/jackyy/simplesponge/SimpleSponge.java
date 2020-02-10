@@ -16,11 +16,11 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = SimpleSponge.MODID, version = SimpleSponge.VERSION, name = SimpleSponge.MODNAME, dependencies = SimpleSponge.DEPENDS, acceptedMinecraftVersions = SimpleSponge.MCVERSION, certificateFingerprint = "@FINGERPRINT@", useMetadata = true)
 public class SimpleSponge {
 
-    public static final String VERSION = "3.6.2";
+    public static final String VERSION = "3.6.3";
     public static final String MCVERSION = "[1.12,1.13)";
     public static final String MODID = "simplesponge";
     public static final String MODNAME = "Simple Sponge";
-    public static final String DEPENDS = "after:openblocks;after:redstoneflux;";
+    public static final String DEPENDS = "required-after:gunpowderlib@[1.12.2-1.0,);after:openblocks;after:redstoneflux;";
     public static final CreativeTabs TAB = new CreativeTabs(MODID) {
         @Override
         public ItemStack createIcon() {

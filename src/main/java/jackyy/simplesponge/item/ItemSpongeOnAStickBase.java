@@ -1,7 +1,7 @@
 package jackyy.simplesponge.item;
 
+import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.SimpleSponge;
-import jackyy.simplesponge.util.ModUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -56,7 +56,7 @@ public class ItemSpongeOnAStickBase extends Item {
     public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         if (!isPowered()){
-            tooltip.add(ModUtils.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + ModUtils.formatNumber(stack.getMaxDamage()) + " " + I18n.format("tooltip." + SimpleSponge.MODID + ".durability"));
+            tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + I18n.format("tooltip." + SimpleSponge.MODID + ".durability"));
         }
     }
 

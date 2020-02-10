@@ -2,9 +2,11 @@ package jackyy.simplesponge.item;
 
 import cofh.redstoneflux.api.IEnergyContainerItem;
 import cofh.redstoneflux.util.EnergyContainerItemWrapper;
+import jackyy.gunpowderlib.helper.EnergyHelper;
+import jackyy.gunpowderlib.helper.NBTHelper;
+import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModConfig;
-import jackyy.simplesponge.util.ModUtils;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -45,7 +47,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
                     ItemStack empty = new ItemStack(this);
                     list.add(empty);
                     ItemStack full = new ItemStack(this);
-                    ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+                    EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
                     list.add(full);
                 }
             }
@@ -85,30 +87,30 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
-        tooltip.add(ModUtils.formatNumber(getEnergyStored(stack)) + " / " + ModUtils.formatNumber(getMaxEnergyStored(stack)) + " RF");
+        tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
     }
 
     @Override
     public double getDurabilityForDisplay(ItemStack stack) {
         if (stack.getTagCompound() == null) {
-            ModUtils.setDefaultEnergyTag(stack, 0);
+            EnergyHelper.setDefaultEnergyTag(stack, 0);
         }
         return 1D - ((double) stack.getTagCompound().getInteger("Energy") / (double) getMaxEnergyStored(stack));
     }
 
     @Override
     public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-        return ModUtils.receive(container, maxReceive, getMaxEnergyStored(container), simulate);
+        return NBTHelper.receiveEnergy(container, maxReceive, getMaxEnergyStored(container), simulate);
     }
 
     @Override
     public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-        return ModUtils.extract(container, maxExtract, simulate);
+        return NBTHelper.extractEnergy(container, maxExtract, simulate);
     }
 
     @Override
     public int getEnergyStored(ItemStack container) {
-        return ModUtils.getEnergyStored(container);
+        return NBTHelper.getEnergyStored(container);
     }
 
     @Override

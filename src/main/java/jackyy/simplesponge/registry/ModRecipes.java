@@ -1,10 +1,9 @@
 package jackyy.simplesponge.registry;
 
+import jackyy.gunpowderlib.helper.ObjectHelper;
 import jackyy.simplesponge.SimpleSponge;
-import jackyy.simplesponge.util.ModUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -17,16 +16,16 @@ public class ModRecipes {
     public static void init() {
         if (Loader.isModLoaded("openblocks")) {
             if (ModConfig.misc.openBlocksIntegration) {
-                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")) != null) {
+                if (ObjectHelper.getItemByName("openblocks", "sponge")  != null) {
                     GameRegistry.addShapelessRecipe(
                             new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_ob"),
                             null,
                             new ItemStack(ModBlocks.magmaticSponge),
-                            Ingredient.fromItem(Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge"))),
+                            Ingredient.fromItem(ObjectHelper.getItemByName("openblocks", "sponge")),
                             Ingredient.fromItem(Items.MAGMA_CREAM)
                     );
                 }
-                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge")) == null) {
+                if (ObjectHelper.getItemByName("openblocks", "sponge") == null) {
                     GameRegistry.addShapelessRecipe(
                             new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge"),
                             null,
@@ -39,18 +38,25 @@ public class ModRecipes {
                             null,
                             new ItemStack(ModBlocks.sponge),
                             Ingredient.fromStacks(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE)),
-                            Ingredient.fromStacks(ModUtils.getStacksFromOreDict("slimeball"))
+                            Ingredient.fromStacks(ObjectHelper.getStacksFromOreDict("slimeball"))
                     );
                 }
-                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) != null) {
+                if (ObjectHelper.getItemByName("openblocks", "sponge_on_a_stick") != null) {
                     GameRegistry.addShapedRecipe(
                             new ResourceLocation(SimpleSponge.MODID, "compressed_sponge_on_a_stick_ob"),
                             null,
                             new ItemStack(ModItems.compressedSpongeOnAStick),
-                            "sss", "sss", "sss", 's', Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick"))
+                            "sss", "sss", "sss", 's', ObjectHelper.getItemByName("openblocks", "sponge_on_a_stick")
+                    );
+                    GameRegistry.addShapelessRecipe(
+                            new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_on_a_stick_upgrade_ob"),
+                            null,
+                            new ItemStack(ModItems.magmaticSpongeOnAStick),
+                            Ingredient.fromStacks(ObjectHelper.getItemStackByName("openblocks", "sponge_on_a_stick", 1 , 0)),
+                            Ingredient.fromItem(Items.MAGMA_CREAM)
                     );
                 }
-                if (Item.REGISTRY.getObject(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
+                if (ObjectHelper.getItemByName("openblocks", "sponge_on_a_stick") == null) {
                     GameRegistry.addShapedRecipe(
                             new ResourceLocation(SimpleSponge.MODID, "compressed_sponge_on_a_stick"),
                             null,
@@ -64,64 +70,19 @@ public class ModRecipes {
                             "s", "w", "w",
                             's', ModBlocks.sponge, 'w', "stickWood"
                     );
+                    GameRegistry.addShapelessRecipe(
+                            new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_on_a_stick_upgrade"),
+                            null,
+                            new ItemStack(ModItems.magmaticSpongeOnAStick),
+                            Ingredient.fromStacks(new ItemStack(ModItems.spongeOnAStick)),
+                            Ingredient.fromItem(Items.MAGMA_CREAM)
+                    );
                 }
             } else {
-                GameRegistry.addShapelessRecipe(
-                        new ResourceLocation(SimpleSponge.MODID, "sponge"),
-                        null,
-                        new ItemStack(ModBlocks.sponge),
-                        Ingredient.fromStacks(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE)),
-                        Ingredient.fromStacks(ModUtils.getStacksFromOreDict("slimeball"))
-                );
-                GameRegistry.addShapedRecipe(
-                        new ResourceLocation(SimpleSponge.MODID, "sponge_on_a_stick"),
-                        null,
-                        new ItemStack(ModItems.spongeOnAStick),
-                        "s", "w", "w",
-                        's', ModBlocks.sponge, 'w', "stickWood"
-                );
-                GameRegistry.addShapedRecipe(
-                        new ResourceLocation(SimpleSponge.MODID, "compressed_sponge_on_a_stick"),
-                        null,
-                        new ItemStack(ModItems.compressedSpongeOnAStick),
-                        "sss", "sss", "sss", 's', ModItems.spongeOnAStick
-                );
-                GameRegistry.addShapelessRecipe(
-                        new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge"),
-                        null,
-                        new ItemStack(ModBlocks.magmaticSponge),
-                        Ingredient.fromStacks(new ItemStack(ModBlocks.sponge)),
-                        Ingredient.fromItem(Items.MAGMA_CREAM)
-                );
+                addAllDefaultRecipes();
             }
         } else {
-            GameRegistry.addShapelessRecipe(
-                    new ResourceLocation(SimpleSponge.MODID, "sponge"),
-                    null,
-                    new ItemStack(ModBlocks.sponge),
-                    Ingredient.fromStacks(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE)),
-                    Ingredient.fromStacks(ModUtils.getStacksFromOreDict("slimeball"))
-            );
-            GameRegistry.addShapedRecipe(
-                    new ResourceLocation(SimpleSponge.MODID, "sponge_on_a_stick"),
-                    null,
-                    new ItemStack(ModItems.spongeOnAStick),
-                    "s", "w", "w",
-                    's', ModBlocks.sponge, 'w', "stickWood"
-            );
-            GameRegistry.addShapedRecipe(
-                    new ResourceLocation(SimpleSponge.MODID, "compressed_sponge_on_a_stick"),
-                    null,
-                    new ItemStack(ModItems.compressedSpongeOnAStick),
-                    "sss", "sss", "sss", 's', ModItems.spongeOnAStick
-            );
-            GameRegistry.addShapelessRecipe(
-                    new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge"),
-                    null,
-                    new ItemStack(ModBlocks.magmaticSponge),
-                    Ingredient.fromStacks(new ItemStack(ModBlocks.sponge)),
-                    Ingredient.fromItem(Items.MAGMA_CREAM)
-            );
+            addAllDefaultRecipes();
         }
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_on_a_stick"),
@@ -147,6 +108,43 @@ public class ModRecipes {
                 );
             }
         }
+    }
+
+    private static void addAllDefaultRecipes() {
+        GameRegistry.addShapelessRecipe(
+                new ResourceLocation(SimpleSponge.MODID, "sponge"),
+                null,
+                new ItemStack(ModBlocks.sponge),
+                Ingredient.fromStacks(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE)),
+                Ingredient.fromStacks(ObjectHelper.getStacksFromOreDict("slimeball"))
+        );
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(SimpleSponge.MODID, "sponge_on_a_stick"),
+                null,
+                new ItemStack(ModItems.spongeOnAStick),
+                "s", "w", "w",
+                's', ModBlocks.sponge, 'w', "stickWood"
+        );
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(SimpleSponge.MODID, "compressed_sponge_on_a_stick"),
+                null,
+                new ItemStack(ModItems.compressedSpongeOnAStick),
+                "sss", "sss", "sss", 's', ModItems.spongeOnAStick
+        );
+        GameRegistry.addShapelessRecipe(
+                new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge"),
+                null,
+                new ItemStack(ModBlocks.magmaticSponge),
+                Ingredient.fromStacks(new ItemStack(ModBlocks.sponge)),
+                Ingredient.fromItem(Items.MAGMA_CREAM)
+        );
+        GameRegistry.addShapelessRecipe(
+                new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_on_a_stick_upgrade"),
+                null,
+                new ItemStack(ModItems.magmaticSpongeOnAStick),
+                Ingredient.fromStacks(new ItemStack(ModItems.spongeOnAStick)),
+                Ingredient.fromItem(Items.MAGMA_CREAM)
+        );
     }
 
 }
