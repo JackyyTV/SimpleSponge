@@ -16,7 +16,7 @@ public class ModRecipes {
     public static void init() {
         if (Loader.isModLoaded("openblocks")) {
             if (ModConfig.misc.openBlocksIntegration) {
-                if (ObjectHelper.getItemByName("openblocks", "sponge")  != null) {
+                if (ObjectHelper.getItemByName("openblocks", "sponge") != null) {
                     GameRegistry.addShapelessRecipe(
                             new ResourceLocation(SimpleSponge.MODID, "magmatic_sponge_ob"),
                             null,
