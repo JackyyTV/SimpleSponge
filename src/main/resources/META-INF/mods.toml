@@ -1,14 +1,15 @@
 modLoader="javafml"
-loaderVersion="[25,)"
+loaderVersion="[35,)"
+license="LGPLv3"
 issueTrackerURL="https://github.com/JackyyTV/SimpleSponge/issues"
-logoFile="logo.png"
 
 [[mods]]
 modId="simplesponge"
-version="4.0"
+version="5.0"
 displayName="Simple Sponge"
 displayURL="https://github.com/JackyyTV/SimpleSponge"
-credits="OpenBlocks source code and Turkey2349"
+logoFile="logo.png"
+credits="OpenBlocks source code and TurkeyDev"
 authors="Jackyy, ThatGamerBlue"
 description='''
 OpenBlocks Sponge port for 1.10+, with some extra sprinkles!
@@ -17,24 +18,24 @@ OpenBlocks Sponge port for 1.10+, with some extra sprinkles!
 [[dependencies.simplesponge]]
     modId="forge"
     mandatory=true
-    versionRange="[25,)"
+    versionRange="[35,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.simplesponge]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.13,1.14)"
+    versionRange="[1.16,1.17)"
     ordering="NONE"
+    side="BOTH"
+[[dependencies.simplesponge]]
+    modId="gunpowderlib"
+    mandatory=true
+    versionRange="[1.16.4-1.0,)"
+    ordering="AFTER"
     side="BOTH"
 [[dependencies.simplesponge]]
     modId="openblocks"
     mandatory=false
     versionRange="[1.0,)"
-    ordering="AFTER"
-    side="BOTH"
-[[dependencies.simplesponge]]
-    modId="redstoneflux"
-    mandatory=false
-    versionRange="[2.0.0.0,)"
     ordering="AFTER"
     side="BOTH"

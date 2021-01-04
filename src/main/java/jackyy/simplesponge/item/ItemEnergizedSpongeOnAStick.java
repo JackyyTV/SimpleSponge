@@ -1,13 +1,28 @@
 package jackyy.simplesponge.item;
 
+import jackyy.gunpowderlib.capability.FEItemStackCapability;
+import jackyy.gunpowderlib.capability.FEStorageCapability;
+import jackyy.gunpowderlib.helper.EnergyHelper;
+import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.registry.ModConfigs;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.ModList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 
-//@Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux")
-public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implements IEnergyContainerItem*/ {
+import javax.annotation.Nullable;
+import java.util.List;
+
+public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     private static int range;
     private static int energy;
@@ -33,15 +48,13 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implem
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if (isInGroup(group)) {
             if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
-                if (ModList.get().isLoaded("redstoneflux")) {
-                    ItemStack empty = new ItemStack(this);
-                    items.add(empty);
-                    /*
-                    ItemStack full = new ItemStack(this);
-                    ModUtils.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                    items.add(full);
-                    */
-                }
+                ItemStack empty = new ItemStack(this);
+                items.add(empty);
+                ItemStack full = new ItemStack(this);
+                IEnergyStorage storage = full.getCapability(CapabilityEnergy.ENERGY, null).orElse(null);
+                int maxEnergy = storage.getMaxEnergyStored();
+                EnergyHelper.setDefaultEnergyTag(full, maxEnergy);
+                items.add(full);
             }
         }
     }
@@ -76,45 +89,25 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase /*implem
         return true;
     }
 
-    /*
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag bool) {
-        tooltip.add(new TextComponentString(ModUtils.formatNumber(getEnergyStored(stack)) + " / " + ModUtils.formatNumber(getMaxEnergyStored(stack)) + " RF"));
+        tooltip.add(new StringTextComponent(StringHelper.formatNumber(EnergyHelper.getEnergyStored(stack)) + " / " + StringHelper.formatNumber(EnergyHelper.getMaxEnergyStored(stack)) + " FE"));
     }
 
     @Override
     public double getDurabilityForDisplay(ItemStack stack) {
-        if (stack.getTagCompound() == null) {
-            ModUtils.setDefaultEnergyTag(stack, 0);
+        FEStorageCapability storage = (FEStorageCapability) stack.getCapability(CapabilityEnergy.ENERGY, null).orElse(null);
+        if (storage == null) {
+            return 0;
         }
-        return 1D - ((double) stack.getTagCompound().getInteger("Energy") / (double) getMaxEnergyStored(stack));
+        double energy = EnergyHelper.getEnergyStored(stack);
+        return 1 - energy / EnergyHelper.getMaxEnergyStored(stack);
     }
 
     @Override
-    public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-        return ModUtils.receive(container, maxReceive, getMaxEnergyStored(container), simulate);
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+        return new FEItemStackCapability(stack, getEnergy());
     }
-
-    @Override
-    public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-        return ModUtils.extract(container, maxExtract, simulate);
-    }
-
-    @Override
-    public int getEnergyStored(ItemStack container) {
-        return ModUtils.getEnergyStored(container);
-    }
-
-    @Override
-    public int getMaxEnergyStored(ItemStack container) {
-        return getEnergy();
-    }
-
-    @Override @Optional.Method(modid = "redstoneflux")
-    public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-        return new EnergyContainerItemWrapper(stack, this);
-    }
-    */
 
 }

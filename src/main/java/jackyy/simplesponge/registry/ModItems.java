@@ -2,8 +2,8 @@ package jackyy.simplesponge.registry;
 
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.item.*;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 
 public class ModItems {
@@ -21,8 +21,8 @@ public class ModItems {
                 energizedSpongeOnAStick,
                 compressedSpongeOnAStick,
                 compressedMagmaticSpongeOnAStick,
-                new ItemBlock(ModBlocks.sponge, new Item.Properties().group(SimpleSponge.TAB)).setRegistryName(ModBlocks.sponge.getRegistryName()),
-                new ItemBlock(ModBlocks.magmaticSponge, new Item.Properties().group(SimpleSponge.TAB)).setRegistryName(ModBlocks.magmaticSponge.getRegistryName())
+                new BlockItem(ModBlocks.sponge, new Item.Properties().group(SimpleSponge.TAB)).setRegistryName(ModBlocks.sponge.getRegistryName()),
+                new BlockItem(ModBlocks.magmaticSponge, new Item.Properties().group(SimpleSponge.TAB)).setRegistryName(ModBlocks.magmaticSponge.getRegistryName())
         );
     }
 

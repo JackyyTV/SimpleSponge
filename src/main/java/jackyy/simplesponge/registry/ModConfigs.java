@@ -55,7 +55,7 @@ public class ModConfigs {
 
             builder.push("energized_sponge");
             enableEnergizedSpongeOnAStick = builder
-                    .comment("Set to true to enable the Energized Sponge On A Stick (Requires Redstone Flux to be installed)")
+                    .comment("Set to true to enable the Energized Sponge On A Stick")
                     .define("enableEnergizedSpongeOnAStick", true);
             energizedSpongeOnAStickMaxEnergy = builder
                     .comment("Set the max energy for an Energized Sponge On A Stick")

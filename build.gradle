@@ -1,3 +1,7 @@
+import net.minecraftforge.gradle.common.task.SignJar             
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
@@ -10,98 +14,140 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 
-version = '1.13.2-4.0'
+version = "${mc_version}-${mod_version}"
 group = 'jackyy.simplesponge'
 archivesBaseName = 'SimpleSponge'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'snapshot', version: '20190220-1.13.1'
+    mappings channel: "${mappings_channel}", version: "${mappings_version}"
     runs {
-        client = {
-            properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
-            properties 'forge.logging.console.level': 'debug'
-            workingDirectory project.file('run').canonicalPath
-            source sourceSets.main
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            if (project.hasProperty('mcUUID')) {
+                args '--uuid', project.getProperty('mcUUID')
+            }
+            if (project.hasProperty('mcUsername')) {
+                args '--username', project.getProperty('mcUsername')
+            }
+            if (project.hasProperty('mcAccessToken')) {
+                args '--accessToken', project.getProperty('mcAccessToken')
+            }
+            mods {
+                simplesponge {
+                    source sourceSets.main
+                }
+            }
         }
-        server = {
-            properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
-            properties 'forge.logging.console.level': 'debug'
-            workingDirectory project.file('run').canonicalPath
-            source sourceSets.main
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                simplesponge {
+                    source sourceSets.main
+                }
+            }
+        }
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'simplesponge', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            mods {
+                simplesponge {
+                    source sourceSets.main
+                }
+            }
         }
     }
-    /*
-    TODO Fix this
-    replace '@FINGERPRINT@', project.findProperty('signSHA1')
-    replaceIn "SimpleSponge.java"
-    */
 }
 
-/*
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
 repositories {
-	maven {
-		name = 'JEI Maven'
-		url = 'http://dvs1.progwml6.com/files/maven'
-	}
-	maven {
-		name = 'Hwyla Maven'
-		url = 'https://tehnut.info/maven'
-	}
-	maven {
-		name = 'CoFH Maven'
-		url = 'http://maven.covers1624.net'
-	}
+  maven {
+    name = 'JEI Maven'
+    url = 'http://dvs1.progwml6.com/files/maven'
+  }
+  maven {
+    name = 'HWYLA Maven'
+    url 'https://maven.tehnut.info'
+  }
+  maven {
+    name = 'TOP Maven'
+    url = 'http://maven.tterrag.com'
+  }
+  maven {
+    name = "Curse Maven"
+    url = "https://www.cursemaven.com"
+  }
 }
-*/
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.44'
-    /*
-	deobfCompile 'mezz.jei:jei_1.12.2:+'
-	deobfCompile 'mcp.mobius.waila:Hwyla:+'
-	compile 'cofh:RedstoneFlux:1.12-2.+:deobf'
-    */
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    
+    compile fg.deobf("mezz.jei:jei-1.16.4:+")
+    compile fg.deobf("mcp.mobius.waila:Hwyla:1.10.11-B78_1.16.2")
+    compile fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.+")
+    
+    compile fg.deobf("curse.maven:gunpowderlib-356646:3158572") //1.16.4-1.0
 }
 
 jar {
     manifest {
         attributes([
-            "Specification-Title": "simplesponge",
-            "Specification-Vendor": "jackyy",
-            "Specification-Version": project.version,
-            "Implementation-Title": project.name,
-            "Implementation-Version": project.version,
-            "Implementation-Vendor" :"jackyy",
+            "Specification-Title": "SimpleSponge",
+            "Specification-Version": "${project.mc_version}-${project.mod_version}",
+            "Specification-Vendor": "Jackyy",
+            "Implementation-Title": "SimpleSponge",
+            "Implementation-Version": "${project.mc_version}-${project.mod_version}",
+            "Implementation-Vendor" :"Jackyy",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ],)
+        ])
     }
 }
 
-/*
-TODO Fix this
-task signJar(type: SignJar, dependsOn: reobfJar) {
-    onlyIf {
-		project.hasProperty('keyStore')
-	}
-	keyStore = project.findProperty('keyStore')
-	alias = project.findProperty('keyStoreAlias')
-	storePass = project.findProperty('keyStorePass')
-	keyPass = project.findProperty('keyStoreKeyPass')
-	inputFile = jar.archivePath
-	outputFile = jar.archivePath
+jar.finalizedBy('reobfJar') 
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+task signJar(type: SignJar, dependsOn: jar) {
+  onlyIf {
+    project.hasProperty('keyStore')
+  }
+  keyStore = project.findProperty('keyStore')
+  alias = project.findProperty('keyStoreAlias')
+  storePass = project.findProperty('keyStorePass')
+  keyPass = project.findProperty('keyStoreKeyPass')
+  inputFile = jar.archivePath
+  outputFile = jar.archivePath
 }
 
 build.dependsOn signJar
 
 task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
+  from sourceSets.main.output
+  classifier = 'deobf'
 }
 
 artifacts {
-    archives deobfJar
+  archives deobfJar
 }
-*/

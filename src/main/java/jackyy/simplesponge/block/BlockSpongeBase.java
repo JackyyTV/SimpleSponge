@@ -1,16 +1,15 @@
 package jackyy.simplesponge.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Particles;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -24,11 +23,6 @@ public class BlockSpongeBase extends Block {
         super(Properties.create(Material.SPONGE).sound(SoundType.CLOTH).tickRandomly().hardnessAndResistance(0.3f));
     }
 
-    @Override
-    public int tickRate(IWorldReaderBase world) {
-        return TICK_RATE;
-    }
-
     public boolean isMagmatic() {
         return this.isMagmatic();
     }
@@ -38,13 +32,13 @@ public class BlockSpongeBase extends Block {
     }
 
     @Override @Deprecated
-    public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
+    public boolean eventReceived(BlockState state, World world, BlockPos pos, int id, int param) {
         if (world.isRemote) {
             for (int i = 0; i < 20; i++) {
                 double px = pos.getX() + RANDOM.nextDouble() * 0.1;
                 double py = pos.getY() + 1.0 + RANDOM.nextDouble();
                 double pz = pos.getZ() + RANDOM.nextDouble();
-                world.addParticle(Particles.LARGE_SMOKE, px, py, pz, 0.0D, 0.0D, 0.0D);
+                world.addParticle(ParticleTypes.LARGE_SMOKE, px, py, pz, 0.0D, 0.0D, 0.0D);
             }
         } else {
             world.setBlockState(pos, Blocks.FIRE.getDefaultState());
@@ -53,35 +47,37 @@ public class BlockSpongeBase extends Block {
     }
 
     @Override @Deprecated
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+    public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
         clearupLiquid(world, pos);
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         clearupLiquid(world, pos);
         world.getPendingBlockTicks().scheduleTick(pos, this, TICK_RATE + RANDOM.nextInt(5));
     }
 
-    @Override @Deprecated
-    public void tick(IBlockState state, World world, BlockPos pos, Random random) {
+    /*
+    @Override
+    public void tick(ServerWorld world, BlockPos pos, Random rand) {
         clearupLiquid(world, pos);
         world.getPendingBlockTicks().scheduleTick(pos, this, TICK_RATE + RANDOM.nextInt(5));
     }
+    */
 
     private void clearupLiquid(World world, BlockPos pos) {
-        if (world.isRemote) return;
+        if (world.isRemote()) return;
         boolean hitLava = false;
         for (int dx = -getRange(); dx <= getRange(); dx++) {
             for (int dy = -getRange(); dy <= getRange(); dy++) {
                 for (int dz = -getRange(); dz <= getRange(); dz++) {
                     final BlockPos workPos = pos.add(dx, dy, dz);
-                    final IBlockState state = world.getBlockState(workPos);
+                    final BlockState state = world.getBlockState(workPos);
                     Material material = state.getMaterial();
                     if (material.isLiquid()) {
                         hitLava |= material == Material.LAVA;
                         world.setBlockState(workPos, Blocks.AIR.getDefaultState());
-                    } else if (state.has(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
+                    } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
                         world.setBlockState(workPos, state.with(BlockStateProperties.WATERLOGGED, false));
                     }
                 }
