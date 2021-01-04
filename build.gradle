@@ -14,7 +14,6 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
 version = "${mc_version}-${mod_version}"
 group = 'jackyy.simplesponge'
@@ -75,18 +74,30 @@ repositories {
   maven {
     name = 'JEI Maven'
     url = 'http://dvs1.progwml6.com/files/maven'
+    content {
+        includeGroup 'mezz.jei'
+    }
   }
   maven {
     name = 'HWYLA Maven'
     url 'https://maven.tehnut.info'
+    content {
+        includeGroup 'mcp.mobius.waila'
+    }
   }
   maven {
     name = 'TOP Maven'
     url = 'http://maven.tterrag.com'
+    content {
+        includeGroup 'mcjty.theoneprobe'
+    }
   }
   maven {
-    name = "Curse Maven"
-    url = "https://www.cursemaven.com"
+    name = 'Curse Maven'
+    url = 'https://www.cursemaven.com'
+    content {
+        includeGroup 'curse.maven'
+    }
   }
 }
 
@@ -115,19 +126,6 @@ jar {
 }
 
 jar.finalizedBy('reobfJar') 
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
 
 task signJar(type: SignJar, dependsOn: jar) {
   onlyIf {

@@ -1,6 +1,6 @@
 {
   "forge_marker": 1,
   "variants": {
-    "": { "model": "simplesponge:sponge" }
+    "": { "model": "simplesponge:block/sponge" }
   }
 }
