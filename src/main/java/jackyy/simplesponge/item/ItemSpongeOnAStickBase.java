@@ -19,6 +19,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -62,7 +63,13 @@ public class ItemSpongeOnAStickBase extends Item {
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
         if (!isPowered()){
-            tooltip.add(new StringTextComponent(StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + I18n.format("tooltip." + SimpleSponge.MODID + ".durability")));
+            tooltip.add(
+                    StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage())
+                            .appendString(" / ")
+                            .append(StringHelper.formatNumber(stack.getMaxDamage()))
+                            .appendString(" ")
+                            .append(new TranslationTextComponent("tooltip." + SimpleSponge.MODID + ".durability"))
+            );
         }
     }
 

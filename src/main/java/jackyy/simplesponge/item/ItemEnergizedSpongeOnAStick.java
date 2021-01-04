@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -92,7 +91,12 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag bool) {
-        tooltip.add(new StringTextComponent(StringHelper.formatNumber(EnergyHelper.getEnergyStored(stack)) + " / " + StringHelper.formatNumber(EnergyHelper.getMaxEnergyStored(stack)) + " FE"));
+        tooltip.add(
+                StringHelper.formatNumber(EnergyHelper.getEnergyStored(stack))
+                        .appendString(" / ")
+                        .append(StringHelper.formatNumber(EnergyHelper.getMaxEnergyStored(stack)))
+                        .appendString(" FE")
+        );
     }
 
     @Override
