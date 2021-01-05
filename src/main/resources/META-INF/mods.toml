@@ -30,7 +30,7 @@ OpenBlocks Sponge port for 1.10+, with some extra sprinkles!
 [[dependencies.simplesponge]]
     modId="gunpowderlib"
     mandatory=true
-    versionRange="[1.16.4-1.0,)"
+    versionRange="[1.16.4-1.1,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.simplesponge]]
