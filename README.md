@@ -36,8 +36,6 @@ If you would like to set up the workspace yourself to submit PRs of features add
     - SSH: `git clone git@github.com:JackyyTV/SimpleSponge.git`
     - Or, use the GitHub desktop app to clone the repo via GUI interface.
 
-2. Setting up the workspace, run: `gradlew eclipse`
+2. Setting up the workspace, simply import the project to the IDE of your choice, then run `gradlew genEclipseRuns` or `gradlew genIntellijRuns` depending on the need.
 
-3. Either use `gradlew build` to build the jar file (Output is in `build/libs`), or setup the IDE if you are going to modify any codes. Both IntelliJ IDEA and Eclipse are included below since they're more popular IDEs.
-    - IntelliJ IDEA: Run `gradlew genIntellijRuns`, then open the `.project` file and import the project into the IDE.
-    - Eclipse: Open the `.project` file.
+3. Either use `gradlew build` to build the jar file (Output is in `build/libs`), or proceed in the IDE if you are going to modify any codes.

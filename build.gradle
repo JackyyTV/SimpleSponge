@@ -86,13 +86,6 @@ repositories {
     }
   }
   maven {
-    name = 'TOP Maven'
-    url = 'http://maven.tterrag.com'
-    content {
-        includeGroup 'mcjty.theoneprobe'
-    }
-  }
-  maven {
     name = 'Curse Maven'
     url = 'https://www.cursemaven.com'
     content {
@@ -106,9 +99,8 @@ dependencies {
     
     compile fg.deobf("mezz.jei:jei-1.16.4:+")
     compile fg.deobf("mcp.mobius.waila:Hwyla:1.10.11-B78_1.16.2")
-    compile fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.+")
-    
-    compile fg.deobf("curse.maven:gunpowderlib-356646:3158572") //1.16.4-1.0
+
+    implementation fg.deobf("curse.maven:gunpowderlib-356646:3158768") //1.16.4-1.1
 }
 
 jar {

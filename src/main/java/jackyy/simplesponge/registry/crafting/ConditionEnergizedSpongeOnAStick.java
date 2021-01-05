@@ -7,12 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
-public class ConditionEnergizedSpongeStick implements ICondition {
+public class ConditionEnergizedSpongeOnAStick implements ICondition {
 
     public static final ResourceLocation ID = new ResourceLocation(SimpleSponge.MODID, "energized_sponge_on_a_stick");
     private final boolean value;
 
-    public ConditionEnergizedSpongeStick(boolean value) {
+    public ConditionEnergizedSpongeOnAStick(boolean value) {
         this.value = value;
     }
 
@@ -26,15 +26,15 @@ public class ConditionEnergizedSpongeStick implements ICondition {
         return ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get() == value;
     }
 
-    public static final IConditionSerializer<ConditionEnergizedSpongeStick> SERIALIZER = new IConditionSerializer<ConditionEnergizedSpongeStick>() {
+    public static final IConditionSerializer<ConditionEnergizedSpongeOnAStick> SERIALIZER = new IConditionSerializer<ConditionEnergizedSpongeOnAStick>() {
         @Override
-        public void write(JsonObject json, ConditionEnergizedSpongeStick condition) {
+        public void write(JsonObject json, ConditionEnergizedSpongeOnAStick condition) {
             json.addProperty("enabled", condition.value);
         }
 
         @Override
-        public ConditionEnergizedSpongeStick read(JsonObject json) {
-            return new ConditionEnergizedSpongeStick(json.get("enabled").getAsBoolean());
+        public ConditionEnergizedSpongeOnAStick read(JsonObject json) {
+            return new ConditionEnergizedSpongeOnAStick(json.get("enabled").getAsBoolean());
         }
 
         @Override

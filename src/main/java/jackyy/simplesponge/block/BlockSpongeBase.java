@@ -11,6 +11,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
@@ -57,13 +58,11 @@ public class BlockSpongeBase extends Block {
         world.getPendingBlockTicks().scheduleTick(pos, this, TICK_RATE + RANDOM.nextInt(5));
     }
 
-    /*
-    @Override
-    public void tick(ServerWorld world, BlockPos pos, Random rand) {
+    @Override @Deprecated
+    public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rand) {
         clearupLiquid(world, pos);
         world.getPendingBlockTicks().scheduleTick(pos, this, TICK_RATE + RANDOM.nextInt(5));
     }
-    */
 
     private void clearupLiquid(World world, BlockPos pos) {
         if (world.isRemote()) return;

@@ -1,12 +1,12 @@
 package jackyy.simplesponge.item;
 
 import jackyy.gunpowderlib.helper.EnergyHelper;
+import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.SimpleSponge;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,7 +18,6 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
@@ -120,14 +119,15 @@ public class ItemSpongeOnAStickBase extends Item {
         }
 
         if (absorbedAnything) {
-            if (isPowered()) {
-                if (EnergyHelper.getEnergyStored(stack) >= getPerRightClickUse()) {
-                    EnergyHelper.setEnergyStored(stack, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());
-                }
-            } else {
-                if (damage >= getDmg()) {
-                    stack.setCount(0);
-                } else if (!player.isCreative()) {
+            if (!player.isCreative()) {
+                if (isPowered()) {
+                    if (EnergyHelper.getEnergyStored(stack) >= getPerRightClickUse()) {
+                        NBTHelper.setInt(stack, StringHelper.ENERGY_NBT, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());
+                    }
+                } else {
+                    if (damage >= getDmg()) {
+                        stack.setCount(0);
+                    }
                     stack.setDamage(damage);
                 }
             }
