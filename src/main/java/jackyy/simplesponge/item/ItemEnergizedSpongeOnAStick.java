@@ -1,7 +1,8 @@
 package jackyy.simplesponge.item;
 
-import cofh.redstoneflux.api.IEnergyContainerItem;
-import cofh.redstoneflux.util.EnergyContainerItemWrapper;
+import jackyy.gunpowderlib.capability.FEItemStackCapability;
+import jackyy.gunpowderlib.capability.FEStorageCapability;
+import jackyy.gunpowderlib.capability.IFEContainer;
 import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
@@ -16,15 +17,12 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-@Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux")
-public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implements IEnergyContainerItem {
+public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implements IFEContainer {
 
     public ItemEnergizedSpongeOnAStick() {
         setRegistryName(SimpleSponge.MODID + ":energized_sponge_on_a_stick");
@@ -43,13 +41,11 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (isInCreativeTab(tab)) {
             if (ModConfig.energizedSponge.enableEnergizedSpongeOnAStick) {
-                if (Loader.isModLoaded("redstoneflux")) {
-                    ItemStack empty = new ItemStack(this);
-                    list.add(empty);
-                    ItemStack full = new ItemStack(this);
-                    EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                    list.add(full);
-                }
+                ItemStack empty = new ItemStack(this);
+                list.add(empty);
+                ItemStack full = new ItemStack(this);
+                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+                list.add(full);
             }
         }
     }
@@ -87,7 +83,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
-        tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
+        tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " FE");
     }
 
     @Override
@@ -100,17 +96,20 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     @Override
     public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-        return NBTHelper.receiveEnergy(container, maxReceive, getMaxEnergyStored(container), simulate);
+        return EnergyHelper.receiveEnergy(container, maxReceive, simulate);
     }
 
     @Override
     public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-        return NBTHelper.extractEnergy(container, maxExtract, simulate);
+        return EnergyHelper.extractEnergy(container, maxExtract, simulate);
     }
 
     @Override
     public int getEnergyStored(ItemStack container) {
-        return NBTHelper.getEnergyStored(container);
+        if (container.getTagCompound() == null || !container.getTagCompound().hasKey(EnergyHelper.ENERGY_NBT)) {
+            return 0;
+        }
+        return Math.min(NBTHelper.getInt(container, EnergyHelper.ENERGY_NBT), getEnergy());
     }
 
     @Override
@@ -118,9 +117,9 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
         return getEnergy();
     }
 
-    @Override @Optional.Method(modid = "redstoneflux")
+    @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-        return new EnergyContainerItemWrapper(stack, this);
+        return new FEItemStackCapability(new FEStorageCapability(this, stack));
     }
 
 }

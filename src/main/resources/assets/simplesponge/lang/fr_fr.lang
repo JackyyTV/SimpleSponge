@@ -1,0 +1,10 @@
+#Creative Tab
+itemGroup.simplesponge=Éponge simple
+
+#Items
+item.simplesponge.sponge_on_a_stick.name=Éponge sur un bâton
+item.simplesponge.magmatic_sponge_on_a_stick.name=Éponge magmatique sur un bâton
+
+#Blocks
+tile.simplesponge.sponge.name=Éponge
+tile.simplesponge.magmatic_sponge.name=Éponge magmatique
