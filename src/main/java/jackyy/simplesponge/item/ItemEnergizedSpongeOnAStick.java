@@ -4,6 +4,7 @@ import jackyy.gunpowderlib.capability.FEItemStackCapability;
 import jackyy.gunpowderlib.capability.FEStorageCapability;
 import jackyy.gunpowderlib.capability.IFEContainer;
 import jackyy.gunpowderlib.helper.EnergyHelper;
+import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.registry.ModConfigs;
 import net.minecraft.client.util.ITooltipFlag;
@@ -118,7 +119,10 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     @Override
     public int getEnergyStored(ItemStack container) {
-        return EnergyHelper.getEnergyStored(container);
+        if (container.getTag() == null || !container.getTag().contains(EnergyHelper.ENERGY_NBT)) {
+            return 0;
+        }
+        return Math.min(NBTHelper.getInt(container, EnergyHelper.ENERGY_NBT), getEnergy());
     }
 
     @Override
