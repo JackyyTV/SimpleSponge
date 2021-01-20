@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/JackyyTV/SimpleSponge/issues"
 
 [[mods]]
 modId="simplesponge"
-version="5.0"
+version="5.0.1"
 displayName="Simple Sponge"
 displayURL="https://github.com/JackyyTV/SimpleSponge"
 logoFile="logo.png"
@@ -30,7 +30,7 @@ OpenBlocks Sponge port for 1.10+, with some extra sprinkles!
 [[dependencies.simplesponge]]
     modId="gunpowderlib"
     mandatory=true
-    versionRange="[1.16.4-1.1,)"
+    versionRange="[1.16.4-1.2,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.simplesponge]]

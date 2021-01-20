@@ -4,7 +4,6 @@ import jackyy.gunpowderlib.capability.FEItemStackCapability;
 import jackyy.gunpowderlib.capability.FEStorageCapability;
 import jackyy.gunpowderlib.capability.IFEContainer;
 import jackyy.gunpowderlib.helper.EnergyHelper;
-import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.registry.ModConfigs;
 import net.minecraft.client.util.ITooltipFlag;
@@ -42,7 +41,6 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     public ItemEnergizedSpongeOnAStick() {
         super(new Properties().maxStackSize(1).setNoRepair());
         setRegistryName("energized_sponge_on_a_stick");
-        EnergyHelper.setDefaultEnergyTag(this.getDefaultInstance(), 0);
     }
 
     @Override
@@ -109,44 +107,22 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     }
 
     @Override
-    public int receiveEnergy(ItemStack stack, int maxReceive, boolean simulate) {
-        if (!stack.hasTag()) {
-            EnergyHelper.setDefaultEnergyTag(stack, 0);
-        }
-        int stored = getEnergyStored(stack);
-        int received = Math.min(getEnergy() - stored, Math.min(getEnergy() / 4, maxReceive));
-        if (!simulate) {
-            stored += received;
-            NBTHelper.setInt(stack, StringHelper.ENERGY_NBT, stored);
-        }
-        return received;
+    public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
+        return EnergyHelper.receiveEnergy(container, maxReceive, simulate);
     }
 
     @Override
-    public int extractEnergy(ItemStack stack, int maxExtract, boolean simulate) {
-        if (!stack.getOrCreateTag().contains(StringHelper.ENERGY_NBT)) {
-            return 0;
-        }
-        int stored = getEnergyStored(stack);
-        int extracted = Math.min(stored, Math.min(getEnergy() / 4, maxExtract));
-
-        if (!simulate) {
-            stored -= extracted;
-            NBTHelper.setInt(stack, StringHelper.ENERGY_NBT, stored);
-        }
-        return extracted;
+    public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
+        return EnergyHelper.extractEnergy(container, maxExtract, simulate);
     }
 
     @Override
-    public int getEnergyStored(ItemStack stack) {
-        if (stack.getTag() == null || !stack.getTag().contains(StringHelper.ENERGY_NBT)) {
-            return 0;
-        }
-        return Math.min(NBTHelper.getInt(stack, StringHelper.ENERGY_NBT), getEnergy());
+    public int getEnergyStored(ItemStack container) {
+        return EnergyHelper.getEnergyStored(container);
     }
 
     @Override
-    public int getMaxEnergyStored(ItemStack stack) {
+    public int getMaxEnergyStored(ItemStack container) {
         return getEnergy();
     }
 

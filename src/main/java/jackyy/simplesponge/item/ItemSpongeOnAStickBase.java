@@ -122,7 +122,7 @@ public class ItemSpongeOnAStickBase extends Item {
             if (!player.isCreative()) {
                 if (isPowered()) {
                     if (EnergyHelper.getEnergyStored(stack) >= getPerRightClickUse()) {
-                        NBTHelper.setInt(stack, StringHelper.ENERGY_NBT, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());
+                        NBTHelper.setInt(stack, EnergyHelper.ENERGY_NBT, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());
                     }
                 } else {
                     if (damage >= getDmg()) {
