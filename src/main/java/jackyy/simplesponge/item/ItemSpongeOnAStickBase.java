@@ -4,6 +4,8 @@ import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.SimpleSponge;
+import jackyy.simplesponge.registry.ModConfigs;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -13,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -29,22 +32,6 @@ public class ItemSpongeOnAStickBase extends Item {
         super(props.group(SimpleSponge.TAB));
     }
 
-    public boolean isPowered() {
-        return false;
-    }
-
-    public boolean isMagmatic() {
-        return this.isMagmatic();
-    }
-
-    public int getRange() {
-        return this.getRange();
-    }
-
-    public int getDmg() {
-        return this.getDmg();
-    }
-
     public int getEnergy() {
         return this.getEnergy();
     }
@@ -53,9 +40,16 @@ public class ItemSpongeOnAStickBase extends Item {
         return this.getPerRightClickUse();
     }
 
-    @Override
-    public boolean showDurabilityBar(ItemStack stack){
-        return stack.isDamaged();
+    public int getRange() {
+        return this.getRange();
+    }
+
+    public boolean isMagnetic() {
+        return this.isMagnetic();
+    }
+
+    public boolean isPowered() {
+        return this.isPowered();
     }
 
     @Override
@@ -65,9 +59,9 @@ public class ItemSpongeOnAStickBase extends Item {
             tooltip.add(
                     StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage())
                             .appendString(" / ")
-                            .append(StringHelper.formatNumber(stack.getMaxDamage()))
+                            .appendSibling(StringHelper.formatNumber(stack.getMaxDamage()))
                             .appendString(" ")
-                            .append(new TranslationTextComponent("tooltip." + SimpleSponge.MODID + ".durability"))
+                            .appendSibling(new TranslationTextComponent("tooltip." + SimpleSponge.MODID + ".durability"))
             );
         }
     }
@@ -86,7 +80,9 @@ public class ItemSpongeOnAStickBase extends Item {
     private boolean soakUp(World world, BlockPos pos, PlayerEntity player, ItemStack stack) {
         boolean absorbedAnything = false;
         boolean hitLava = false;
-        int damage = stack.getDamage();
+        boolean allowHotLiquid = ModConfigs.CONFIG.regularSpongeAbsorbHotLiquid.get();
+        int dmg = stack.getDamage();
+        int maxDmg = stack.getMaxDamage();
 
         for (int x = -getRange(); x <= getRange(); x++) {
             for (int y = -getRange(); y <= getRange(); y++) {
@@ -97,25 +93,28 @@ public class ItemSpongeOnAStickBase extends Item {
                     if (material.isLiquid()) {
                         absorbedAnything = true;
                         hitLava |= material == Material.LAVA;
+                        if (hitLava && !allowHotLiquid) break;
                         world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
-                        if (!isPowered() && ++damage >= getDmg()) break;
+                        if (!isPowered() && ++dmg >= maxDmg) break;
                         else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
                     } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
                         absorbedAnything = true;
                         hitLava = false;
                         world.setBlockState(targetPos, state.with(BlockStateProperties.WATERLOGGED, false));
-                        if (!isPowered() && ++damage >= getDmg()) break;
+                        if (!isPowered() && ++dmg >= maxDmg) break;
                         else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                    } else if (material == Material.OCEAN_PLANT || material == Material.SEA_GRASS) {
+                        TileEntity tile = state.hasTileEntity() ? world.getTileEntity(targetPos) : null;
+                        Block.spawnDrops(state, world, targetPos, tile);
+                        world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
                     }
                 }
             }
         }
 
-        if (hitLava) {
-            if (!isMagmatic()) {
-                stack.setCount(0);
-                player.setFire(6);
-            }
+        if (hitLava && !isMagnetic() && allowHotLiquid) {
+            stack.setCount(0);
+            player.setFire(6);
         }
 
         if (absorbedAnything) {
@@ -125,10 +124,10 @@ public class ItemSpongeOnAStickBase extends Item {
                         NBTHelper.setInt(stack, EnergyHelper.ENERGY_NBT, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());
                     }
                 } else {
-                    if (damage >= getDmg()) {
+                    if (dmg >= maxDmg) {
                         stack.setCount(0);
                     }
-                    stack.setDamage(damage);
+                    stack.setDamage(dmg);
                 }
             }
             return true;

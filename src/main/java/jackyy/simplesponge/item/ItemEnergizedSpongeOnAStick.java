@@ -8,6 +8,7 @@ import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.registry.ModConfigs;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -24,24 +25,38 @@ import java.util.List;
 
 public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implements IFEContainer {
 
-    private static int range;
-    private static int energy;
-    private static int use;
-    static {
-        try {
-            range = ModConfigs.CONFIG.energizedSpongeOnAStickRange.get();
-            energy = ModConfigs.CONFIG.energizedSpongeOnAStickMaxEnergy.get();
-            use = ModConfigs.CONFIG.energizedSpongeOnAStickPerRightClickUse.get();
-        } catch (NullPointerException e) {
-            range = 7;
-            energy = 500000;
-            use = 100;
-        }
+    public ItemEnergizedSpongeOnAStick() {
+        super(new Item.Properties().maxStackSize(1).setNoRepair());
     }
 
-    public ItemEnergizedSpongeOnAStick() {
-        super(new Properties().maxStackSize(1).setNoRepair());
-        setRegistryName("energized_sponge_on_a_stick");
+    @Override
+    public int getEnergy() {
+        return ModConfigs.CONFIG.energizedSpongeOnAStickMaxEnergy.get();
+    }
+
+    @Override
+    public int getPerRightClickUse() {
+        return ModConfigs.CONFIG.energizedSpongeOnAStickPerRightClickUse.get();
+    }
+
+    @Override
+    public int getRange() {
+        return ModConfigs.CONFIG.energizedSpongeOnAStickRange.get();
+    }
+
+    @Override
+    public boolean isMagnetic() {
+        return true;
+    }
+
+    @Override
+    public boolean isPowered() {
+        return true;
+    }
+
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return true;
     }
 
     @Override
@@ -58,42 +73,12 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     }
 
     @Override
-    public boolean isPowered() {
-        return true;
-    }
-
-    @Override
-    public boolean isMagmatic() {
-        return true;
-    }
-
-    @Override
-    public int getRange() {
-        return range;
-    }
-
-    @Override
-    public int getEnergy() {
-        return energy;
-    }
-
-    @Override
-    public int getPerRightClickUse() {
-        return use;
-    }
-
-    @Override
-    public boolean showDurabilityBar(ItemStack stack) {
-        return true;
-    }
-
-    @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
         tooltip.add(
                 StringHelper.formatNumber(getEnergyStored(stack))
                         .appendString(" / ")
-                        .append(StringHelper.formatNumber(getEnergy()))
+                        .appendSibling(StringHelper.formatNumber(getEnergy()))
                         .appendString(" FE")
         );
     }

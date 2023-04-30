@@ -10,37 +10,25 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
-    private static int dmg;
-    private static int range;
-    static {
-        try {
-            dmg = ModConfigs.CONFIG.spongeOnAStickMaxDamage.get();
-            range = ModConfigs.CONFIG.spongeOnAStickRange.get();
-        } catch (NullPointerException e) {
-            dmg = 256;
-            range = 3;
-        }
-    }
-
     public ItemSpongeOnAStick() {
-        super(new Properties().defaultMaxDamage(dmg));
-        setRegistryName("sponge_on_a_stick");
-    }
-
-    @Override
-    public int getDmg() {
-        return dmg;
+        super(new Properties().maxDamage(512));
     }
 
     @Override
     public int getRange() {
-        return range;
+        return ModConfigs.CONFIG.spongeOnAStickRange.get();
     }
 
     @Override
-    public boolean isMagmatic() {
+    public boolean isMagnetic() {
         return false;
     }
+
+    @Override
+    public boolean isPowered() {
+        return false;
+    }
+
 
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {

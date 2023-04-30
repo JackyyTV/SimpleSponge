@@ -1,39 +1,27 @@
 package jackyy.simplesponge.item;
 
 import jackyy.simplesponge.registry.ModConfigs;
+import net.minecraft.item.Item;
 
 public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
-    private static int dmg;
-    private static int range;
-    static {
-        try {
-            dmg = ModConfigs.CONFIG.magmaticSpongeOnAStickMaxDamage.get();
-            range = ModConfigs.CONFIG.magmaticSpongeOnAStickRange.get();
-        } catch (NullPointerException e) {
-            dmg = 256;
-            range = 3;
-        }
-    }
-
     public ItemMagmaticSpongeOnAStick() {
-        super(new Properties().defaultMaxDamage(dmg));
-        setRegistryName("magmatic_sponge_on_a_stick");
-    }
-
-    @Override
-    public boolean isMagmatic() {
-        return true;
-    }
-
-    @Override
-    public int getDmg() {
-        return dmg;
+        super(new Item.Properties().maxDamage(1024));
     }
 
     @Override
     public int getRange() {
-        return range;
+        return ModConfigs.CONFIG.magmaticSpongeOnAStickRange.get();
+    }
+
+    @Override
+    public boolean isMagnetic() {
+        return true;
+    }
+
+    @Override
+    public boolean isPowered() {
+        return false;
     }
 
 }

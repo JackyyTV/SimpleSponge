@@ -1,5 +1,6 @@
 package jackyy.simplesponge.block;
 
+import jackyy.simplesponge.registry.ModConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -9,6 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -24,12 +26,12 @@ public class BlockSpongeBase extends Block {
         super(Properties.create(Material.SPONGE).sound(SoundType.CLOTH).tickRandomly().hardnessAndResistance(0.3f));
     }
 
-    public boolean isMagmatic() {
-        return this.isMagmatic();
-    }
-
     public int getRange() {
         return this.getRange();
+    }
+
+    public boolean isMagnetic() {
+        return this.isMagnetic();
     }
 
     @Override @Deprecated
@@ -67,6 +69,7 @@ public class BlockSpongeBase extends Block {
     private void clearupLiquid(World world, BlockPos pos) {
         if (world.isRemote()) return;
         boolean hitLava = false;
+        boolean allowHotLiquid = ModConfigs.CONFIG.regularSpongeAbsorbHotLiquid.get();
         for (int dx = -getRange(); dx <= getRange(); dx++) {
             for (int dy = -getRange(); dy <= getRange(); dy++) {
                 for (int dz = -getRange(); dz <= getRange(); dz++) {
@@ -75,14 +78,19 @@ public class BlockSpongeBase extends Block {
                     Material material = state.getMaterial();
                     if (material.isLiquid()) {
                         hitLava |= material == Material.LAVA;
+                        if (hitLava && !allowHotLiquid) break;
                         world.setBlockState(workPos, Blocks.AIR.getDefaultState());
                     } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
                         world.setBlockState(workPos, state.with(BlockStateProperties.WATERLOGGED, false));
+                    } else if (material == Material.OCEAN_PLANT || material == Material.SEA_GRASS) {
+                        TileEntity tile = state.hasTileEntity() ? world.getTileEntity(workPos) : null;
+                        spawnDrops(state, world, workPos, tile);
+                        world.setBlockState(workPos, Blocks.AIR.getDefaultState());
                     }
                 }
             }
         }
-        if (hitLava && !isMagmatic()) world.addBlockEvent(pos, this, 0, 0);
+        if (hitLava && !isMagnetic() && allowHotLiquid) world.addBlockEvent(pos, this, 0, 0);
     }
 
 }

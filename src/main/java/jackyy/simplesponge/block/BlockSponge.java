@@ -10,17 +10,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockSponge extends BlockSpongeBase {
 
-    private static int range;
-    static {
-        try {
-            range = ModConfigs.CONFIG.spongeRange.get();
-        } catch (NullPointerException e) {
-            range = 3;
-        }
+    @Override
+    public int getRange() {
+        return ModConfigs.CONFIG.spongeRange.get();
     }
 
-    public BlockSponge() {
-        setRegistryName("sponge");
+    @Override
+    public boolean isMagnetic() {
+        return false;
     }
 
     @Override
@@ -36,16 +33,6 @@ public class BlockSponge extends BlockSpongeBase {
         } else {
             items.add(new ItemStack(this));
         }
-    }
-
-    @Override
-    public boolean isMagmatic() {
-        return false;
-    }
-
-    @Override
-    public int getRange() {
-        return range;
     }
 
 }
