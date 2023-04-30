@@ -71,14 +71,17 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        name "JEI & TCon Maven"
-        url "https://dvs1.progwml6.com/files/maven"
+        name = 'JEI Maven'
+        url = 'https://dvs1.progwml6.com/files/maven'
+        content {
+            includeGroup 'mezz.jei'
+        }
     }
     maven {
-        name "Curse Maven"
-        url "https://www.cursemaven.com"
+        name = 'Curse Maven'
+        url = 'https://www.cursemaven.com'
         content {
-            includeGroup "curse.maven"
+            includeGroup 'curse.maven'
         }
     }
 }
