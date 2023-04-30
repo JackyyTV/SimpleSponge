@@ -2,7 +2,7 @@
 
 [![Downloads](http://cf.way2muchnoise.eu/full_simple-sponge_downloads.svg)](https://minecraft.curseforge.com/projects/simple-sponge) [![MCVersion](http://cf.way2muchnoise.eu/versions/simple-sponge.svg)](https://minecraft.curseforge.com/projects/simple-sponge)
 
-[![GitHub issues](https://img.shields.io/github/issues/JackyyTV/SimpleSponge.svg)](https://github.com/JackyyTV/SimpleSponge/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/SimpleSponge.svg)](https://github.com/JackyyTV/SimpleSponge/pulls) [![license](https://img.shields.io/github/license/JackyyTV/SimpleSponge.svg)](../dev-1.12/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/JackyyTV/SimpleSponge.svg)](https://github.com/JackyyTV/SimpleSponge/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/SimpleSponge.svg)](https://github.com/JackyyTV/SimpleSponge/pulls)
 
 [![Logo](https://i.gyazo.com/c21d28bc15d3fa76bc753f0a93942b71.png)](https://minecraft.curseforge.com/projects/simple-sponge)
 
