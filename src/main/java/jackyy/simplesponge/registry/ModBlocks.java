@@ -3,11 +3,11 @@ package jackyy.simplesponge.registry;
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.block.BlockMagmaticSponge;
 import jackyy.simplesponge.block.BlockSponge;
-import net.minecraft.block.Block;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlocks {
 

@@ -5,31 +5,33 @@ import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModConfigs;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Material;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
 public class ItemSpongeOnAStickBase extends Item {
 
     public ItemSpongeOnAStickBase(Properties props) {
-        super(props.group(SimpleSponge.TAB));
+        super(props.tab(SimpleSponge.TAB));
     }
 
     public int getEnergy() {
@@ -52,61 +54,61 @@ public class ItemSpongeOnAStickBase extends Item {
         return this.isPowered();
     }
 
-    @Override
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        super.addInformation(stack, world, tooltip, flag);
+    @Override @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced) {
+        super.appendHoverText(stack, world, tooltip, advanced);
         if (!isPowered()){
             tooltip.add(
-                    StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage())
-                            .appendString(" / ")
-                            .appendSibling(StringHelper.formatNumber(stack.getMaxDamage()))
-                            .appendString(" ")
-                            .appendSibling(new TranslationTextComponent("tooltip." + SimpleSponge.MODID + ".durability"))
+                    StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamageValue())
+                            .append(" / ")
+                            .append(StringHelper.formatNumber(stack.getMaxDamage()))
+                            .append(" ")
+                            .append(new TranslatableComponent("tooltip." + SimpleSponge.MODID + ".durability"))
             );
         }
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        return soakUp(context.getWorld(), context.getPos(), context.getPlayer(), context.getPlayer().getHeldItemMainhand()) ? ActionResultType.SUCCESS : ActionResultType.FAIL;
+    public InteractionResult useOn(UseOnContext context) {
+        return soakUp(context.getLevel(), context.getClickedPos(), context.getPlayer(), context.getItemInHand()) ? InteractionResult.SUCCESS : InteractionResult.FAIL;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        boolean result = soakUp(world, player.getPosition(), player, player.getHeldItemMainhand());
-        return result ? ActionResult.resultSuccess(player.getHeldItemMainhand()) : ActionResult.resultFail(player.getHeldItemMainhand());
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+        boolean result = soakUp(world, player.getOnPos(), player, player.getItemInHand(hand));
+        return result ? InteractionResultHolder.pass(player.getItemInHand(hand)) : InteractionResultHolder.fail(player.getItemInHand(hand));
     }
 
-    private boolean soakUp(World world, BlockPos pos, PlayerEntity player, ItemStack stack) {
+    private boolean soakUp(Level world, BlockPos pos, Player player, ItemStack stack) {
         boolean absorbedAnything = false;
         boolean hitLava = false;
         boolean allowHotLiquid = ModConfigs.CONFIG.regularSpongeAbsorbHotLiquid.get();
-        int dmg = stack.getDamage();
+        int dmg = stack.getDamageValue();
         int maxDmg = stack.getMaxDamage();
 
         for (int x = -getRange(); x <= getRange(); x++) {
             for (int y = -getRange(); y <= getRange(); y++) {
                 for (int z = -getRange(); z <= getRange(); z++) {
-                    final BlockPos targetPos = pos.add(x, y, z);
+                    final BlockPos targetPos = pos.offset(x, y, z);
                     final BlockState state = world.getBlockState(targetPos);
                     Material material = world.getBlockState(targetPos).getMaterial();
                     if (material.isLiquid()) {
                         absorbedAnything = true;
                         hitLava |= material == Material.LAVA;
                         if (hitLava && !allowHotLiquid) break;
-                        world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
+                        world.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 3);
                         if (!isPowered() && ++dmg >= maxDmg) break;
                         else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
-                    } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
+                    } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getProperties().contains(BlockStateProperties.WATERLOGGED)) {
                         absorbedAnything = true;
                         hitLava = false;
-                        world.setBlockState(targetPos, state.with(BlockStateProperties.WATERLOGGED, false));
+                        world.setBlock(targetPos, state.setValue(BlockStateProperties.WATERLOGGED, false), 3);
                         if (!isPowered() && ++dmg >= maxDmg) break;
                         else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
-                    } else if (material == Material.OCEAN_PLANT || material == Material.SEA_GRASS) {
-                        TileEntity tile = state.hasTileEntity() ? world.getTileEntity(targetPos) : null;
-                        Block.spawnDrops(state, world, targetPos, tile);
-                        world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
+                    } else if (material == Material.WATER_PLANT || material == Material.REPLACEABLE_WATER_PLANT) {
+                        BlockEntity tile = state.hasBlockEntity() ? world.getBlockEntity(targetPos) : null;
+                        Block.dropResources(state, world, targetPos, tile);
+                        world.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 3);
                     }
                 }
             }
@@ -114,7 +116,7 @@ public class ItemSpongeOnAStickBase extends Item {
 
         if (hitLava && !isMagnetic() && allowHotLiquid) {
             stack.setCount(0);
-            player.setFire(6);
+            player.setSecondsOnFire(6);
         }
 
         if (absorbedAnything) {
@@ -127,7 +129,7 @@ public class ItemSpongeOnAStickBase extends Item {
                     if (dmg >= maxDmg) {
                         stack.setCount(0);
                     }
-                    stack.setDamage(dmg);
+                    stack.setDamageValue(dmg);
                 }
             }
             return true;

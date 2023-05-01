@@ -7,14 +7,14 @@ import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.registry.ModConfigs;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -26,7 +26,7 @@ import java.util.List;
 public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implements IFEContainer {
 
     public ItemEnergizedSpongeOnAStick() {
-        super(new Item.Properties().maxStackSize(1).setNoRepair());
+        super(new Properties().stacksTo(1).setNoRepair());
     }
 
     @Override
@@ -55,41 +55,45 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     }
 
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
+    public boolean isBarVisible(ItemStack stack) {
         return true;
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(tab)) {
             if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
                 ItemStack empty = new ItemStack(this);
                 items.add(empty);
                 ItemStack full = new ItemStack(this);
-                EnergyHelper.setDefaultEnergyTag(full, getEnergy());
+                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
                 items.add(full);
             }
         }
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
+    @Override @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced) {
         tooltip.add(
                 StringHelper.formatNumber(getEnergyStored(stack))
-                        .appendString(" / ")
-                        .appendSibling(StringHelper.formatNumber(getEnergy()))
-                        .appendString(" FE")
+                        .append(" / ")
+                        .append(StringHelper.formatNumber(getMaxEnergyStored(stack)))
+                        .append(" FE")
         );
     }
 
     @Override
-    public double getDurabilityForDisplay(ItemStack stack) {
+    public int getBarWidth(ItemStack stack) {
         FEStorageCapability storage = (FEStorageCapability) stack.getCapability(CapabilityEnergy.ENERGY, null).orElse(null);
         if (storage == null) {
             return 0;
         }
-        return 1 - (double) getEnergyStored(stack) / getEnergy();
+        return (int) Math.round(13.0D * getEnergyStored(stack) / (double) getMaxEnergyStored(stack));
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        return Mth.hsvToRgb(1 / 3.0F, 1.0F, 1.0F);
     }
 
     @Override
@@ -116,7 +120,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new FEItemStackCapability<>(new FEStorageCapability(this, stack));
     }
 

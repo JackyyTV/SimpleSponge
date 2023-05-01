@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[40,)"
 license="MIT License (Original OpenBlocks codes and art assets), Jacky's Minecraft Mods License (The rest of the codes and art assets)"
 issueTrackerURL="https://github.com/JackyyTV/SimpleSponge/issues"
 
 [[mods]]
 modId="simplesponge"
-version="5.1"
+version="6.0"
 displayName="Simple Sponge"
 displayURL="https://github.com/JackyyTV/SimpleSponge"
 logoFile="logo.png"
@@ -18,19 +18,19 @@ OpenBlocks Sponge port for 1.10+, with some extra sprinkles!
 [[dependencies.simplesponge]]
     modId="forge"
     mandatory=true
-    versionRange="[35,)"
+    versionRange="[40,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.simplesponge]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16,1.17)"
+    versionRange="[1.18,1.19)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.simplesponge]]
     modId="gunpowderlib"
     mandatory=true
-    versionRange="[1.16.4-1.2,)"
+    versionRange="[1.18.2-2.0,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.simplesponge]]

@@ -1,12 +1,11 @@
 package jackyy.simplesponge.item;
 
 import jackyy.simplesponge.registry.ModConfigs;
-import net.minecraft.item.Item;
 
 public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemMagmaticSpongeOnAStick() {
-        super(new Item.Properties().maxDamage(1024));
+        super(new Properties().durability(1024));
     }
 
     @Override

@@ -1,17 +1,17 @@
 package jackyy.simplesponge.item;
 
 import jackyy.simplesponge.registry.ModConfigs;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemSpongeOnAStick() {
-        super(new Properties().maxDamage(512));
+        super(new Properties().durability(512));
     }
 
     @Override
@@ -31,8 +31,8 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
 
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(tab)) {
             if (ModList.get().isLoaded("openblocks")) {
                 if (ModConfigs.CONFIG.openBlocksIntegration.get()) {
                     if (ForgeRegistries.ITEMS.getValue(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {

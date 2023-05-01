@@ -3,7 +3,7 @@ package jackyy.simplesponge.registry.crafting;
 import com.google.gson.JsonObject;
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModConfigs;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 

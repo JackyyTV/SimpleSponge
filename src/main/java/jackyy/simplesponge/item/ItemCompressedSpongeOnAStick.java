@@ -5,7 +5,7 @@ import jackyy.simplesponge.registry.ModConfigs;
 public class ItemCompressedSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemCompressedSpongeOnAStick() {
-        super(new Properties().maxDamage(512 * 9));
+        super(new Properties().durability(512 * 9));
     }
 
     @Override

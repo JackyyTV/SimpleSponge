@@ -4,8 +4,8 @@ import jackyy.simplesponge.registry.ModBlocks;
 import jackyy.simplesponge.registry.ModConfigs;
 import jackyy.simplesponge.registry.ModItems;
 import jackyy.simplesponge.registry.crafting.ModCrafting;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -14,9 +14,9 @@ import net.minecraftforge.fml.config.ModConfig;
 public class SimpleSponge {
 
     public static final String MODID = "simplesponge";
-    public static final ItemGroup TAB = new ItemGroup(MODID) {
+    public static final CreativeModeTab TAB = new CreativeModeTab(MODID) {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(ModItems.SPONGE_ON_A_STICK.get());
         }
     };
