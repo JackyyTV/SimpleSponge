@@ -61,7 +61,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'simplesponge'
             mods {
-                gunpowderlib {
+                simplesponge {
                     source sourceSets.main
                 }
             }
@@ -105,7 +105,7 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-1.18.2:+")
     implementation fg.deobf("curse.maven:jade-324717:4082408") //1.18.2-5.2.6
 
-    implementation fg.deobf("curse.maven:gunpowderlib-356646:4515268") //1.18.2-2.0
+    implementation fg.deobf("curse.maven:gunpowderlib-356646:4515715") //1.18.2-2.0.1
 }
 
 jar {
