@@ -1,6 +1,6 @@
 # SimpleSponge
 
-[![Downloads](http://cf.way2muchnoise.eu/full_simple-sponge_downloads.svg)](https://minecraft.curseforge.com/projects/simple-sponge) [![MCVersion](http://cf.way2muchnoise.eu/versions/simple-sponge.svg)](https://minecraft.curseforge.com/projects/simple-sponge)
+[![Downloads](http://cf.way2muchnoise.eu/full_269141_downloads.svg)](https://minecraft.curseforge.com/projects/simple-sponge) [![MCVersion](http://cf.way2muchnoise.eu/versions/269141.svg)](https://minecraft.curseforge.com/projects/simple-sponge)
 
 [![GitHub issues](https://img.shields.io/github/issues/JackyyTV/SimpleSponge.svg)](https://github.com/JackyyTV/SimpleSponge/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/SimpleSponge.svg)](https://github.com/JackyyTV/SimpleSponge/pulls)
 
