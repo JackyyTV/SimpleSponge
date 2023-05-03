@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.simplesponge": "Enkel Svamp",
+    "item_group.simplesponge.main_creative_tab": "Enkel Svamp",
 
     "_comment": "Items",
     "item.simplesponge.sponge_on_a_stick": "Svamp på en pinne",

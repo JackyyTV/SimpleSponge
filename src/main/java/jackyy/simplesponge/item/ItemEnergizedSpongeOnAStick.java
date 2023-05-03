@@ -7,18 +7,16 @@ import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.registry.ModConfigs;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -59,19 +57,6 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
         return true;
     }
 
-    @Override
-    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(tab)) {
-            if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
-                ItemStack empty = new ItemStack(this);
-                items.add(empty);
-                ItemStack full = new ItemStack(this);
-                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                items.add(full);
-            }
-        }
-    }
-
     @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced) {
         tooltip.add(
@@ -84,7 +69,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        FEStorageCapability storage = (FEStorageCapability) stack.getCapability(CapabilityEnergy.ENERGY, null).orElse(null);
+        FEStorageCapability storage = (FEStorageCapability) stack.getCapability(ForgeCapabilities.ENERGY, null).orElse(null);
         if (storage == null) {
             return 0;
         }

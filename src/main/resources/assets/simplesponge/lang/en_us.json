@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.simplesponge": "Simple Sponge",
+    "item_group.simplesponge.main_creative_tab": "Simple Sponge",
 
     "_comment": "Items",
     "item.simplesponge.sponge_on_a_stick": "Sponge on a Stick",

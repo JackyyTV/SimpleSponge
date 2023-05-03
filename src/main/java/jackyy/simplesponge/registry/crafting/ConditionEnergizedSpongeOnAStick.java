@@ -22,7 +22,7 @@ public class ConditionEnergizedSpongeOnAStick implements ICondition {
     }
 
     @Override
-    public boolean test() {
+    public boolean test(IContext context) {
         return ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get() == value;
     }
 

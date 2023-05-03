@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.simplesponge": "Prosta Gąbka",
+    "item_group.simplesponge.main_creative_tab": "Prosta Gąbka",
 
     "_comment": "Items",
     "item.simplesponge.sponge_on_a_stick": "Gąbka na Patyku",

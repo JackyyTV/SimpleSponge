@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.simplesponge": "Éponge simple",
+    "item_group.simplesponge.main_creative_tab": "Éponge simple",
 
     "_comment": "Items",
     "item.simplesponge.sponge_on_a_stick": "Éponge sur un bâton",

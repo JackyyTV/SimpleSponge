@@ -25,9 +25,9 @@ public class ModItems {
             = ITEMS.register("compressed_magmatic_sponge_on_a_stick", ItemCompressedMagmaticSpongeOnAStick::new);
 
     public static final RegistryObject<Item> SPONGE_BLOCK_ITEM
-            = ITEMS.register("sponge", () -> new BlockItem(ModBlocks.SPONGE.get(), new Item.Properties().tab(SimpleSponge.TAB)));
+            = ITEMS.register("sponge", () -> new BlockItem(ModBlocks.SPONGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> MAGMATIC_SPONGE_BLOCK_ITEM
-            = ITEMS.register("magmatic_sponge", () -> new BlockItem(ModBlocks.MAGMATIC_SPONGE.get(), new Item.Properties().tab(SimpleSponge.TAB)));
+            = ITEMS.register("magmatic_sponge", () -> new BlockItem(ModBlocks.MAGMATIC_SPONGE.get(), new Item.Properties()));
 
     public static void init() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

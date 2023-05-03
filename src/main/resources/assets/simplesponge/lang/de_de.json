@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.simplesponge": "Einfacher Schwamm",
+    "item_group.simplesponge.main_creative_tab": "Einfacher Schwamm",
 
     "_comment": "Items",
     "item.simplesponge.sponge_on_a_stick": "Schwamm am Stiel",
