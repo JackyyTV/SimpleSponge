@@ -23,7 +23,7 @@ public class ConditionOpenBlocksIntegration implements ICondition {
 
     @Override
     public boolean test() {
-        return ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get() == value;
+        return ModConfigs.CONFIG.openBlocksIntegration.get() == value;
     }
 
     public static final IConditionSerializer<ConditionOpenBlocksIntegration> SERIALIZER = new IConditionSerializer<ConditionOpenBlocksIntegration>() {
