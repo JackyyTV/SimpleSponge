@@ -1,6 +1,5 @@
 package jackyy.simplesponge.registry;
 
-import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.simplesponge.SimpleSponge;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +16,7 @@ public class ModCreativeTab {
 
     public static CreativeModeTab tab;
     @SubscribeEvent
-    public void registerCreativeTab(CreativeModeTabEvent.Register event) {
+    public static void registerCreativeTab(CreativeModeTabEvent.Register event) {
         tab = event.registerCreativeModeTab(
                 new ResourceLocation(SimpleSponge.MODID, "main_creative_tab"), builder -> builder
                         .title(Component.translatable("item_group." + SimpleSponge.MODID + ".main_creative_tab"))
@@ -25,32 +24,28 @@ public class ModCreativeTab {
                         .displayItems((params, output) -> {
                             if (ModList.get().isLoaded("openblocks")) {
                                 if (ModConfigs.CONFIG.openBlocksIntegration.get()) {
-                                    if (ForgeRegistries.ITEMS.getValue(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
-                                        output.accept(ModItems.SPONGE_ON_A_STICK.get());
-                                    }
                                     if (ForgeRegistries.ITEMS.getValue(new ResourceLocation("openblocks", "sponge")) == null) {
                                         output.accept(ModItems.SPONGE_BLOCK_ITEM.get());
                                     }
+                                    if (ForgeRegistries.ITEMS.getValue(new ResourceLocation("openblocks", "sponge_on_a_stick")) == null) {
+                                        output.accept(ModItems.SPONGE_ON_A_STICK.get());
+                                    }
                                 } else {
-                                    output.accept(ModItems.SPONGE_ON_A_STICK.get());
                                     output.accept(ModItems.SPONGE_BLOCK_ITEM.get());
+                                    output.accept(ModItems.SPONGE_ON_A_STICK.get());
                                 }
                             } else {
-                                output.accept(ModItems.SPONGE_ON_A_STICK.get());
                                 output.accept(ModItems.SPONGE_BLOCK_ITEM.get());
+                                output.accept(ModItems.SPONGE_ON_A_STICK.get());
                             }
 
-                            output.accept(ModItems.MAGMATIC_SPONGE_BLOCK_ITEM.get());
-
-                            output.accept(ModItems.MAGMATIC_SPONGE_ON_A_STICK.get());
                             output.accept(ModItems.COMPRESSED_SPONGE_ON_A_STICK.get());
+                            output.accept(ModItems.MAGMATIC_SPONGE_BLOCK_ITEM.get());
+                            output.accept(ModItems.MAGMATIC_SPONGE_ON_A_STICK.get());
                             output.accept(ModItems.COMPRESSED_MAGMATIC_SPONGE_ON_A_STICK.get());
 
                             if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
-                                ItemStack stack = new ItemStack(ModItems.ENERGIZED_SPONGE_ON_A_STICK.get());
-                                output.accept(stack);
-                                EnergyHelper.setDefaultEnergyTag(stack, EnergyHelper.getMaxEnergyStored(stack));
-                                output.accept(stack);
+                                output.accept(ModItems.ENERGIZED_SPONGE_ON_A_STICK.get());
                             }
                         })
         );
