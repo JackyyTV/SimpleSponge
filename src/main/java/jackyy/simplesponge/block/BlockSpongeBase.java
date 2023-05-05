@@ -4,6 +4,7 @@ import jackyy.simplesponge.registry.ModConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -59,7 +60,7 @@ public class BlockSpongeBase extends Block {
     }
 
     @Override @Deprecated
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random rand) {
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource rand) {
         clearupLiquid(world, pos);
         world.scheduleTick(pos, this, TICK_RATE + RANDOM.nextInt(5));
     }

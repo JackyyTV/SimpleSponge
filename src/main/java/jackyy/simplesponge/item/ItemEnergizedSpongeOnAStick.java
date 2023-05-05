@@ -17,8 +17,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -61,7 +61,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     @Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(tab)) {
+        if (this.allowedIn(tab)) {
             if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
                 ItemStack empty = new ItemStack(this);
                 items.add(empty);
@@ -84,7 +84,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        FEStorageCapability storage = (FEStorageCapability) stack.getCapability(CapabilityEnergy.ENERGY, null).orElse(null);
+        FEStorageCapability storage = (FEStorageCapability) stack.getCapability(ForgeCapabilities.ENERGY, null).orElse(null);
         if (storage == null) {
             return 0;
         }

@@ -7,7 +7,6 @@ import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -63,7 +62,7 @@ public class ItemSpongeOnAStickBase extends Item {
                             .append(" / ")
                             .append(StringHelper.formatNumber(stack.getMaxDamage()))
                             .append(" ")
-                            .append(new TranslatableComponent("tooltip." + SimpleSponge.MODID + ".durability"))
+                            .append(Component.translatable("tooltip." + SimpleSponge.MODID + ".durability"))
             );
         }
     }
