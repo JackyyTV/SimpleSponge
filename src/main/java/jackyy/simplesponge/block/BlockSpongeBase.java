@@ -8,11 +8,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.LavaFluid;
 
 import java.util.Random;
 
@@ -22,7 +24,7 @@ public class BlockSpongeBase extends Block {
     private static final Random RANDOM = new Random();
 
     public BlockSpongeBase() {
-        super(Properties.of(Material.SPONGE).sound(SoundType.WOOL).randomTicks().strength(0.3f));
+        super(Properties.of().sound(SoundType.WOOL).randomTicks().strength(0.3f));
     }
 
     public int getRange() {
@@ -74,14 +76,14 @@ public class BlockSpongeBase extends Block {
                 for (int dz = -getRange(); dz <= getRange(); dz++) {
                     final BlockPos workPos = pos.offset(dx, dy, dz);
                     final BlockState state = world.getBlockState(workPos);
-                    Material material = state.getMaterial();
-                    if (material.isLiquid()) {
-                        hitLava |= material == Material.LAVA;
+                    final FluidState fluidState = world.getFluidState(workPos);
+                    if (state.getBlock() instanceof LiquidBlock) {
+                        hitLava |= fluidState.getType() instanceof LavaFluid;
                         if (hitLava && !allowHotLiquid) break;
                         world.setBlock(workPos, Blocks.AIR.defaultBlockState(), 3);
                     } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getProperties().contains(BlockStateProperties.WATERLOGGED)) {
                         world.setBlock(workPos, state.setValue(BlockStateProperties.WATERLOGGED, false), 3);
-                    } else if (material == Material.WATER_PLANT || material == Material.REPLACEABLE_WATER_PLANT) {
+                    } else if (state.is(Blocks.KELP) || state.is(Blocks.KELP_PLANT) || state.is(Blocks.SEAGRASS) || state.is(Blocks.TALL_SEAGRASS)) {
                         BlockEntity tile = state.hasBlockEntity() ? world.getBlockEntity(workPos) : null;
                         dropResources(state, world, workPos, tile);
                         world.setBlock(workPos, Blocks.AIR.defaultBlockState(), 3);

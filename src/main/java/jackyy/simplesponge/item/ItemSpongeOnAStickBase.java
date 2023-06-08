@@ -18,10 +18,12 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.LavaFluid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -90,10 +92,10 @@ public class ItemSpongeOnAStickBase extends Item {
                 for (int z = -getRange(); z <= getRange(); z++) {
                     final BlockPos targetPos = pos.offset(x, y, z);
                     final BlockState state = world.getBlockState(targetPos);
-                    Material material = world.getBlockState(targetPos).getMaterial();
-                    if (material.isLiquid()) {
+                    final FluidState fluidState = world.getFluidState(targetPos);
+                    if (state.getBlock() instanceof LiquidBlock) {
                         absorbedAnything = true;
-                        hitLava |= material == Material.LAVA;
+                        hitLava |= fluidState.getType() instanceof LavaFluid;
                         if (hitLava && !allowHotLiquid) break;
                         world.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 3);
                         if (!isPowered() && ++dmg >= maxDmg) break;
@@ -104,7 +106,7 @@ public class ItemSpongeOnAStickBase extends Item {
                         world.setBlock(targetPos, state.setValue(BlockStateProperties.WATERLOGGED, false), 3);
                         if (!isPowered() && ++dmg >= maxDmg) break;
                         else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
-                    } else if (material == Material.WATER_PLANT || material == Material.REPLACEABLE_WATER_PLANT) {
+                    } else if (state.is(Blocks.KELP) || state.is(Blocks.KELP_PLANT) || state.is(Blocks.SEAGRASS) || state.is(Blocks.TALL_SEAGRASS)) {
                         BlockEntity tile = state.hasBlockEntity() ? world.getBlockEntity(targetPos) : null;
                         Block.dropResources(state, world, targetPos, tile);
                         world.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 3);
