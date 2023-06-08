@@ -4,6 +4,7 @@ import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.item.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,7 +28,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPONGE_BLOCK_ITEM
             = ITEMS.register("sponge", () -> new BlockItem(ModBlocks.SPONGE.get(), new Item.Properties().group(SimpleSponge.TAB)));
     public static final RegistryObject<Item> MAGMATIC_SPONGE_BLOCK_ITEM
-            = ITEMS.register("magmatic_sponge", () -> new BlockItem(ModBlocks.MAGMATIC_SPONGE.get(), new Item.Properties().group(SimpleSponge.TAB)));
+            = ITEMS.register("magmatic_sponge", () -> new BlockItem(ModBlocks.MAGMATIC_SPONGE.get(), new Item.Properties().rarity(Rarity.UNCOMMON).group(SimpleSponge.TAB)));
 
     public static void init() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

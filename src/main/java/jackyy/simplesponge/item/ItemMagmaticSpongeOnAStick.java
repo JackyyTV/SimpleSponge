@@ -2,11 +2,12 @@ package jackyy.simplesponge.item;
 
 import jackyy.simplesponge.registry.ModConfigs;
 import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
 
 public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
 
     public ItemMagmaticSpongeOnAStick() {
-        super(new Item.Properties().maxDamage(1024));
+        super(new Item.Properties().maxDamage(1024).rarity(Rarity.UNCOMMON));
     }
 
     @Override
@@ -15,7 +16,7 @@ public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
     }
 
     @Override
-    public boolean isMagnetic() {
+    public boolean isMagmatic() {
         return true;
     }
 

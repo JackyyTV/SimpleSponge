@@ -44,8 +44,8 @@ public class ItemSpongeOnAStickBase extends Item {
         return this.getRange();
     }
 
-    public boolean isMagnetic() {
-        return this.isMagnetic();
+    public boolean isMagmatic() {
+        return this.isMagmatic();
     }
 
     public boolean isPowered() {
@@ -112,7 +112,7 @@ public class ItemSpongeOnAStickBase extends Item {
             }
         }
 
-        if (hitLava && !isMagnetic() && allowHotLiquid) {
+        if (hitLava && !isMagmatic() && allowHotLiquid) {
             stack.setCount(0);
             player.setFire(6);
         }

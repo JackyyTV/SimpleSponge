@@ -11,6 +11,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -26,7 +27,7 @@ import java.util.List;
 public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implements IFEContainer {
 
     public ItemEnergizedSpongeOnAStick() {
-        super(new Item.Properties().maxStackSize(1).setNoRepair());
+        super(new Item.Properties().maxStackSize(1).setNoRepair().rarity(Rarity.RARE));
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     }
 
     @Override
-    public boolean isMagnetic() {
+    public boolean isMagmatic() {
         return true;
     }
 

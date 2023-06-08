@@ -20,7 +20,7 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
     }
 
     @Override
-    public boolean isMagnetic() {
+    public boolean isMagmatic() {
         return false;
     }
 
