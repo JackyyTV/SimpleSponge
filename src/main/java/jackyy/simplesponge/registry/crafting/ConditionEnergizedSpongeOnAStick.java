@@ -26,7 +26,7 @@ public class ConditionEnergizedSpongeOnAStick implements ICondition {
         return ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get() == value;
     }
 
-    public static final IConditionSerializer<ConditionEnergizedSpongeOnAStick> SERIALIZER = new IConditionSerializer<ConditionEnergizedSpongeOnAStick>() {
+    public static final IConditionSerializer<ConditionEnergizedSpongeOnAStick> SERIALIZER = new IConditionSerializer<>() {
         @Override
         public void write(JsonObject json, ConditionEnergizedSpongeOnAStick condition) {
             json.addProperty("enabled", condition.value);

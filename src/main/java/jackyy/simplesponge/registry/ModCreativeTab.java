@@ -1,5 +1,6 @@
 package jackyy.simplesponge.registry;
 
+import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.simplesponge.SimpleSponge;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -46,6 +47,9 @@ public class ModCreativeTab {
 
                             if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
                                 output.accept(ModItems.ENERGIZED_SPONGE_ON_A_STICK.get());
+                                ItemStack full = new ItemStack(ModItems.ENERGIZED_SPONGE_ON_A_STICK.get());
+                                EnergyHelper.setDefaultEnergyTag(full, EnergyHelper.getMaxEnergyStored(full));
+                                output.accept(full);
                             }
                         })
         );

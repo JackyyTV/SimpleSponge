@@ -4,6 +4,7 @@ import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.item.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -11,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
 
-    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SimpleSponge.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SimpleSponge.MODID);
 
     public static final RegistryObject<Item> SPONGE_ON_A_STICK
             = ITEMS.register("sponge_on_a_stick", ItemSpongeOnAStick::new);
@@ -27,7 +28,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPONGE_BLOCK_ITEM
             = ITEMS.register("sponge", () -> new BlockItem(ModBlocks.SPONGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> MAGMATIC_SPONGE_BLOCK_ITEM
-            = ITEMS.register("magmatic_sponge", () -> new BlockItem(ModBlocks.MAGMATIC_SPONGE.get(), new Item.Properties()));
+            = ITEMS.register("magmatic_sponge", () -> new BlockItem(ModBlocks.MAGMATIC_SPONGE.get(), new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static void init() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
