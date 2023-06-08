@@ -10,7 +10,7 @@ public class BlockMagmaticSponge extends BlockSpongeBase {
     }
 
     @Override
-    public boolean isMagnetic() {
+    public boolean isMagmatic() {
         return true;
     }
 
