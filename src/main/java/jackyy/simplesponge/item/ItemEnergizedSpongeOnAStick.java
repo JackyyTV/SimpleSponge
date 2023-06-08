@@ -11,11 +11,13 @@ import jackyy.simplesponge.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,6 +31,11 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
         setTranslationKey(SimpleSponge.MODID + ".energized_sponge_on_a_stick");
         setCreativeTab(SimpleSponge.TAB);
         setNoRepair();
+    }
+
+    @Override
+    public IRarity getForgeRarity(ItemStack stack) {
+        return EnumRarity.RARE;
     }
 
     @SideOnly(Side.CLIENT)

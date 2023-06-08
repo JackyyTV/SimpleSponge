@@ -1,8 +1,11 @@
 package jackyy.simplesponge.registry;
 
 import jackyy.simplesponge.item.*;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.event.RegistryEvent;
 
 public class ModItems {
@@ -21,7 +24,12 @@ public class ModItems {
                 compressedSpongeOnAStick,
                 compressedMagmaticSpongeOnAStick,
                 new ItemBlock(ModBlocks.sponge).setRegistryName(ModBlocks.sponge.getRegistryName()),
-                new ItemBlock(ModBlocks.magmaticSponge).setRegistryName(ModBlocks.magmaticSponge.getRegistryName())
+                new ItemBlock(ModBlocks.magmaticSponge) {
+                    @Override
+                    public IRarity getForgeRarity(ItemStack stack) {
+                        return EnumRarity.UNCOMMON;
+                    }
+                }.setRegistryName(ModBlocks.magmaticSponge.getRegistryName())
         );
     }
 

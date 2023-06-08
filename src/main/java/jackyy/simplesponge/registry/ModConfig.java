@@ -19,7 +19,7 @@ public class ModConfig {
     public static class Sponge {
         @Config.RangeInt(min = 1)
         @Config.Comment("Set the durability for a Sponge On A Stick")
-        public int spongeOnAStickMaxDamage = 256;
+        public int spongeOnAStickMaxDamage = 512;
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range for a Sponge")
         public int spongeRange = 3;
@@ -31,13 +31,13 @@ public class ModConfig {
     public static class MagneticSponge {
         @Config.RangeInt(min = 1)
         @Config.Comment("Set the durability for a Magmatic Sponge On A Stick")
-        public int magmaticSpongeOnAStickMaxDamage = 256;
+        public int magmaticSpongeOnAStickMaxDamage = 1024;
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range for a Magmatic Sponge")
-        public int magmaticSpongeRange = 3;
+        public int magmaticSpongeRange = 5;
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range for a Magmatic Sponge On A Stick")
-        public int magmaticSpongeOnAStickRange = 3;
+        public int magmaticSpongeOnAStickRange = 5;
     }
 
     public static class EnergizedSponge {
@@ -46,9 +46,9 @@ public class ModConfig {
         @Config.RangeInt(min = 1)
         @Config.Comment("Set the max energy for an Energized Sponge On A Stick")
         public int energizedSpongeOnAStickMaxEnergy = 500000;
-        @Config.RangeInt(min = 1, max = 10000)
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the per right click energy use for an Energized Sponge On A Stick")
-        public int energizedSpongeOnAStickPerRightClickUse = 100;
+        public int energizedSpongeOnAStickPerRightClickUse = 1000;
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range for an Energized Sponge On A Stick")
         public int energizedSpongeOnAStickRange = 7;
@@ -57,22 +57,27 @@ public class ModConfig {
     public static class CompressedSponge {
         @Config.RangeInt(min = 1)
         @Config.Comment("Set the durability (multiplied by 9) for a Compressed Sponge On A Stick")
-        public int compressedSpongeOnAStickMaxDamage = 256;
+        public int compressedSpongeOnAStickMaxDamage = 512;
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range (multiplied by 2) for a Compressed Sponge On A Stick")
         public int compressedSpongeOnAStickRange = 3;
         @Config.RangeInt(min = 1)
         @Config.Comment("Set the durability (multiplied by 9) for a Compressed Magmatic Sponge On A Stick")
-        public int compressedMagmaticSpongeOnAStickMaxDamage = 256;
+        public int compressedMagmaticSpongeOnAStickMaxDamage = 1024;
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range (multiplied by 2) for a Compressed Magmatic Sponge On A Stick")
-        public int compressedMagmaticSpongeOnAStickRange = 3;
+        public int compressedMagmaticSpongeOnAStickRange = 5;
     }
 
     public static class Misc {
         @Config.Comment({
+                "By default, regular (non-magmatic) Sponges and Sponge On A Sticks can absorb hot liquid (e.g. Lava) once then breaks.",
+                "Set this to false if you don't want regular Sponges and Sponge On A Sticks to absorb hot liquid at all."
+        })
+        public boolean regularSpongeAbsorbHotLiquid = true;
+        @Config.Comment({
                 "When OpenBlocks is detected, certain crafting recipes will be changed / disabled.",
-                "Set this to false if you wish to use the sponges from this mod.",
+                "Set this to false if you wish to use the Sponges from this mod.",
                 "You'll have to use CraftTweaker to prevent recipe conflicts."
         })
         public boolean openBlocksIntegration = true;

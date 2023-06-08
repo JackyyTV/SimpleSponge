@@ -16,11 +16,11 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = SimpleSponge.MODID, version = SimpleSponge.VERSION, name = SimpleSponge.MODNAME, dependencies = SimpleSponge.DEPENDS, acceptedMinecraftVersions = SimpleSponge.MCVERSION, certificateFingerprint = "@FINGERPRINT@", useMetadata = true)
 public class SimpleSponge {
 
-    public static final String VERSION = "3.7";
+    public static final String VERSION = "3.7.1";
     public static final String MCVERSION = "[1.12,1.13)";
     public static final String MODID = "simplesponge";
     public static final String MODNAME = "Simple Sponge";
-    public static final String DEPENDS = "required-after:gunpowderlib@[1.12.2-1.1,);after:openblocks;";
+    public static final String DEPENDS = "required-after:gunpowderlib@[1.12.2-1.1,);required-after:forge@[14.23.5.2816,);after:openblocks;";
     public static final CreativeTabs TAB = new CreativeTabs(MODID) {
         @Override
         public ItemStack createIcon() {
@@ -50,7 +50,7 @@ public class SimpleSponge {
 
     @Mod.EventHandler
     public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-        logger.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified. This will NOT be supported by the mod author!");
+        logger.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified or running in dev environment.");
     }
 
 }

@@ -1,5 +1,6 @@
 package jackyy.simplesponge.block;
 
+import jackyy.simplesponge.registry.ModConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -74,6 +75,7 @@ public class BlockSpongeBase extends Block {
     private void clearupLiquid(World world, BlockPos pos) {
         if (world.isRemote) return;
         boolean hitLava = false;
+        boolean allowHotLiquid = ModConfig.misc.regularSpongeAbsorbHotLiquid;
         for (int dx = -getRange(); dx <= getRange(); dx++) {
             for (int dy = -getRange(); dy <= getRange(); dy++) {
                 for (int dz = -getRange(); dz <= getRange(); dz++) {
@@ -82,12 +84,13 @@ public class BlockSpongeBase extends Block {
                     Material material = state.getMaterial();
                     if (material.isLiquid()) {
                         hitLava |= material == Material.LAVA;
+                        if (hitLava && !allowHotLiquid) break;
                         world.setBlockToAir(workPos);
                     }
                 }
             }
         }
-        if (hitLava && !isMagmatic()) world.addBlockEvent(pos, this, 0, 0);
+        if (hitLava && !isMagmatic() && allowHotLiquid) world.addBlockEvent(pos, this, 0, 0);
     }
 
 }

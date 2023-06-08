@@ -3,7 +3,10 @@ package jackyy.simplesponge.item;
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -14,6 +17,11 @@ public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
         setTranslationKey(SimpleSponge.MODID + ".magmatic_sponge_on_a_stick");
         setMaxDamage(getDmg());
         setCreativeTab(SimpleSponge.TAB);
+    }
+
+    @Override
+    public IRarity getForgeRarity(ItemStack stack) {
+        return EnumRarity.UNCOMMON;
     }
 
     @SideOnly(Side.CLIENT)

@@ -2,6 +2,7 @@ package jackyy.simplesponge.item;
 
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.SimpleSponge;
+import jackyy.simplesponge.registry.ModConfig;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -74,6 +75,7 @@ public class ItemSpongeOnAStickBase extends Item {
     private boolean soakUp(World world, BlockPos pos, EntityPlayer player, ItemStack stack) {
         boolean absorbedAnything = false;
         boolean hitLava = false;
+        boolean allowHotLiquid = ModConfig.misc.regularSpongeAbsorbHotLiquid;
         int damage = stack.getItemDamage();
 
         for (int x = -getRange(); x <= getRange(); x++) {
@@ -85,6 +87,7 @@ public class ItemSpongeOnAStickBase extends Item {
                     if (material.isLiquid()) {
                         absorbedAnything = true;
                         hitLava |= material == Material.LAVA;
+                        if (hitLava && !allowHotLiquid) break;
                         world.setBlockToAir(targetPos);
                         if (!isPowered() && ++damage >= getDmg()) break;
                         else if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerRightClickUse()) break;
@@ -94,11 +97,9 @@ public class ItemSpongeOnAStickBase extends Item {
             }
         }
 
-        if (hitLava) {
-            if (!isMagmatic()) {
-                stack.setCount(0);
-                player.setFire(6);
-            }
+        if (hitLava && !isMagmatic() && allowHotLiquid) {
+            stack.setCount(0);
+            player.setFire(6);
         }
 
         if (absorbedAnything) {
