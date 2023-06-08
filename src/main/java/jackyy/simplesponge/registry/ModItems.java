@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
 
-    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SimpleSponge.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SimpleSponge.MODID);
 
     public static final RegistryObject<Item> SPONGE_ON_A_STICK
             = ITEMS.register("sponge_on_a_stick", ItemSpongeOnAStick::new);
