@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,7 +27,7 @@ import java.util.List;
 public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implements IFEContainer {
 
     public ItemEnergizedSpongeOnAStick() {
-        super(new Properties().stacksTo(1).setNoRepair());
+        super(new Properties().stacksTo(1).setNoRepair().rarity(Rarity.RARE));
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ItemEnergizedSpongeOnAStick extends ItemSpongeOnAStickBase implemen
     }
 
     @Override
-    public boolean isMagnetic() {
+    public boolean isMagmatic() {
         return true;
     }
 

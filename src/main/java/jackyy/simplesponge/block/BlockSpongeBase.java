@@ -28,8 +28,8 @@ public class BlockSpongeBase extends Block {
         return this.getRange();
     }
 
-    public boolean isMagnetic() {
-        return this.isMagnetic();
+    public boolean isMagmatic() {
+        return this.isMagmatic();
     }
 
     @Override @Deprecated
@@ -88,7 +88,7 @@ public class BlockSpongeBase extends Block {
                 }
             }
         }
-        if (hitLava && !isMagnetic() && allowHotLiquid) world.blockEvent(pos, this, 0, 0);
+        if (hitLava && !isMagmatic() && allowHotLiquid) world.blockEvent(pos, this, 0, 0);
     }
 
 }

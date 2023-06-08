@@ -21,12 +21,12 @@ public class ConditionOpenBlocksIntegration implements ICondition {
         return ID;
     }
 
-    @Override
+    @Override @SuppressWarnings("removal")
     public boolean test() {
         return ModConfigs.CONFIG.openBlocksIntegration.get() == value;
     }
 
-    public static final IConditionSerializer<ConditionOpenBlocksIntegration> SERIALIZER = new IConditionSerializer<ConditionOpenBlocksIntegration>() {
+    public static final IConditionSerializer<ConditionOpenBlocksIntegration> SERIALIZER = new IConditionSerializer<>() {
         @Override
         public void write(JsonObject json, ConditionOpenBlocksIntegration condition) {
             json.addProperty("enabled", condition.value);
