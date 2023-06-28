@@ -1,7 +1,5 @@
 package jackyy.simplesponge.integration;
 
-/*
-TODO Fix JEI Plugin
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModItems;
 import mezz.jei.api.IModPlugin;
@@ -55,4 +53,3 @@ public class JEIPlugin implements IModPlugin {
     };
 
 }
-*/
