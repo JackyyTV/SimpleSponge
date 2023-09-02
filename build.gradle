@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://maven.minecraftforge.net" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -28,10 +28,6 @@ minecraft {
 }
 
 repositories {
-    maven {
-        name = "JEI Maven"
-        url = "https://dvs1.progwml6.com/files/maven"
-    }
     maven {
         name = "ModMaven"
         url = "https://modmaven.dev"

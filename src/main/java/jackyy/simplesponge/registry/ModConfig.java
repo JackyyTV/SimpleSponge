@@ -14,6 +14,7 @@ public class ModConfig {
     public static MagneticSponge magneticSponge = new MagneticSponge();
     public static EnergizedSponge energizedSponge = new EnergizedSponge();
     public static CompressedSponge compressedSponge = new CompressedSponge();
+    public static CreativeSponge creativeSponge = new CreativeSponge();
     public static Misc misc = new Misc();
 
     public static class Sponge {
@@ -67,6 +68,18 @@ public class ModConfig {
         @Config.RangeInt(min = 1, max = 64)
         @Config.Comment("Set the range (multiplied by 2) for a Compressed Magmatic Sponge On A Stick")
         public int compressedMagmaticSpongeOnAStickRange = 5;
+    }
+
+    public static class CreativeSponge {
+        @Config.RangeInt(min = 1, max = 64)
+        @Config.Comment("Set the range for a Creative Sponge")
+        public int creativeSpongeRange = 12;
+        @Config.RangeInt(min = 1, max = 64)
+        @Config.Comment("Set the range for a Creative Sponge On A Stick")
+        public int creativeSpongeOnAStickRange = 12;
+        @Config.RangeInt(min = 1, max = 64)
+        @Config.Comment("Set the range (multiplied by 2) for a Compressed Creative Sponge On A Stick")
+        public int compressedCreativeSpongeOnAStickRange = 12;
     }
 
     public static class Misc {

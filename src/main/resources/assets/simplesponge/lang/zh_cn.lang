@@ -3,8 +3,17 @@ itemGroup.simplesponge=简易海绵
 
 #Items
 item.simplesponge.sponge_on_a_stick.name=海绵棍
+item.simplesponge.compressed_sponge_on_a_stick.name=压缩海绵棍
 item.simplesponge.magmatic_sponge_on_a_stick.name=岩浆海绵棍
+item.simplesponge.compressed_magmatic_sponge_on_a_stick.name=岩浆压缩海绵棍
+item.simplesponge.creative_sponge_on_a_stick.name=创造模式海绵棍
+item.simplesponge.compressed_creative_sponge_on_a_stick.name=创造模式压缩海绵棍
+item.simplesponge.energized_sponge_on_a_stick.name=充能海绵棍
 
 #Blocks
 tile.simplesponge.sponge.name=海绵
 tile.simplesponge.magmatic_sponge.name=岩浆海绵
+tile.simplesponge.creative_sponge.name=创造模式海绵
+
+#Tooltips
+tooltip.simplesponge.durability=耐久值

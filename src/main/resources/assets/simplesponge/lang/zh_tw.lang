@@ -1,0 +1,19 @@
+#Creative Tab
+itemGroup.simplesponge=簡易海綿
+
+#Items
+item.simplesponge.sponge_on_a_stick.name=海綿棍
+item.simplesponge.compressed_sponge_on_a_stick.name=壓縮海綿棍
+item.simplesponge.magmatic_sponge_on_a_stick.name=岩漿海綿棍
+item.simplesponge.compressed_magmatic_sponge_on_a_stick.name=岩漿壓縮海綿棍
+item.simplesponge.creative_sponge_on_a_stick.name=創造模式海綿棍
+item.simplesponge.compressed_creative_sponge_on_a_stick.name=創造模式壓縮海綿棍
+item.simplesponge.energized_sponge_on_a_stick.name=充能海綿棍
+
+#Blocks
+tile.simplesponge.sponge.name=海綿
+tile.simplesponge.magmatic_sponge.name=岩漿海綿
+tile.simplesponge.creative_sponge.name=創造模式海綿
+
+#Tooltips
+tooltip.simplesponge.durability=耐久度

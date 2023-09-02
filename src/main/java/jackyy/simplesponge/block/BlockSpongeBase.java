@@ -84,7 +84,7 @@ public class BlockSpongeBase extends Block {
                     Material material = state.getMaterial();
                     if (material.isLiquid()) {
                         hitLava |= material == Material.LAVA;
-                        if (hitLava && !allowHotLiquid) break;
+                        if (hitLava && !isMagmatic() && !allowHotLiquid) break;
                         world.setBlockToAir(workPos);
                     }
                 }

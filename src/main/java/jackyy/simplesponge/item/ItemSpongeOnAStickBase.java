@@ -32,6 +32,10 @@ public class ItemSpongeOnAStickBase extends Item {
         return this.isMagmatic();
     }
 
+    public boolean isCreative() {
+        return false;
+    }
+
     public int getRange() {
         return this.getRange();
     }
@@ -87,10 +91,12 @@ public class ItemSpongeOnAStickBase extends Item {
                     if (material.isLiquid()) {
                         absorbedAnything = true;
                         hitLava |= material == Material.LAVA;
-                        if (hitLava && !allowHotLiquid) break;
+                        if (hitLava && !isMagmatic() && !allowHotLiquid) break;
                         world.setBlockToAir(targetPos);
-                        if (!isPowered() && ++damage >= getDmg()) break;
-                        else if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerRightClickUse()) break;
+                        if (!isCreative()) {
+                            if (!isPowered() && ++damage >= getDmg()) break;
+                            else if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerRightClickUse()) break;
+                        }
                     }
 
                 }
@@ -103,15 +109,17 @@ public class ItemSpongeOnAStickBase extends Item {
         }
 
         if (absorbedAnything) {
-            if (isPowered()) {
-                if (stack.getTagCompound().getInteger("Energy") >= getPerRightClickUse()) {
-                    stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerRightClickUse());
-                }
-            } else {
-                if (damage >= getDmg()) {
-                    stack.setCount(0);
-                } else if (!player.isCreative()) {
-                    stack.setItemDamage(damage);
+            if (!isCreative()) {
+                if (isPowered()) {
+                    if (stack.getTagCompound().getInteger("Energy") >= getPerRightClickUse()) {
+                        stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerRightClickUse());
+                    }
+                } else {
+                    if (damage >= getDmg()) {
+                        stack.setCount(0);
+                    } else if (!player.isCreative()) {
+                        stack.setItemDamage(damage);
+                    }
                 }
             }
             return true;
