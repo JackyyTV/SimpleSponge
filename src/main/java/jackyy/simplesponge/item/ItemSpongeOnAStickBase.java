@@ -96,7 +96,7 @@ public class ItemSpongeOnAStickBase extends Item {
                         hitLava |= material == Material.LAVA;
                         if (hitLava && !isMagmatic() && !allowHotLiquid) break;
                         world.setBlockToAir(targetPos);
-                        if (!isCreative()) {
+                        if (!player.isCreative() && !isCreative()) {
                             if (!isPowered() && ++dmg >= maxDmg) break;
                             else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
                         }
