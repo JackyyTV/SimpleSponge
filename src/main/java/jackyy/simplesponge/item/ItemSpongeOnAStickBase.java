@@ -1,5 +1,7 @@
 package jackyy.simplesponge.item;
 
+import jackyy.gunpowderlib.helper.EnergyHelper;
+import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import jackyy.simplesponge.SimpleSponge;
 import jackyy.simplesponge.registry.ModConfig;
@@ -77,10 +79,11 @@ public class ItemSpongeOnAStickBase extends Item {
     }
 
     private boolean soakUp(World world, BlockPos pos, EntityPlayer player, ItemStack stack) {
-        boolean absorbedAnything = false;
+        boolean succ = false;
         boolean hitLava = false;
         boolean allowHotLiquid = ModConfig.misc.regularSpongeAbsorbHotLiquid;
-        int damage = stack.getItemDamage();
+        int dmg = stack.getItemDamage();
+        int maxDmg = stack.getMaxDamage();
 
         for (int x = -getRange(); x <= getRange(); x++) {
             for (int y = -getRange(); y <= getRange(); y++) {
@@ -89,13 +92,13 @@ public class ItemSpongeOnAStickBase extends Item {
 
                     Material material = world.getBlockState(targetPos).getMaterial();
                     if (material.isLiquid()) {
-                        absorbedAnything = true;
+                        succ = true;
                         hitLava |= material == Material.LAVA;
                         if (hitLava && !isMagmatic() && !allowHotLiquid) break;
                         world.setBlockToAir(targetPos);
                         if (!isCreative()) {
-                            if (!isPowered() && ++damage >= getDmg()) break;
-                            else if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerRightClickUse()) break;
+                            if (!isPowered() && ++dmg >= maxDmg) break;
+                            else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
                         }
                     }
 
@@ -108,18 +111,17 @@ public class ItemSpongeOnAStickBase extends Item {
             player.setFire(6);
         }
 
-        if (absorbedAnything) {
-            if (!isCreative()) {
+        if (succ) {
+            if (!player.isCreative() && !isCreative()) {
                 if (isPowered()) {
-                    if (stack.getTagCompound().getInteger("Energy") >= getPerRightClickUse()) {
-                        stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerRightClickUse());
+                    if (EnergyHelper.getEnergyStored(stack) >= getPerRightClickUse()) {
+                        NBTHelper.setInt(stack, EnergyHelper.ENERGY_NBT, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());
                     }
                 } else {
-                    if (damage >= getDmg()) {
+                    if (dmg >= maxDmg) {
                         stack.setCount(0);
-                    } else if (!player.isCreative()) {
-                        stack.setItemDamage(damage);
                     }
+                    stack.setItemDamage(dmg);
                 }
             }
             return true;
