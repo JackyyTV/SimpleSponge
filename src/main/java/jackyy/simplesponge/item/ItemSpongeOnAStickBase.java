@@ -48,8 +48,12 @@ public class ItemSpongeOnAStickBase extends Item {
         return this.isMagmatic();
     }
 
+    public boolean isCreative() {
+        return false;
+    }
+
     public boolean isPowered() {
-        return this.isPowered();
+        return false;
     }
 
     @Override
@@ -78,7 +82,7 @@ public class ItemSpongeOnAStickBase extends Item {
     }
 
     private boolean soakUp(World world, BlockPos pos, PlayerEntity player, ItemStack stack) {
-        boolean absorbedAnything = false;
+        boolean succ = false;
         boolean hitLava = false;
         boolean allowHotLiquid = ModConfigs.CONFIG.regularSpongeAbsorbHotLiquid.get();
         int dmg = stack.getDamage();
@@ -91,22 +95,32 @@ public class ItemSpongeOnAStickBase extends Item {
                     final BlockState state = world.getBlockState(targetPos);
                     Material material = world.getBlockState(targetPos).getMaterial();
                     if (material.isLiquid()) {
-                        absorbedAnything = true;
+                        succ = true;
                         hitLava |= material == Material.LAVA;
-                        if (hitLava && !allowHotLiquid) break;
+                        if (hitLava && !isMagmatic() && !allowHotLiquid) break;
                         world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
-                        if (!isPowered() && ++dmg >= maxDmg) break;
-                        else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        if (!player.isCreative() && !isCreative()) {
+                            if (!isPowered() && ++dmg >= maxDmg) break;
+                            else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        }
                     } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED)) {
-                        absorbedAnything = true;
+                        succ = true;
                         hitLava = false;
                         world.setBlockState(targetPos, state.with(BlockStateProperties.WATERLOGGED, false));
-                        if (!isPowered() && ++dmg >= maxDmg) break;
-                        else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        if (!player.isCreative() && !isCreative()) {
+                            if (!isPowered() && ++dmg >= maxDmg) break;
+                            else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        }
                     } else if (material == Material.OCEAN_PLANT || material == Material.SEA_GRASS) {
+                        succ = true;
+                        hitLava = false;
                         TileEntity tile = state.hasTileEntity() ? world.getTileEntity(targetPos) : null;
                         Block.spawnDrops(state, world, targetPos, tile);
                         world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
+                        if (!player.isCreative() && !isCreative()) {
+                            if (!isPowered() && ++dmg >= maxDmg) break;
+                            else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        }
                     }
                 }
             }
@@ -117,8 +131,8 @@ public class ItemSpongeOnAStickBase extends Item {
             player.setFire(6);
         }
 
-        if (absorbedAnything) {
-            if (!player.isCreative()) {
+        if (succ) {
+            if (!player.isCreative() && !isCreative()) {
                 if (isPowered()) {
                     if (EnergyHelper.getEnergyStored(stack) >= getPerRightClickUse()) {
                         NBTHelper.setInt(stack, EnergyHelper.ENERGY_NBT, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());

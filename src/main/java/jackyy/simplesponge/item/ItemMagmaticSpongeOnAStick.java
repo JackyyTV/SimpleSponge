@@ -20,9 +20,4 @@ public class ItemMagmaticSpongeOnAStick extends ItemSpongeOnAStickBase {
         return true;
     }
 
-    @Override
-    public boolean isPowered() {
-        return false;
-    }
-
 }

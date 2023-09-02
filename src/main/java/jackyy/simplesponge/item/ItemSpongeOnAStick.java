@@ -25,12 +25,6 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
     }
 
     @Override
-    public boolean isPowered() {
-        return false;
-    }
-
-
-    @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if (isInGroup(group)) {
             if (ModList.get().isLoaded("openblocks")) {
