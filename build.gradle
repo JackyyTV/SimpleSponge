@@ -59,15 +59,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        name = 'JEI Maven'
-        url = 'https://dvs1.progwml6.com/files/maven'
-        content {
-            includeGroup 'mezz.jei'
-        }
-    }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
+        name = 'ModMaven'
+        url = 'https://modmaven.dev'
     }
     maven {
         name = 'Curse Maven'
@@ -83,7 +76,7 @@ dependencies {
 
     implementation fg.deobf("mezz.jei:jei-1.20.1-forge:+")
     //implementation fg.deobf("curse.maven:jade-324717:4614153") //1.20-11.1.4
-    implementation fg.deobf("curse.maven:theoneprobe-245211:4613250") //1.20.1-10.0.0
+    implementation fg.deobf("curse.maven:theoneprobe-245211:4629624") //1.20.1-10.0.1
 
     implementation fg.deobf("curse.maven:gunpowderlib-356646:4573505") //1.20-2.2
 }

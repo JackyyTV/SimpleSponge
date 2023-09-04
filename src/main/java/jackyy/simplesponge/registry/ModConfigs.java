@@ -21,6 +21,10 @@ public class ModConfigs {
         public ForgeConfigSpec.IntValue compressedSpongeOnAStickRange;
         public ForgeConfigSpec.IntValue compressedMagmaticSpongeOnAStickRange;
 
+        public ForgeConfigSpec.IntValue creativeSpongeRange;
+        public ForgeConfigSpec.IntValue creativeSpongeOnAStickRange;
+        public ForgeConfigSpec.IntValue compressedCreativeSpongeOnAStickRange;
+
         public ForgeConfigSpec.BooleanValue regularSpongeAbsorbHotLiquid;
         public ForgeConfigSpec.BooleanValue openBlocksIntegration;
 
@@ -66,6 +70,18 @@ public class ModConfigs {
             compressedMagmaticSpongeOnAStickRange = builder
                     .comment("Set the range (multiplied by 2) for a Compressed Magmatic Sponge On A Stick")
                     .defineInRange("compressedMagmaticSpongeOnAStickRange", 5, 1, 64);
+            builder.pop();
+
+            builder.push("creative_sponge");
+            creativeSpongeRange = builder
+                    .comment("Set the range for a Creative Sponge")
+                    .defineInRange("creativeSpongeRange", 12, 1, 64);
+            creativeSpongeOnAStickRange = builder
+                    .comment("Set the range for a Creative Sponge On A Stick")
+                    .defineInRange("creativeSpongeOnAStickRange", 12, 1, 64);
+            compressedCreativeSpongeOnAStickRange = builder
+                    .comment("Set the range (multiplied by 2) for a Compressed Creative Sponge On A Stick")
+                    .defineInRange("compressedCreativeSpongeOnAStickRange", 12, 1, 64);
             builder.pop();
 
             builder.push("misc");

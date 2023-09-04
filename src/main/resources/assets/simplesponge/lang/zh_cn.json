@@ -4,9 +4,18 @@
 
     "_comment": "Items",
     "item.simplesponge.sponge_on_a_stick": "海绵棍",
+    "item.simplesponge.compressed_sponge_on_a_stick": "压缩海绵棍",
     "item.simplesponge.magmatic_sponge_on_a_stick": "岩浆海绵棍",
+    "item.simplesponge.compressed_magmatic_sponge_on_a_stick": "岩浆压缩海绵棍",
+    "item.simplesponge.creative_sponge_on_a_stick": "创造模式海绵棍",
+    "item.simplesponge.compressed_creative_sponge_on_a_stick": "创造模式压缩海绵棍",
+    "item.simplesponge.energized_sponge_on_a_stick": "充能海绵棍",
 
     "_comment": "Blocks",
     "block.simplesponge.sponge": "海绵",
-    "block.simplesponge.magmatic_sponge": "岩浆海绵"
+    "block.simplesponge.magmatic_sponge": "岩浆海绵",
+    "block.simplesponge.creative_sponge": "创造模式海绵",
+
+    "_comment": "Tooltips",
+    "tooltip.simplesponge.durability": "耐久值"
 }

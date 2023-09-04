@@ -18,17 +18,23 @@ public class ModItems {
             = ITEMS.register("sponge_on_a_stick", ItemSpongeOnAStick::new);
     public static final RegistryObject<Item> MAGMATIC_SPONGE_ON_A_STICK
             = ITEMS.register("magmatic_sponge_on_a_stick", ItemMagmaticSpongeOnAStick::new);
+    public static final RegistryObject<Item> CREATIVE_SPONGE_ON_A_STICK
+            = ITEMS.register("creative_sponge_on_a_stick", ItemCreativeSpongeOnAStick::new);
     public static final RegistryObject<Item> ENERGIZED_SPONGE_ON_A_STICK
             = ITEMS.register("energized_sponge_on_a_stick", ItemEnergizedSpongeOnAStick::new);
     public static final RegistryObject<Item> COMPRESSED_SPONGE_ON_A_STICK
             = ITEMS.register("compressed_sponge_on_a_stick", ItemCompressedSpongeOnAStick::new);
     public static final RegistryObject<Item> COMPRESSED_MAGMATIC_SPONGE_ON_A_STICK
             = ITEMS.register("compressed_magmatic_sponge_on_a_stick", ItemCompressedMagmaticSpongeOnAStick::new);
+    public static final RegistryObject<Item> COMPRESSED_CREATIVE_SPONGE_ON_A_STICK
+            = ITEMS.register("compressed_creative_sponge_on_a_stick", ItemCompressedCreativeSpongeOnAStick::new);
 
     public static final RegistryObject<Item> SPONGE_BLOCK_ITEM
             = ITEMS.register("sponge", () -> new BlockItem(ModBlocks.SPONGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> MAGMATIC_SPONGE_BLOCK_ITEM
             = ITEMS.register("magmatic_sponge", () -> new BlockItem(ModBlocks.MAGMATIC_SPONGE.get(), new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> CREATIVE_SPONGE_BLOCK_ITEM
+            = ITEMS.register("creative_sponge", () -> new BlockItem(ModBlocks.CREATIVE_SPONGE.get(), new Item.Properties().rarity(Rarity.EPIC)));
 
     public static void init() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

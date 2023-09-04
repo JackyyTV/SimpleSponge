@@ -79,7 +79,7 @@ public class BlockSpongeBase extends Block {
                     final FluidState fluidState = world.getFluidState(workPos);
                     if (state.getBlock() instanceof LiquidBlock) {
                         hitLava |= fluidState.getType() instanceof LavaFluid;
-                        if (hitLava && !allowHotLiquid) break;
+                        if (hitLava && !isMagmatic() && !allowHotLiquid) break;
                         world.setBlock(workPos, Blocks.AIR.defaultBlockState(), 3);
                     } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getProperties().contains(BlockStateProperties.WATERLOGGED)) {
                         world.setBlock(workPos, state.setValue(BlockStateProperties.WATERLOGGED, false), 3);

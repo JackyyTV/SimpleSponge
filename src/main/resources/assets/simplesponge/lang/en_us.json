@@ -7,11 +7,14 @@
     "item.simplesponge.compressed_sponge_on_a_stick": "Compressed Sponge on a Stick",
     "item.simplesponge.magmatic_sponge_on_a_stick": "Magmatic Sponge on a Stick",
     "item.simplesponge.compressed_magmatic_sponge_on_a_stick": "Compressed Magmatic Sponge on a Stick",
+    "item.simplesponge.creative_sponge_on_a_stick": "Creative Sponge on a Stick",
+    "item.simplesponge.compressed_creative_sponge_on_a_stick": "Compressed Creative Sponge on a Stick",
     "item.simplesponge.energized_sponge_on_a_stick": "Energized Sponge on a Stick",
 
     "_comment": "Blocks",
     "block.simplesponge.sponge": "Sponge",
     "block.simplesponge.magmatic_sponge": "Magmatic Sponge",
+    "block.simplesponge.creative_sponge": "Creative Sponge",
 
     "_comment": "Tooltips",
     "tooltip.simplesponge.durability": "Durability"

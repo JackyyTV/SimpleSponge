@@ -41,6 +41,9 @@ public class ModCreativeTab {
                 output.accept(ModItems.MAGMATIC_SPONGE_BLOCK_ITEM.get());
                 output.accept(ModItems.MAGMATIC_SPONGE_ON_A_STICK.get());
                 output.accept(ModItems.COMPRESSED_MAGMATIC_SPONGE_ON_A_STICK.get());
+                output.accept(ModItems.CREATIVE_SPONGE_BLOCK_ITEM.get());
+                output.accept(ModItems.CREATIVE_SPONGE_ON_A_STICK.get());
+                output.accept(ModItems.COMPRESSED_CREATIVE_SPONGE_ON_A_STICK.get());
 
                 if (ModConfigs.CONFIG.enableEnergizedSpongeOnAStick.get()) {
                     output.accept(ModItems.ENERGIZED_SPONGE_ON_A_STICK.get());
