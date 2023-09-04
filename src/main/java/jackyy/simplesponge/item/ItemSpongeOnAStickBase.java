@@ -49,8 +49,12 @@ public class ItemSpongeOnAStickBase extends Item {
         return this.isMagmatic();
     }
 
+    public boolean isCreative() {
+        return false;
+    }
+
     public boolean isPowered() {
-        return this.isPowered();
+        return false;
     }
 
     @Override @OnlyIn(Dist.CLIENT)
@@ -79,7 +83,7 @@ public class ItemSpongeOnAStickBase extends Item {
     }
 
     private boolean soakUp(Level world, BlockPos pos, Player player, ItemStack stack) {
-        boolean absorbedAnything = false;
+        boolean succ = false;
         boolean hitLava = false;
         boolean allowHotLiquid = ModConfigs.CONFIG.regularSpongeAbsorbHotLiquid.get();
         int dmg = stack.getDamageValue();
@@ -92,22 +96,32 @@ public class ItemSpongeOnAStickBase extends Item {
                     final BlockState state = world.getBlockState(targetPos);
                     Material material = world.getBlockState(targetPos).getMaterial();
                     if (material.isLiquid()) {
-                        absorbedAnything = true;
+                        succ = true;
                         hitLava |= material == Material.LAVA;
-                        if (hitLava && !allowHotLiquid) break;
+                        if (hitLava && !isMagmatic() && !allowHotLiquid) break;
                         world.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 3);
-                        if (!isPowered() && ++dmg >= maxDmg) break;
-                        else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        if (!player.isCreative() && !isCreative()) {
+                            if (!isPowered() && ++dmg >= maxDmg) break;
+                            else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        }
                     } else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getProperties().contains(BlockStateProperties.WATERLOGGED)) {
-                        absorbedAnything = true;
+                        succ = true;
                         hitLava = false;
                         world.setBlock(targetPos, state.setValue(BlockStateProperties.WATERLOGGED, false), 3);
-                        if (!isPowered() && ++dmg >= maxDmg) break;
-                        else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        if (!player.isCreative() && !isCreative()) {
+                            if (!isPowered() && ++dmg >= maxDmg) break;
+                            else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        }
                     } else if (material == Material.WATER_PLANT || material == Material.REPLACEABLE_WATER_PLANT) {
+                        succ = true;
+                        hitLava = false;
                         BlockEntity tile = state.hasBlockEntity() ? world.getBlockEntity(targetPos) : null;
                         Block.dropResources(state, world, targetPos, tile);
                         world.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 3);
+                        if (!player.isCreative() && !isCreative()) {
+                            if (!isPowered() && ++dmg >= maxDmg) break;
+                            else if (isPowered() && EnergyHelper.getEnergyStored(stack) < getPerRightClickUse()) break;
+                        }
                     }
                 }
             }
@@ -118,8 +132,8 @@ public class ItemSpongeOnAStickBase extends Item {
             player.setSecondsOnFire(6);
         }
 
-        if (absorbedAnything) {
-            if (!player.isCreative()) {
+        if (succ) {
+            if (!player.isCreative() && !isCreative()) {
                 if (isPowered()) {
                     if (EnergyHelper.getEnergyStored(stack) >= getPerRightClickUse()) {
                         NBTHelper.setInt(stack, EnergyHelper.ENERGY_NBT, EnergyHelper.getEnergyStored(stack) - getPerRightClickUse());

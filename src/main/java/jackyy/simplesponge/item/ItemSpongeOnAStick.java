@@ -18,9 +18,4 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
         return false;
     }
 
-    @Override
-    public boolean isPowered() {
-        return false;
-    }
-
 }
