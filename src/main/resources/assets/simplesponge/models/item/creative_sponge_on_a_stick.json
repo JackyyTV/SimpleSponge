@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "simplesponge:item/creative_sponge_on_a_stick"
+  }
+}

@@ -1,0 +1,21 @@
+{
+    "_comment": "Creative Tab",
+    "itemGroup.simplesponge": "簡易海綿",
+
+    "_comment": "Items",
+    "item.simplesponge.sponge_on_a_stick": "海綿棍",
+    "item.simplesponge.compressed_sponge_on_a_stick": "壓縮海綿棍",
+    "item.simplesponge.magmatic_sponge_on_a_stick": "岩漿海綿棍",
+    "item.simplesponge.compressed_magmatic_sponge_on_a_stick": "岩漿壓縮海綿棍",
+    "item.simplesponge.creative_sponge_on_a_stick": "創造模式海綿棍",
+    "item.simplesponge.compressed_creative_sponge_on_a_stick": "創造模式壓縮海綿棍",
+    "item.simplesponge.energized_sponge_on_a_stick": "充能海綿棍",
+
+    "_comment": "Blocks",
+    "block.simplesponge.sponge": "海綿",
+    "block.simplesponge.magmatic_sponge": "岩漿海綿",
+    "block.simplesponge.creative_sponge": "創造模式海綿",
+
+    "_comment": "Tooltips",
+    "tooltip.simplesponge.durability": "耐久度"
+}
