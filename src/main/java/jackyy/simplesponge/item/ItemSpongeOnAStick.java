@@ -25,12 +25,6 @@ public class ItemSpongeOnAStick extends ItemSpongeOnAStickBase {
     }
 
     @Override
-    public boolean isPowered() {
-        return false;
-    }
-
-
-    @Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
         if (this.allowedIn(tab)) {
             if (ModList.get().isLoaded("openblocks")) {
