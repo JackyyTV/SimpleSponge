@@ -1,46 +1,28 @@
 package jackyy.simplesponge.registry.crafting;
 
-import com.google.gson.JsonObject;
-import jackyy.simplesponge.SimpleSponge;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jackyy.simplesponge.registry.ModConfigs;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
-public class ConditionOpenBlocksIntegration implements ICondition {
+public record ConditionOpenBlocksIntegration(boolean enabled) implements ICondition {
 
-    public static final ResourceLocation ID = new ResourceLocation(SimpleSponge.MODID, "openblocks_integration");
-    private final boolean value;
-
-    public ConditionOpenBlocksIntegration(boolean value) {
-        this.value = value;
-    }
-
-    @Override
-    public ResourceLocation getID() {
-        return ID;
-    }
+    public static final Codec<ConditionOpenBlocksIntegration> CODEC = RecordCodecBuilder.create(
+            (b) -> b.group(Codec.BOOL.fieldOf("enabled").forGetter(ConditionOpenBlocksIntegration::enabled)).apply(b, ConditionOpenBlocksIntegration::new)
+    );
 
     @Override
     public boolean test(IContext context) {
-        return ModConfigs.CONFIG.openBlocksIntegration.get() == value;
+        return ModConfigs.CONFIG.openBlocksIntegration.get() == enabled;
     }
 
-    public static final IConditionSerializer<ConditionOpenBlocksIntegration> SERIALIZER = new IConditionSerializer<>() {
-        @Override
-        public void write(JsonObject json, ConditionOpenBlocksIntegration condition) {
-            json.addProperty("enabled", condition.value);
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public ConditionOpenBlocksIntegration read(JsonObject json) {
-            return new ConditionOpenBlocksIntegration(json.get("enabled").getAsBoolean());
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return ID;
-        }
-    };
+    public boolean enabled() {
+        return this.enabled;
+    }
 
 }
