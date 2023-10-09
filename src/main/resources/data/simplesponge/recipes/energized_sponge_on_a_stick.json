@@ -1,10 +1,9 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "simplesponge:energized_sponge_on_a_stick", "enabled": true
-    }
-  ],
+  "forge:condition": {
+    "type": "simplesponge:energized_sponge_on_a_stick",
+    "enabled": true
+  },
   "pattern": [
     "R#R",
     "GBG",

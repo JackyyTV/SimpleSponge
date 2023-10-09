@@ -1,29 +1,30 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "forge:or",
-      "values": [
-        {
-          "type": "simplesponge:openblocks_integration", "enabled": false
-        },
-        {
-          "type": "forge:and",
-          "values": [
-            {
-              "type": "simplesponge:openblocks_integration", "enabled": true
-            },
-            {
-              "type": "forge:not",
-              "value": {
-                "type": "forge:item_exists", "item": "openblocks:sponge_on_a_stick"
-              }
+  "forge:condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "simplesponge:openblocks_integration",
+        "enabled": false
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "simplesponge:openblocks_integration",
+            "enabled": true
+          },
+          {
+            "type": "forge:not",
+            "value": {
+              "type": "forge:item_exists",
+              "item": "openblocks:sponge_on_a_stick"
             }
-          ]
-        }
-      ]
-    }
-  ],
+          }
+        ]
+      }
+    ]
+  },
   "pattern": [
     "#",
     "S",
